@@ -23,7 +23,7 @@ export default function Navbar() {
     ];
 
     return (
-        <nav className=" sticky top-0 z-40 w-full border-b border-separator bg-white backdrop-blur-lg">
+        <nav className=" sticky top-0 z-40 w-full bg-white backdrop-blur-lg">
             <header className="mx-auto flex h-25 max-w-[1280px] items-center justify-between gap-4 px-6">
                 <div className="flex items-center gap-4">
                     <NextLink className="flex items-center gap-1" href="/">
