@@ -6,7 +6,7 @@ import { Providers } from "./providers";
 
 import { siteConfig } from "@/config/site";
 import { fontSans } from "@/config/fonts";
-import { Navbar } from "@/components";
+import { Navbar } from "@/components/common";
 
 export const metadata: Metadata = {
     title: {
@@ -44,7 +44,7 @@ export default function RootLayout({
                     themeProps={{ attribute: "class", defaultTheme: "dark" }}
                 >
                     <div className=" w-full flex flex-col h-auto">
-                        <div className=" sticky top-0 z-50 w-full h-[100px] ">
+                        <div className=" sticky top-0 z-50 w-full h-20 lg:h-[100px] ">
                             <Navbar />
                         </div>
                         <main className=" flex flex-1 flex-col ">

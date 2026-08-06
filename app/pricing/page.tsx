@@ -29,7 +29,7 @@ export default function PricingPage() {
 
     return (
         <section className="flex flex-col items-center justify-center ">
-            <section className=" w-full lg:h-[calc(100vh-100px)] relative z-20 bg-[#EAEFFA] flex flex-col  ">
+            <section className=" w-full lg:min-h-[calc(100vh-100px)] relative z-20 bg-[#EAEFFA] flex flex-col  ">
                 <LandingLayout>
                     <div className=" flex flex-col gap-12 py-10 lg:py-20 text-center items-center ">
                         <div className=" flex flex-col items-center gap-2 ">
@@ -52,9 +52,9 @@ export default function PricingPage() {
                             <div className=" w-fit flex ">
                                 <button
                                     onClick={() => setTab(false)}
-                                    className={` ${!tab ? " border-primary-300 text-primary-300 font-bold " : " "} w-[104px] h-[44px] border-b `}
+                                    className={` ${!tab ? " border-primary-300 text-primary-300 font-bold! " : " "} w-[104px] h-[44px] border-b `}
                                 >
-                                    <CustomText type="body-lg">
+                                    <CustomText type={!tab ? "body-lg-bold" :"body-lg"}>
                                         Monthly
                                     </CustomText>
                                 </button>
@@ -62,7 +62,7 @@ export default function PricingPage() {
                                     onClick={() => setTab(true)}
                                     className={` ${tab ? " border-primary-300 text-primary-300 font-bold " : " "} w-[104px] h-[44px] border-b `}
                                 >
-                                    <CustomText type="body-lg">
+                                    <CustomText type={tab ? "body-lg-bold" :"body-lg"}>
                                         Yearly
                                     </CustomText>
                                 </button>
@@ -72,7 +72,7 @@ export default function PricingPage() {
                                     return (
                                         <div
                                             key={index}
-                                            className={` ${index === 0 ? " bg-white text-neutral-500 " : " bg-primary-300 text-white "} lg:max-w-[412px] w-full rounded-xl p-10 flex flex-col gap-2 text-left `}
+                                            className={` ${index === 0 ? " bg-white text-neutral-500 " : " bg-primary-300 text-white "} max-w-[412px] w-full rounded-xl p-10 flex flex-col gap-2 text-left `}
                                         >
                                             <CustomText type="title-lg">
                                                 {item?.title}
