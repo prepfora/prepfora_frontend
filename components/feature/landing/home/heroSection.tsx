@@ -68,7 +68,7 @@ export default function HeroSection() {
             </div>
             <div className=" w-full lg:hidden relative -mb-10 flex flex-col ">
                 <CustomImage
-                    src={"/images/landing/heromobile.png"}
+                    src={"/images/landing/heromobile1.png"}
                     alt="heromobile"
                     layout="width"
                     objectFit="contain"
