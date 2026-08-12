@@ -96,7 +96,7 @@ export default function SecondSection() {
                                 return (
                                     <div
                                         key={index}
-                                        className=" w-full lg:h-[440px] flex lg:flex-row flex-col items-center justify-between gap-6 "
+                                        className=" w-full lg:h-[440px] flex lg:flex-row flex-col items-center justify-between lg:pb-0 pb-6 gap-6 "
                                     >
                                         <div className=" max-w-[447px] text-left flex flex-col gap-2 ">
                                             <CustomText type="display-sm">

@@ -38,6 +38,7 @@ type Props = Omit<ImageProps, "src"> & {
     className?: string;
     imageClassName?: string;
     priority?: boolean;
+    borderRadius?: string
 };
 
 function isStaticImage(src: ImgSrc): src is StaticImageData {
@@ -58,6 +59,7 @@ export default function CustomImage({
     imageClassName = "",
 
     priority = false,
+    borderRadius,
 
     ...rest
 }: Props) {
@@ -184,6 +186,7 @@ export default function CustomImage({
                     <Image
                         {...sharedProps}
                         fill
+                        style={{ borderRadius: borderRadius}}
                         className={cn(fitClass, imageClassName)}
                     />
 
@@ -215,6 +218,7 @@ export default function CustomImage({
                         height={
                             isStatic ? imgSrc.height : Number(height ?? 1000)
                         }
+                        style={{ borderRadius: borderRadius}}
                         className={cn(
                             "h-full w-auto max-w-none",
                             imageClassName
@@ -246,6 +250,7 @@ export default function CustomImage({
                         height={
                             isStatic ? imgSrc.height : Number(height ?? 1000)
                         }
+                        style={{ borderRadius: borderRadius}}
                         className={cn("h-auto w-full", imageClassName)}
                     />
 

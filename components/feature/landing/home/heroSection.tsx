@@ -66,7 +66,7 @@ export default function HeroSection() {
                     layout="width"
                 />
             </div>
-            <div className=" w-full lg:hidden relative -mb-10 flex flex-col ">
+            <div className=" w-full lg:hidden relative mt-6 -mb-10 flex flex-col ">
                 <CustomImage
                     src={"/images/landing/heromobile1.png"}
                     alt="heromobile"

@@ -3,7 +3,7 @@ import { CustomImage, CustomText } from "@/components/ui";
 
 export default function WorkHeroSection() {
     return (
-        <section className=" w-full lg:h-[calc(100vh-100px)] flex flex-col pt-4 lg:pb-0 pb-4 relative bg-[#EAEFFA] ">
+        <section className=" w-full lg:h-auto flex flex-col pt-4 lg:pb-0 pb-4 relative bg-[#EAEFFA] ">
             <LandingLayout>
                 <div className=" flex-1 relative z-20 flex flex-col gap-8 items-center justify-center text-center py-10 ">
                     <div className=" w-full flex items-center flex-col gap-1 ">

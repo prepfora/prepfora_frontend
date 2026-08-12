@@ -1,8 +1,7 @@
 import { LandingLayout } from "@/components/layouts";
-import { CustomText } from "@/components/ui";
+import { CustomImage, CustomText } from "@/components/ui";
 
 export default function ForthSection() {
-
     const list = [
         {
             title: "Choose your exam",
@@ -47,7 +46,13 @@ export default function ForthSection() {
                                         and study goals to earn PrepPoints
                                     </CustomText>
                                 </div>
-                                <div className=" w-20 h-20 rounded-2xl border "></div>
+                                <div className=" w-20 h-auto ">
+                                    <CustomImage
+                                        src={"/images/landing/Capa_1.png"}
+                                        alt="Hero1"
+                                        layout="width" 
+                                    />
+                                </div>
                             </div>
                             <div className=" w-full h-[256px] rounded-[26px] bg-[#2563EB33] px-6 gap-6 flex flex-col justify-center ">
                                 <div className=" flex flex-col gap-2 ">
@@ -59,10 +64,16 @@ export default function ForthSection() {
                                         achievements as you prepare.
                                     </CustomText>
                                 </div>
-                                <div className=" w-20 h-20 rounded-2xl border "></div>
+                                <div className=" w-20 h-auto ">
+                                    <CustomImage
+                                        src={"/images/landing/Layer_1.png"}
+                                        alt="Hero1"
+                                        layout="width" 
+                                    />
+                                </div>
                             </div>
                         </div>
-                        <div className=" w-full h-[443px] rounded-[26px] bg-[#2563EB33] px-6 gap-6 flex flex-col justify-center ">
+                        <div className=" w-full h-[256px] lg:h-[443px] rounded-[26px] bg-[#2563EB33] px-6 gap-6 flex flex-col justify-center ">
                             <div className=" flex flex-col gap-2 ">
                                 <CustomText type="headline-sm">
                                     Redeem Rewards
@@ -72,7 +83,13 @@ export default function ForthSection() {
                                     rewards and credits
                                 </CustomText>
                             </div>
-                            <div className=" w-63.5 h-59.5 rounded-2xl border "></div>
+                            <div className=" w-20 lg:w-63.5 h-auto ">
+                                <CustomImage
+                                    src={"/images/landing/Page-1.png"}
+                                    alt="Hero1"
+                                    layout="width" 
+                                />
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -89,19 +106,31 @@ export default function ForthSection() {
                             scores, and prepare with confidence.
                         </CustomText>
                     </div>
-                    <div className=" w-full grid lg:grid-cols-4 text-left gap-6 " >
+                    <div className=" w-full grid lg:grid-cols-4 text-left gap-6 ">
                         {list.map((item, index) => {
-                            return(
-                                <div key={index} className=" w-full flex flex-col gap-4 " >
-                                    <div className=" w-[67px] h-[48px] rounded-lg bg-primary-300 text-white flex justify-center items-center "  >
-                                        <CustomText type="body-lg" >Step {index+1}</CustomText>
+                            return (
+                                <div
+                                    key={index}
+                                    className=" w-full flex flex-col gap-4 "
+                                >
+                                    <div className=" w-[67px] h-[48px] rounded-lg bg-primary-300 text-white flex justify-center items-center ">
+                                        <CustomText type="body-lg">
+                                            Step {index + 1}
+                                        </CustomText>
                                     </div>
-                                    <div className=" flex flex-col gap-2 " >
-                                        <CustomText type="headline-sm" className=" lg:h-[63px] "  >{item?.title}</CustomText>
-                                        <CustomText type="body-lg" >{item?.body}</CustomText>
+                                    <div className=" flex flex-col gap-2 ">
+                                        <CustomText
+                                            type="headline-sm"
+                                            className=" lg:h-[63px] "
+                                        >
+                                            {item?.title}
+                                        </CustomText>
+                                        <CustomText type="body-lg">
+                                            {item?.body}
+                                        </CustomText>
                                     </div>
                                 </div>
-                            )
+                            );
                         })}
                     </div>
                 </div>

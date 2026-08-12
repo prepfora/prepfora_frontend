@@ -1,8 +1,7 @@
 import { LandingLayout } from "@/components/layouts";
-import { CustomButton, CustomText } from "@/components/ui";
+import { CustomButton, CustomImage, CustomText } from "@/components/ui";
 
 export default function ThirdSection() {
-
     const list = [
         {
             title: "Others",
@@ -28,22 +27,26 @@ export default function ThirdSection() {
 
     const exams = [
         {
+            image: "/images/landing/jamb.png",
             title: "JAMB",
-            body: "Practice CBT questions, take mock exams, and track your progress."
+            body: "Practice CBT questions, take mock exams, and track your progress.",
         },
         {
+            image: "/images/landing/waec.png",
             title: "WAEC",
-            body: "Prepare across all your subjects with real exam questions."
+            body: "Prepare across all your subjects with real exam questions.",
         },
         {
+            image: "/images/landing/neco.png",
             title: "NECO",
-            body: "Build confidence with topic-based practice and full mock exams."
+            body: "Build confidence with topic-based practice and full mock exams.",
         },
         {
+            image: "/images/landing/jamb.png",
             title: "POST-UTME",
-            body: "Practice under timed conditions and get ready for your admission."
+            body: "Practice under timed conditions and get ready for your admission.",
         },
-    ]
+    ];
 
     return (
         <section className=" w-full bg-[#EAEFFA] flex flex-col ">
@@ -107,17 +110,37 @@ export default function ThirdSection() {
                                     key={index}
                                     className={` w-full p-4 rounded-xl border border-secondary-400 text-left flex gap-3 flex-col `}
                                 >
-                                    <div className=" w-14 h-14 border rounded-2xl " >
-
+                                    <div className=" w-14 h-14 ">
+                                        <CustomImage
+                                            src={item?.image}
+                                            alt="Hero1"
+                                            layout="width"
+                                        />
                                     </div>
-                                    <CustomText type="body-lg" >{item?.title}</CustomText>
-                                    <CustomText type="body-md" >{item?.body}</CustomText>
+                                    <CustomText type="body-lg">
+                                        {item?.title}
+                                    </CustomText>
+                                    <CustomText type="body-md">
+                                        {item?.body}
+                                    </CustomText>
                                 </div>
                             );
                         })}
                     </div>
-                    <div className=" w-full h-[402px] bg-secondary-150 rounded-2xl " >
-
+                    <div className=" w-full h-[402px] lg:flex hidden mb-8 rounded-2xl ">
+                        <CustomImage
+                            src={"/images/landing/exam.png"}
+                            alt="Hero1" 
+                            layout="width"
+                            borderRadius="24px"
+                        />
+                    </div>
+                    <div className=" w-full h-[596px] flex justify-center items-center lg:hidden mb-8 rounded-2xl ">
+                        <CustomImage
+                            src={"/images/landing/exam-mobile.png"}
+                            alt="Hero1"
+                            layout="height"
+                        />
                     </div>
                 </div>
             </LandingLayout>
