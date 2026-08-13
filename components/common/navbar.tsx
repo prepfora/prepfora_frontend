@@ -2,6 +2,7 @@
 
 import NextLink from "next/link";
 import { usePathname, useRouter } from "next/navigation";
+import { motion } from "motion/react";
 import {
     Dropdown,
     DropdownTrigger,
@@ -24,35 +25,55 @@ export default function Navbar() {
     const router = useRouter();
 
     return (
-        <nav className="sticky top-0 z-40 w-full bg-white backdrop-blur-lg">
+        <motion.nav
+            className="sticky top-0 z-40 w-full bg-white backdrop-blur-lg"
+            initial={{ y: -100, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            transition={{ duration: 0.5, ease: "easeOut" }}
+        >
             <header className="mx-auto flex h-20 max-w-[1280px] items-center justify-between gap-4 px-6 lg:h-25">
                 <NextLink className="flex items-center gap-1" href="/">
                     <Logo width={129} />
                 </NextLink>
 
                 <div className="hidden items-center gap-6 lg:flex">
-                    {NAV_ITEMS.map((item) => (
-                        <NextLink
-                            key={item.href}
-                            href={item.href}
-                            className={
-                                item.href === pathname ? "text-primary-300" : ""
-                            }
-                        >
-                            {item.label}
-                        </NextLink>
-                    ))}
+                    {NAV_ITEMS.map((item) => {
+                        const isActive = item.href === pathname;
+                        return (
+                            <NextLink
+                                key={item.href}
+                                href={item.href}
+                                className={`relative py-1 ${isActive ? "text-primary-300" : ""}`}
+                            >
+                                {item.label}
+                                {isActive && (
+                                    <motion.span
+                                        layoutId="navbar-underline"
+                                        className="absolute left-0 right-0 -bottom-1 h-[2px] bg-primary-300 rounded-full"
+                                        transition={{ type: "spring", stiffness: 380, damping: 30 }}
+                                    />
+                                )}
+                            </NextLink>
+                        );
+                    })}
                 </div>
 
                 <div className="flex items-center gap-4">
-                    <CustomButton variant="primary">Join Waitlist</CustomButton>
+                    <motion.div whileHover={{ scale: 1.04 }} whileTap={{ scale: 0.96 }}>
+                        <CustomButton variant="primary">Join Waitlist</CustomButton>
+                    </motion.div>
 
                     <div className="flex lg:hidden">
                         <Dropdown>
                             <Dropdown.Trigger>
-                                <button aria-label="Open menu" type="button">
+                                <motion.button
+                                    aria-label="Open menu"
+                                    type="button"
+                                    whileTap={{ scale: 0.85, rotate: 90 }}
+                                    transition={{ duration: 0.2 }}
+                                >
                                     <HamburgerMenu size={25} />
-                                </button>
+                                </motion.button>
                             </Dropdown.Trigger>
                             <Dropdown.Popover>
                                 <Dropdown.Menu
@@ -83,6 +104,6 @@ export default function Navbar() {
                     </div>
                 </div>
             </header>
-        </nav>
+        </motion.nav>
     );
 }

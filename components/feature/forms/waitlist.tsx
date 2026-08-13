@@ -24,7 +24,7 @@ export default function Waitlist(
                     <CustomText type="body-lg" >We're putting the finishing touches on Prepfora. Join the waitlist today, and get <span className=" font-bold " >1 month FREE</span> subscription when we launch</CustomText>
                 </div>
                 <div className=" w-full flex flex-col gap-3 pt-3 " >
-                    <div className=" w-full flex gap-3 " >
+                    <div className=" w-full lg:flex-row flex-col flex gap-3 " >
                         <FormikField
                             name="first_name"
                             label="First Name*"

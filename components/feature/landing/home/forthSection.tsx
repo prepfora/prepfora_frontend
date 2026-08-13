@@ -1,5 +1,29 @@
+"use client"
+import { motion } from "motion/react";
 import { LandingLayout } from "@/components/layouts";
 import { CustomImage, CustomText } from "@/components/ui";
+
+const fadeUp = {
+    hidden: { opacity: 0, y: 24 },
+    show: { opacity: 1, y: 0 },
+};
+
+const stagger = {
+    hidden: {},
+    show: {
+        transition: { staggerChildren: 0.12, delayChildren: 0.05 },
+    },
+};
+
+const cardVariant = {
+    hidden: { opacity: 0, y: 32, scale: 0.96 },
+    show: { opacity: 1, y: 0, scale: 1 },
+};
+
+const stepVariant = {
+    hidden: { opacity: 0, y: 24 },
+    show: { opacity: 1, y: 0 },
+};
 
 export default function ForthSection() {
     const list = [
@@ -25,18 +49,39 @@ export default function ForthSection() {
         <section className=" w-full bg-primary-550 text-white flex flex-col ">
             <LandingLayout>
                 <div className=" flex flex-col gap-12 py-10 lg:py-20 text-center items-center ">
-                    <div className=" flex flex-col items-center gap-2 ">
-                        <CustomText type="display-md">
-                            Practice More. Earn More.
-                        </CustomText>
-                        <CustomText type="title-md" className=" max-w-[511px] ">
-                            Every practice session brings you closer to your
-                            exam goals, and rewards you for staying consistent.
-                        </CustomText>
-                    </div>
-                    <div className=" lg:max-w-[952px] text-left w-full flex lg:flex-row flex-col items-center gap-4 lg:gap-8 ">
+                    <motion.div
+                        className=" flex flex-col items-center gap-2 "
+                        initial="hidden"
+                        whileInView="show"
+                        viewport={{ once: true, amount: 0.4 }}
+                        variants={stagger}
+                    >
+                        <motion.div variants={fadeUp} transition={{ duration: 0.6, ease: "easeOut" }}>
+                            <CustomText type="display-md">
+                                Practice More. Earn More.
+                            </CustomText>
+                        </motion.div>
+                        <motion.div variants={fadeUp} transition={{ duration: 0.6, ease: "easeOut" }}>
+                            <CustomText type="title-md" className=" max-w-[511px] ">
+                                Every practice session brings you closer to your
+                                exam goals, and rewards you for staying consistent.
+                            </CustomText>
+                        </motion.div>
+                    </motion.div>
+                    <motion.div
+                        className=" lg:max-w-[952px] text-left w-full flex lg:flex-row flex-col items-center gap-4 lg:gap-8 "
+                        initial="hidden"
+                        whileInView="show"
+                        viewport={{ once: true, amount: 0.2 }}
+                        variants={stagger}
+                    >
                         <div className=" w-full flex flex-col gap-4 lg:gap-8 ">
-                            <div className=" w-full h-[256px] rounded-[26px] bg-[#2563EB33] px-6 gap-6 flex flex-col justify-center ">
+                            <motion.div
+                                variants={cardVariant}
+                                transition={{ duration: 0.5, ease: "easeOut" }}
+                                whileHover={{ y: -4, transition: { duration: 0.25, ease: "easeOut" } }}
+                                className=" w-full h-[256px] rounded-[26px] bg-[#2563EB33] px-6 gap-6 flex flex-col justify-center "
+                            >
                                 <div className=" flex flex-col gap-2 ">
                                     <CustomText type="headline-sm">
                                         Earn PrepPoints
@@ -50,11 +95,16 @@ export default function ForthSection() {
                                     <CustomImage
                                         src={"/images/landing/Capa_1.png"}
                                         alt="Hero1"
-                                        layout="width" 
+                                        layout="width"
                                     />
                                 </div>
-                            </div>
-                            <div className=" w-full h-[256px] rounded-[26px] bg-[#2563EB33] px-6 gap-6 flex flex-col justify-center ">
+                            </motion.div>
+                            <motion.div
+                                variants={cardVariant}
+                                transition={{ duration: 0.5, ease: "easeOut" }}
+                                whileHover={{ y: -4, transition: { duration: 0.25, ease: "easeOut" } }}
+                                className=" w-full h-[256px] rounded-[26px] bg-[#2563EB33] px-6 gap-6 flex flex-col justify-center "
+                            >
                                 <div className=" flex flex-col gap-2 ">
                                     <CustomText type="headline-sm">
                                         Unlock Badges
@@ -68,12 +118,17 @@ export default function ForthSection() {
                                     <CustomImage
                                         src={"/images/landing/Layer_1.png"}
                                         alt="Hero1"
-                                        layout="width" 
+                                        layout="width"
                                     />
                                 </div>
-                            </div>
+                            </motion.div>
                         </div>
-                        <div className=" w-full h-[256px] lg:h-[443px] rounded-[26px] bg-[#2563EB33] px-6 gap-6 flex flex-col justify-center ">
+                        <motion.div
+                            variants={cardVariant}
+                            transition={{ duration: 0.5, ease: "easeOut" }}
+                            whileHover={{ y: -4, transition: { duration: 0.25, ease: "easeOut" } }}
+                            className=" w-full h-[256px] lg:h-[443px] rounded-[26px] bg-[#2563EB33] px-6 gap-6 flex flex-col justify-center "
+                        >
                             <div className=" flex flex-col gap-2 ">
                                 <CustomText type="headline-sm">
                                     Redeem Rewards
@@ -87,37 +142,61 @@ export default function ForthSection() {
                                 <CustomImage
                                     src={"/images/landing/Page-1.png"}
                                     alt="Hero1"
-                                    layout="width" 
+                                    layout="width"
                                 />
                             </div>
-                        </div>
-                    </div>
+                        </motion.div>
+                    </motion.div>
                 </div>
             </LandingLayout>
             <LandingLayout>
                 <div className=" flex flex-col gap-12 py-10 lg:py-20 text-center items-center ">
-                    <div className=" flex flex-col items-center gap-2 ">
-                        <CustomText type="display-md">
-                            Getting Started Is Easy
-                        </CustomText>
-                        <CustomText type="title-md" className=" max-w-[520px] ">
-                            From your first practice session to exam day,
-                            Prepfora helps you stay focused, improve your
-                            scores, and prepare with confidence.
-                        </CustomText>
-                    </div>
-                    <div className=" w-full grid lg:grid-cols-4 text-left gap-6 ">
+                    <motion.div
+                        className=" flex flex-col items-center gap-2 "
+                        initial="hidden"
+                        whileInView="show"
+                        viewport={{ once: true, amount: 0.4 }}
+                        variants={stagger}
+                    >
+                        <motion.div variants={fadeUp} transition={{ duration: 0.6, ease: "easeOut" }}>
+                            <CustomText type="display-md">
+                                Getting Started Is Easy
+                            </CustomText>
+                        </motion.div>
+                        <motion.div variants={fadeUp} transition={{ duration: 0.6, ease: "easeOut" }}>
+                            <CustomText type="title-md" className=" max-w-[520px] ">
+                                From your first practice session to exam day,
+                                Prepfora helps you stay focused, improve your
+                                scores, and prepare with confidence.
+                            </CustomText>
+                        </motion.div>
+                    </motion.div>
+                    <motion.div
+                        className=" w-full grid lg:grid-cols-4 text-left gap-6 "
+                        initial="hidden"
+                        whileInView="show"
+                        viewport={{ once: true, amount: 0.2 }}
+                        variants={stagger}
+                    >
                         {list.map((item, index) => {
                             return (
-                                <div
+                                <motion.div
                                     key={index}
+                                    variants={stepVariant}
+                                    transition={{ duration: 0.5, ease: "easeOut" }}
                                     className=" w-full flex flex-col gap-4 "
                                 >
-                                    <div className=" w-[67px] h-[48px] rounded-lg bg-primary-300 text-white flex justify-center items-center ">
+                                    <motion.div
+                                        className=" w-[67px] h-[48px] rounded-lg bg-primary-300 text-white flex justify-center items-center "
+                                        initial={{ scale: 0 }}
+                                        whileInView={{ scale: 1 }}
+                                        viewport={{ once: true }}
+                                        transition={{ duration: 0.4, ease: "backOut", delay: 0.15 }}
+                                    >
                                         <CustomText type="body-lg">
                                             Step {index + 1}
                                         </CustomText>
-                                    </div>
+                                    </motion.div>
                                     <div className=" flex flex-col gap-2 ">
                                         <CustomText
                                             type="headline-sm"
@@ -129,10 +208,10 @@ export default function ForthSection() {
                                             {item?.body}
                                         </CustomText>
                                     </div>
-                                </div>
+                                </motion.div>
                             );
                         })}
-                    </div>
+                    </motion.div>
                 </div>
             </LandingLayout>
         </section>

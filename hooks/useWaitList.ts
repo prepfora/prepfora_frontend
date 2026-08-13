@@ -37,12 +37,11 @@ const useWaitList = () => {
         onError: (error: AxiosError<ApiErrorResponse>) => handleApiError(error),
         onSuccess: (data) => {
 
-            console.log(data);
-            
-            showSuccess("Saved"); 
+            setOpen(false)
+            showSuccess(data?.data?.message); 
+            formik.resetForm()
         },
-    });
-
+    }); 
 
     const formik = useFormik({
         initialValues: {
