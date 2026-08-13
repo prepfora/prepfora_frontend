@@ -48,7 +48,7 @@ export default function RootLayout({
                         <div className=" sticky bg-[#EAEFFA] top-0 z-30 w-full h-20 lg:h-[100px] ">
                             <Navbar />
                         </div>
-                        <main className=" flex flex-1 flex-col ">
+                        <main className=" flex flex-1 flex-col overflow-x-hidden ">
                             {/* <PageTransition> */}
                                 {children}
                                 {/* </PageTransition> */}
