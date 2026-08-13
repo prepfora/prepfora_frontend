@@ -1,4 +1,5 @@
-import { CommonQuestion, ContactHeroSection, Footer } from "@/components";
+import { Footer } from "@/components/common";
+import { CommonQuestion, ContactHeroSection } from "@/components/feature";
 
 
 export default function Contact() {

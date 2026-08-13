@@ -1,5 +1,5 @@
 "use client";
-import { Footer } from "@/components";
+import { Footer } from "@/components/common";
 import { LandingLayout } from "@/components/layouts";
 import { CustomButton, CustomText } from "@/components/ui";
 import { useState } from "react";

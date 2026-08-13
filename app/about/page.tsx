@@ -1,4 +1,5 @@
-import { Footer, WorkHeroSection, WorkSecondSection, WorkThirdSection } from "@/components";
+import { Footer } from "@/components/common";
+import { WorkHeroSection, WorkSecondSection, WorkThirdSection } from "@/components/feature";
 
 export default function AboutPage() {
     return (

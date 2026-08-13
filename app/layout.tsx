@@ -32,7 +32,7 @@ export default function RootLayout({
     children: React.ReactNode;
 }) {
     return (
-        <html suppressHydrationWarning lang="en">
+        <html suppressHydrationWarning lang="en" className="light" >
             <head />
             <body
                 className={clsx(
@@ -41,10 +41,10 @@ export default function RootLayout({
                 )}
             >
                 <Providers
-                    themeProps={{ attribute: "class", defaultTheme: "dark" }}
+                    themeProps={{ attribute: "class", defaultTheme: "light" }}
                 >
                     <div className=" w-full flex flex-col h-auto">
-                        <div className=" sticky top-0 z-50 w-full h-20 lg:h-[100px] ">
+                        <div className=" sticky top-0 z-30 w-full h-20 lg:h-[100px] ">
                             <Navbar />
                         </div>
                         <main className=" flex flex-1 flex-col ">

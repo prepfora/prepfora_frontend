@@ -1,4 +1,5 @@
-import { FAQ, FifthSection, Footer, ForthSection, HeroSection, SecondSection, ThirdSection } from "@/components";
+import { Footer } from "@/components/common";
+import { FAQ, FifthSection, ForthSection, HeroSection, SecondSection, ThirdSection } from "@/components/feature";
 
 export default function Home() {
     return (

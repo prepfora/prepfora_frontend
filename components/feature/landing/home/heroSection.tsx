@@ -1,7 +1,15 @@
-import { LandingLayout } from "@/components/layouts";
+"use client"
+import { LandingLayout, ModalLayout } from "@/components/layouts";
 import { CustomButton, CustomImage, CustomText } from "@/components/ui";
+import { useState } from "react";
+import { WaitListForm } from "../../forms";
+import useWaitList from "@/hooks/useWaitList";
 
 export default function HeroSection() {
+
+    const [isOpen, setOpen] = useState(false)
+    const { formik, isLoading } = useWaitList()
+
     return (
         <section className=" w-full lg:h-[calc(100vh-100px)] flex flex-col pt-4 lg:pb-0 pb-4 relative bg-[#EAEFFA] ">
             <LandingLayout>
@@ -32,6 +40,7 @@ export default function HeroSection() {
                                 See how it works
                             </CustomButton>
                             <CustomButton
+                                onClick={()=> setOpen(true)}
                                 fullWidth
                                 variant="primary"
                                 className=" w-full! lg:w-[150px] "
@@ -82,6 +91,10 @@ export default function HeroSection() {
                     />
                 </div>
             </div>
+
+            <ModalLayout size="cover" containerClass=" max-w-[660px] h-fit " open={isOpen} onOpenChange={setOpen} >
+                <WaitListForm loading={isLoading} formik={formik} />
+            </ModalLayout>
         </section>
     );
 }

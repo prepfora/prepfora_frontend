@@ -10,6 +10,7 @@ interface AppModalProps {
     icon?: ReactNode;
     children?: ReactNode;
     footer?: ReactNode;
+    containerClass?: string;
     size?: "cover" | "full" | "lg" | "md" | "sm" | "xs";
     open?: boolean;
     onOpenChange?: (open: boolean) => void;
@@ -24,6 +25,7 @@ export function AppModal({
     icon,
     children,
     footer,
+    containerClass,
     size = "sm",
     open,
     onOpenChange,
@@ -44,15 +46,15 @@ export function AppModal({
             )}
 
             <Modal.Backdrop>
-                <Modal.Container size={size} >
-                    <Modal.Dialog className={nospace ? " px-0! " : ""}>
+                <Modal.Container size={size} className={containerClass} >
+                    <Modal.Dialog className={` bg-white text-black! rounded-2xl ${nospace ? " px-0! " : ""}`}>
                         {showClose && <Modal.CloseTrigger />}
 
                         {/* Header */}
                         {(title || icon) && (
                             <Modal.Header className=" px-4 " >
                                 {icon && (
-                                    <Modal.Icon className="bg-default text-foreground">
+                                    <Modal.Icon className="bg-white text-black">
                                         {icon}
                                     </Modal.Icon>
                                 )}
@@ -63,7 +65,7 @@ export function AppModal({
                         )}
 
                         {/* Body */}
-                        <Modal.Body>
+                        <Modal.Body  className="bg-white text-black">
                             {description && <p>{description}</p>}
                             {children}
                         </Modal.Body>

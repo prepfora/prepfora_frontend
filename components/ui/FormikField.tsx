@@ -110,9 +110,9 @@ export function FormikField<T = unknown>({
     
 
     return (
-        <div className={`w-full flex flex-col gap-1 ${className || ""}`}>
+        <div className={`w-full flex flex-col text-black! gap-1 ${className || ""}`}>
             {label && (
-                <Label className="text-sm font-medium text-grey-04">
+                <Label className="text-sm font-medium text-black ">
                     {label}
                 </Label>
             )}
@@ -121,7 +121,7 @@ export function FormikField<T = unknown>({
             {as === "input" && (
                 <TextField name={name} aria-label={accessibleLabel}>
                     <InputGroup
-                        className={`bg-grey-01 rounded-[8px] p-px border h-fit border-grey-02 ${
+                        className={`bg-white rounded-[8px] p-px border h-fit border-neutral-150 ${
                             (fieldTouched || isTouched)&& fieldError ? "border-red-500" : ""
                         }`}
                     >
@@ -141,14 +141,14 @@ export function FormikField<T = unknown>({
                             disabled={disabled || loading}
                             onChange={(e) => handleChange(e.target.value)}
                             onBlur={handleBlur}
-                            className={`w-full bg-grey-01 ${
+                            className={`w-full bg-white  text-black! ${
                                 isPassword ? "rounded-l-[8px]" : "rounded-[8px]"
                             } h-[45px] text-sm`}
                         />
 
                         {loading ? (
                             <InputGroup.Suffix>
-                                <span className="animate-spin text-gray-400 text-sm">
+                                <span className="animate-spin text-black text-sm">
                                     ⏳
                                 </span>
                             </InputGroup.Suffix>
@@ -187,7 +187,7 @@ export function FormikField<T = unknown>({
                     placeholder={placeholder}
                     aria-label={accessibleLabel}
                     disabled={disabled || loading}
-                    className={`w-full h-[100px] bg-grey-01 ${
+                    className={`w-full h-[100px] bg-white  text-black border border-neutral-150 ${
                         (fieldTouched || isTouched)&& fieldError ? "border-red-500" : ""
                     }`}
                 />
@@ -204,12 +204,12 @@ export function FormikField<T = unknown>({
                     placeholder={placeholder || "Select option"}
                     aria-label={accessibleLabel}
                     isDisabled={disabled || loading}
-                    className={`rounded-md bg-greyone h-[40px] ${
+                    className={`rounded-md bg-white h-[45px] border border-neutral-150 ${
                         selectClassName || ""
                     }`}
                 >
                     <Select.Trigger
-                        className={`rounded-md bg-greyone h-[40px] text-sm ${
+                        className={`rounded-md bg-white h-[45px] text-sm ${
                             selectTriggerClassName || ""
                         }`}
                     >
@@ -256,12 +256,12 @@ export function FormikField<T = unknown>({
                     placeholder={placeholder || "Select option"}
                     aria-label={accessibleLabel}
                     isDisabled={disabled || loading}
-                    className={`rounded-md bg-greyone h-[40px] ${
+                    className={`rounded-md bg-white h-[40px] ${
                         selectClassName || ""
                     }`}
                 >
                     <Select.Trigger
-                        className={`rounded-md bg-greyone h-[40px] ${
+                        className={`rounded-md bg-white h-[40px] ${
                             selectTriggerClassName || ""
                         }`}
                     >

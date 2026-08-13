@@ -66,11 +66,11 @@ export default function ContactHeroSection() {
                                         />
                                     </div>
                                     <FormikField name="email" label="Email" />
-                                    <FormikField
+                                    {/* <FormikField
                                         as="select"
                                         name="category"
                                         label="Category"
-                                    />
+                                    /> */}
                                     <FormikField
                                         as="textarea"
                                         name="subject"

@@ -5,7 +5,7 @@ import axios, {
   InternalAxiosRequestConfig,
 } from "axios";
 
-const BASE_URL = "https://dev.hiroek.io/api"
+const BASE_URL = "https://prepforabackend-production.up.railway.app"
 
 // ─── Token Storage ────────────────────────────────────────────────────────────
 // Prefer memory for access token (XSS-safe); only refresh token goes to httpOnly
