@@ -7,7 +7,7 @@ import { FaFacebookSquare, FaInstagram, FaLinkedin } from "react-icons/fa";
 import { FaTiktok } from "react-icons/fa6";
 import { FiMail } from "react-icons/fi";
 import { LuPhone } from "react-icons/lu";
-import { ContactForm } from "../../forms";
+import { ContactForm } from "../../forms/landing";
 
 const fadeUp = {
     hidden: { opacity: 0, y: 24 },

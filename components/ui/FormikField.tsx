@@ -141,7 +141,7 @@ export function FormikField<T = unknown>({
                             disabled={disabled || loading}
                             onChange={(e) => handleChange(e.target.value)}
                             onBlur={handleBlur}
-                            className={`w-full bg-white  text-black! ${
+                            className={`w-full bg-white placeholder:text-neutral-150 text-black! ${
                                 isPassword ? "rounded-l-[8px]" : "rounded-[8px]"
                             } h-[45px] text-sm`}
                         />

@@ -7,7 +7,6 @@ import { Providers } from "./providers";
 import { siteConfig } from "@/config/site";
 import { fontSans } from "@/config/fonts";
 import { Navbar } from "@/components/common";
-import { PageTransition } from "@/components/layouts";
 
 export const metadata: Metadata = {
     title: {
@@ -45,13 +44,9 @@ export default function RootLayout({
                     themeProps={{ attribute: "class", defaultTheme: "light" }}
                 >
                     <div className=" w-full flex flex-col h-auto">
-                        <div className=" sticky bg-[#EAEFFA] top-0 z-30 w-full h-20 lg:h-[100px] ">
-                            <Navbar />
-                        </div>
+                        <Navbar />
                         <main className=" flex flex-1 flex-col overflow-x-hidden ">
-                            {/* <PageTransition> */}
-                                {children}
-                                {/* </PageTransition> */}
+                            {children}
                         </main>
                     </div>
                 </Providers>

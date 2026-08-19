@@ -1,2 +1,2 @@
 export * from "./landing"
-export * from "./forms"
+export * from "./forms/landing"

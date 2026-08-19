@@ -1,4 +1,3 @@
 
-
-export { default as WaitListForm } from "./waitlist"
-export { default as ContactForm } from "./contact"
+export * from "./landing"
+export * from "./auth"

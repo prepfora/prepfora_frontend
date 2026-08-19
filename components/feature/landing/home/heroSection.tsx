@@ -2,7 +2,7 @@
 import { motion } from "motion/react";
 import { LandingLayout, ModalLayout } from "@/components/layouts";
 import { CustomButton, CustomImage, CustomText } from "@/components/ui";
-import { WaitListForm } from "../../forms";
+import { WaitListForm } from "../../forms/landing";
 import useWaitList from "@/hooks/useWaitList";
 
 const fadeUp = {
