@@ -29,6 +29,9 @@ const useAuth = () => {
             .trim()
             .min(2, "Last name must be at least 2 characters")
             .required("Last name is required"),
+        phone_number: Yup.string()
+                .trim() 
+                .required("Phone Number is required"),
     });
     
     const waitlist = useMutation({
@@ -48,6 +51,7 @@ const useAuth = () => {
             email: "",
             first_name: "",
             last_name: "",
+            phone_number: ""
         },
         validationSchema: validationSchema,
         onSubmit: (data) => {
