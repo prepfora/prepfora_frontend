@@ -75,7 +75,7 @@ export default function CustomImage({
     };
 
     const openPreview = () => {
-        if (!disablePreview) {
+        if (disablePreview) {
             setPreviewSrc(imgSrc);
         }
     };

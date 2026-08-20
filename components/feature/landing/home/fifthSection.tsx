@@ -2,6 +2,7 @@
 import { motion } from "motion/react";
 import { LandingLayout } from "@/components/layouts";
 import { CustomButton, CustomText } from "@/components/ui";
+import { WaitlistBtn } from "@/components/common";
 
 const fadeUp = {
     hidden: { opacity: 0, y: 24 },
@@ -45,7 +46,8 @@ export default function FifthSection() {
                         whileHover={{ scale: 1.05 }}
                         whileTap={{ scale: 0.95 }}
                     >
-                        <CustomButton variant="secondary-btn">Join Waitlist</CustomButton>
+                        {/* <CustomButton variant="secondary-btn">Join Waitlist</CustomButton> */}
+                        <WaitlistBtn variant="secondary-btn" />
                     </motion.div>
                 </motion.div>
             </LandingLayout>

@@ -1,9 +1,8 @@
 "use client"
 import { motion } from "motion/react";
-import { LandingLayout, ModalLayout } from "@/components/layouts";
-import { CustomButton, CustomImage, CustomText } from "@/components/ui";
-import { WaitListForm } from "../../forms/landing";
-import useWaitList from "@/hooks/useWaitList";
+import { LandingLayout } from "@/components/layouts";
+import { CustomButton, CustomImage, CustomText } from "@/components/ui"; 
+import { WaitlistBtn } from "@/components/common";
 
 const fadeUp = {
     hidden: { opacity: 0, y: 24 },
@@ -18,9 +17,7 @@ const stagger = {
 };
 
 export default function HeroSection() {
-
-    const { formik, isLoading, isOpen, setOpen } = useWaitList()
-
+    
     return (
         <section className=" w-full lg:h-[calc(100vh-100px)] flex flex-col pt-4 lg:pb-0 pb-4 relative bg-[#EAEFFA] ">
             <LandingLayout>
@@ -77,14 +74,7 @@ export default function HeroSection() {
                                 whileHover={{ scale: 1.03 }}
                                 whileTap={{ scale: 0.97 }}
                             >
-                                <CustomButton
-                                    onClick={() => setOpen(true)}
-                                    fullWidth
-                                    variant="primary"
-                                    className=" w-full! lg:w-[150px] "
-                                >
-                                    Join Waitlist
-                                </CustomButton>
+                                <WaitlistBtn />
                             </motion.div>
                         </motion.div>
                     </div>
@@ -171,10 +161,6 @@ export default function HeroSection() {
                     />
                 </motion.div>
             </div>
-
-            <ModalLayout size="cover" containerClass=" lg:max-w-[660px] h-fit " open={isOpen} onOpenChange={setOpen} >
-                <WaitListForm loading={isLoading} formik={formik} />
-            </ModalLayout>
         </section>
     );
 }

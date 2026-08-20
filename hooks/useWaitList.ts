@@ -1,7 +1,7 @@
 "use client"
 import { ApiErrorResponse } from "@/config/getErrorMessage";
 import { handleApiError } from "@/config/handleApiError";
-import httpService from "@/config/httpService";
+import { unsecureHttpService } from "@/config/httpService";
 import { showSuccess } from "@/config/toast";
 import { URLS } from "@/config/urls";
 import { IWaitlist } from "@/types/waitlist";
@@ -33,10 +33,9 @@ const useWaitList = () => {
     
     const waitlist = useMutation({
         mutationFn: (data: IWaitlist) =>
-            httpService.post(URLS.WAIT_LIST, data),
+            unsecureHttpService.post(URLS.WAIT_LIST, data),
         onError: (error: AxiosError<ApiErrorResponse>) => handleApiError(error),
-        onSuccess: (data) => {
-
+        onSuccess: (data) => { 
             setOpen(false)
             showSuccess(data?.data?.message); 
             formik.resetForm()
@@ -48,6 +47,7 @@ const useWaitList = () => {
             email: "",
             first_name: "",
             last_name: "",
+            phone_number: ""
         },
         validationSchema: validationSchema,
         onSubmit: (data) => {

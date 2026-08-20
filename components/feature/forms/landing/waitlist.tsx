@@ -11,10 +11,7 @@ export default function Waitlist(
         formik: FormikProps<IWaitlist>;
         loading: boolean
     }
-) {
-
-    console.log(formik.errors);
-    
+) { 
 
     return (
         <FormikProvider value={formik} >
@@ -34,6 +31,11 @@ export default function Waitlist(
                             label="Last Name*"
                         />
                     </div>
+                    <FormikField
+                        name="phone_number"
+                        label="Phone Number*"
+                        type="tel"
+                    />
                     <FormikField
                         name="email"
                         label="Email*"

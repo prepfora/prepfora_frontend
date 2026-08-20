@@ -6,6 +6,9 @@ import NextLink from "next/link";
 import { CustomText } from "@/components/ui";
 import { Instagram } from "iconsax-reactjs";
 import { PiFacebookLogoFill, PiLinkedinLogoFill, PiTiktokLogoFill } from "react-icons/pi";
+import { FaInstagram } from "react-icons/fa";
+import { FaTiktok } from "react-icons/fa6";
+import { LiaFacebook } from "react-icons/lia";
 
 const fadeUp = {
     hidden: { opacity: 0, y: 20 },
@@ -35,18 +38,18 @@ export default function Footer() {
                             <Logo color="white" width={193} />
                         </NextLink>
                         <div className=" flex gap-4 items-center ">
-                            <motion.button whileHover={{ scale: 1.15, y: -2 }} whileTap={{ scale: 0.9 }}>
-                                <Instagram size={24} />
-                            </motion.button>
-                            <motion.button whileHover={{ scale: 1.15, y: -2 }} whileTap={{ scale: 0.9 }}>
+                            <motion.a href="https://www.instagram.com/prepforaedu/" target="_blank" whileHover={{ scale: 1.15, y: -2 }} whileTap={{ scale: 0.9 }}>
+                                <FaInstagram size={24} />
+                            </motion.a>
+                            <motion.a href="https://www.linkedin.com/in/prepfora-edutech-a57b2a422" target="_blank" whileHover={{ scale: 1.15, y: -2 }} whileTap={{ scale: 0.9 }}>
                                 <PiLinkedinLogoFill size={24} />
-                            </motion.button>
-                            <motion.button whileHover={{ scale: 1.15, y: -2 }} whileTap={{ scale: 0.9 }}>
-                                <PiTiktokLogoFill size={24} />
-                            </motion.button>
-                            <motion.button whileHover={{ scale: 1.15, y: -2 }} whileTap={{ scale: 0.9 }}>
-                                <PiFacebookLogoFill size={24} />
-                            </motion.button>
+                            </motion.a>
+                            {/* <motion.a href="" target="_blank" whileHover={{ scale: 1.15, y: -2 }} whileTap={{ scale: 0.9 }}>
+                                <FaTiktok size={24} />
+                            </motion.a> */}
+                            <motion.a href="https://www.facebook.com/profile.php?id=61592083746946" target="_blank" whileHover={{ scale: 1.15, y: -2 }} whileTap={{ scale: 0.9 }}>
+                                <LiaFacebook size={24} />
+                            </motion.a>
                         </div>
                     </motion.div>
                     <motion.div className=" flex items-center gap-4 " variants={fadeUp} transition={{ duration: 0.6, ease: "easeOut" }}>

@@ -7,6 +7,7 @@ import { Dropdown, Label } from "@heroui/react";
 import { HamburgerMenu } from "iconsax-reactjs";
 import { Logo } from "@/components/icons";
 import { CustomButton } from "@/components/ui";
+import WaitlistBtn from "./waitlistBtn";
 
 const NAV_ITEMS = [
     { label: "How it works", href: "/about" },
@@ -66,10 +67,8 @@ export default function Navbar() {
                                 <motion.div
                                     whileHover={{ scale: 1.04 }}
                                     whileTap={{ scale: 0.96 }}
-                                >
-                                    <CustomButton variant="primary">
-                                        Join Waitlist
-                                    </CustomButton>
+                                > 
+                                    <WaitlistBtn />
                                 </motion.div>
 
                                 <div className="flex lg:hidden">

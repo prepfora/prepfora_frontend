@@ -3,17 +3,9 @@
 import { Button } from "@heroui/react";
 import { ComponentProps, ReactNode } from "react";
 import clsx from "clsx";
+import { CustomVariants } from "@/types/ui";
 
 type HeroVariants = NonNullable<ComponentProps<typeof Button>["variant"]>;
-
-type CustomVariants =
-    | HeroVariants
-    | "primary"
-    | "primary-outline"
-    | "secondary-btn"
-    | "secondary-outline"
-    | "error"
-    | "disabled";
 
 interface AppButtonProps
     extends Omit<

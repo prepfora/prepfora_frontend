@@ -9,7 +9,7 @@ import {
     ListBox,
     TextArea,
 } from "@heroui/react";
-import { ReactNode, useState } from "react";
+import { HTMLInputTypeAttribute, ReactNode, useState } from "react";
 import { Danger, Eye, EyeSlash, InfoCircle } from "iconsax-reactjs";
 import { AnimatePresence, motion } from "framer-motion";
 
@@ -22,7 +22,7 @@ interface FormikFieldProps<T = unknown> {
     name: string;
     label?: string;
     placeholder?: string;
-    type?: string;
+    type?: HTMLInputTypeAttribute;
     as?: "input" | "textarea" | "select";
     options?: Option[];
     info?: string;
