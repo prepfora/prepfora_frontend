@@ -11,7 +11,7 @@ import WaitlistBtn from "./waitlistBtn";
 
 const NAV_ITEMS = [
     { label: "How it works", href: "/about" },
-    { label: "Pricing", href: "/pricing" },
+    // { label: "Pricing", href: "/pricing" },
     { label: "Contact", href: "/contact" },
 ];
 

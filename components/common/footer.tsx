@@ -61,7 +61,7 @@ export default function Footer() {
 
                     <motion.div variants={fadeUp} transition={{ duration: 0.6, ease: "easeOut" }}>
                         <CustomText type="body-lg">
-                            © 2024 Prepfora Nigeria. All rights reserved.
+                            © {new Date().getFullYear()} Prepfora Nigeria. All rights reserved.
                         </CustomText>
                     </motion.div>
                 </motion.div>
