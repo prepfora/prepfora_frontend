@@ -4,11 +4,10 @@ import { Logo } from "@/components/icons";
 import { LandingLayout } from "@/components/layouts";
 import NextLink from "next/link";
 import { CustomText } from "@/components/ui";
-import { Instagram } from "iconsax-reactjs";
-import { PiFacebookLogoFill, PiLinkedinLogoFill, PiTiktokLogoFill } from "react-icons/pi";
+import { PiLinkedinLogoFill } from "react-icons/pi";
 import { FaInstagram } from "react-icons/fa";
-import { FaTiktok } from "react-icons/fa6";
 import { LiaFacebook } from "react-icons/lia";
+import { useRouter } from "next/navigation";
 
 const fadeUp = {
     hidden: { opacity: 0, y: 20 },
@@ -23,6 +22,9 @@ const stagger = {
 };
 
 export default function Footer() {
+
+    const router = useRouter()
+
     return (
         <section className=" w-full bg-primary-550 text-white flex flex-col ">
             <LandingLayout>
@@ -53,10 +55,12 @@ export default function Footer() {
                         </div>
                     </motion.div>
                     <motion.div className=" flex items-center gap-4 " variants={fadeUp} transition={{ duration: 0.6, ease: "easeOut" }}>
-                        <CustomText type="body-lg">Privacy Policy</CustomText>
-                        <CustomText type="body-lg">
-                            Terms and Conditions
-                        </CustomText>
+                        <button className=" cursor-pointer " onClick={() => router.push("/policy")} ><CustomText type="body-lg">Privacy Policy</CustomText></button>
+                        <button className=" cursor-pointer " onClick={() => router.push("/terms")} >
+                            <CustomText type="body-lg">
+                                Terms and Conditions
+                            </CustomText>
+                        </button>
                     </motion.div>
 
                     <motion.div variants={fadeUp} transition={{ duration: 0.6, ease: "easeOut" }}>
