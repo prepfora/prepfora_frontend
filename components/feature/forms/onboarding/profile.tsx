@@ -1,11 +1,13 @@
 "use client"
- 
+
 import { CustomButton, FormikField } from "@/components/ui";
 import useAuth from "@/hooks/auth/useAuth";
 import { FormikProvider } from "formik";
+import { useRouter } from "next/navigation";
 
 export default function ProfileForm() {
     const { formik } = useAuth();
+    const router = useRouter();
 
     const option = [
         {
@@ -23,7 +25,7 @@ export default function ProfileForm() {
                 <FormikField as="select" options={option} placeholder="Lagos" name="email" label="State of Residence*" />
                 <FormikField as="select" options={option} placeholder="Obafemi Awolowo University" name="email" label="University of Interest*" />
                 <div className=" flex flex-col gap-4 w-full " >
-                    <CustomButton fullWidth variant="disabled" >Continue</CustomButton> 
+                    <CustomButton fullWidth onClick={() => router.push("/onboarding?type=exam-type")} variant="disabled" >Continue</CustomButton>
                 </div>
             </form>
         </FormikProvider>

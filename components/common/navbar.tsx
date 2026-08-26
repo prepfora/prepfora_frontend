@@ -21,7 +21,7 @@ export default function Navbar() {
 
     return (
         <>
-            {!pathname?.includes("auth") && (
+            {(!pathname?.includes("auth") && !pathname?.includes("onboarding") && !pathname?.includes("dashboard")) && (
                 <div className=" sticky bg-[#EAEFFA] top-0 z-30 w-full h-20 lg:h-[100px] ">
                     <motion.nav
                         className="sticky top-0 z-40 w-full bg-white backdrop-blur-lg"
@@ -67,7 +67,7 @@ export default function Navbar() {
                                 <motion.div
                                     whileHover={{ scale: 1.04 }}
                                     whileTap={{ scale: 0.96 }}
-                                > 
+                                >
                                     <WaitlistBtn />
                                 </motion.div>
 
@@ -103,7 +103,7 @@ export default function Navbar() {
                                                         textValue={item.label}
                                                         className={
                                                             item.href ===
-                                                            pathname
+                                                                pathname
                                                                 ? "text-primary-300"
                                                                 : ""
                                                         }

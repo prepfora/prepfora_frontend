@@ -3,31 +3,31 @@
 import { CustomButton, CustomText } from "@/components/ui";
 import useAuth from "@/hooks/auth/useAuth";
 import { FormikProvider } from "formik";
+import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { FaCheckCircle } from "react-icons/fa";
-import { useRouter } from "next/navigation";
 
-export default function ExamType() {
+export default function ExamDate() {
     const { formik } = useAuth();
     const [selected, setSelected] = useState<string[]>([]);
     const router = useRouter();
 
     const option = [
         {
-            label: "WAEC",
-            value: "WAEC"
+            label: "Next 6 Months",
+            value: "Next 6 Months"
         },
         {
-            label: "NECO",
-            value: "NECO"
+            label: "Next 3 Months",
+            value: "Next 3 Months"
         },
         {
-            label: "JAMB",
-            value: "JAMB"
+            label: "Next 1 Month",
+            value: "Next 1 Month"
         },
         {
-            label: "POST-UTME",
-            value: "POST-UTME"
+            label: "Not Sure",
+            value: "Not Sure"
         },
     ];
 
@@ -54,12 +54,12 @@ export default function ExamType() {
             <button
                 type="button"
                 onClick={onClick}
-                className={` ${isActive ? " border-secondary-300 bg-secondary-50 " : " border-neutral-100 "} w-full h-[102px] text-neutral-500 flex justify-center items-center rounded-xl border relative `}
+                className={` ${isActive ? " border-secondary-300 bg-secondary-50 " : " border-neutral-100 "} w-full h-[60px] text-neutral-500 flex justify-between items-center rounded-xl border relative px-4 `}
             >
-                {isActive && (
-                    <FaCheckCircle size={24} color="#4DC497" className="absolute top-3 right-3" />
-                )}
                 <CustomText type={isActive ? "body-lg-bold" : "body-lg"} >{name}</CustomText>
+                {isActive && (
+                    <FaCheckCircle size={24} color="#4DC497" />
+                )}
             </button>
         )
     };
@@ -67,7 +67,7 @@ export default function ExamType() {
     return (
         <FormikProvider value={formik}>
             <form className=" w-full p-6 flex flex-col gap-6 rounded-2xl bg-white ">
-                <div className=" w-full grid grid-cols-2 gap-3 " >
+                <div className=" w-full flex flex-col gap-3 " >
                     {option.map((item, index) => {
                         return (
                             <CustomBox
@@ -80,7 +80,7 @@ export default function ExamType() {
                     })}
                 </div>
                 <div className=" flex flex-col gap-4 w-full " >
-                    <CustomButton fullWidth onClick={() => router.push("/onboarding?type=exam-date")} variant={selected.length > 0 ? "primary" : "disabled"} >Continue</CustomButton>
+                    <CustomButton fullWidth onClick={() => router.push("/onboarding?type=goals")} variant={selected.length > 0 ? "primary" : "disabled"} >Continue</CustomButton>
                 </div>
             </form>
         </FormikProvider>
