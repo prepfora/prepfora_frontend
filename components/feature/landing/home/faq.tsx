@@ -112,7 +112,7 @@ export default function FAQ() {
                                         >
                                             <div className=" p-5 rounded-lg border ">
                                                 <CustomText type="body-md">
-                                                    {item?.description}
+                                                    <div dangerouslySetInnerHTML={{ __html: item?.description }} />
                                                 </CustomText>
                                             </div>
                                         </motion.div>

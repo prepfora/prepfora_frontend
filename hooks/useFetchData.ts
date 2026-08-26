@@ -1,6 +1,6 @@
 "use client";
- 
-import { useQuery, type UseQueryResult } from "@tanstack/react-query"; 
+
+import { useQuery, type UseQueryResult } from "@tanstack/react-query";
 import { fetchSecureData, fetchUnsecureData } from "../config/api";
 
 interface UseFetchDataOptions {
@@ -41,6 +41,24 @@ export const useFetchData = <T>({
     queryKey: buildQueryKey(name, endpoint, id, queryKey, params),
     queryFn: () => fetchSecureData<T>(endpoint, params),
     enabled: enable,
+  });
+};
+
+export const useFetchDataNoCache = <T>({
+  endpoint,
+  name,
+  params,
+  id,
+  queryKey = [],
+  enable = true,
+}: UseFetchDataOptions): UseQueryResult<T> => {
+  return useQuery<T>({
+    queryKey: buildQueryKey(name, endpoint, id, queryKey, params),
+    queryFn: () => fetchSecureData<T>(endpoint, params),
+    enabled: enable,
+    staleTime: 0,
+    gcTime: 0,
+    refetchOnMount: "always",
   });
 };
 
