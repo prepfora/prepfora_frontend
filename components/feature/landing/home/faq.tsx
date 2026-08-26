@@ -3,6 +3,7 @@ import { motion, AnimatePresence } from "motion/react";
 import { CustomText } from "@/components/ui";
 import { Add, Minus } from "iconsax-reactjs";
 import { useState } from "react";
+import useFAQ from "@/hooks/useFAQ";
 
 const fadeUp = {
     hidden: { opacity: 0, y: 24 },
@@ -46,6 +47,10 @@ export default function FAQ() {
 
     const [show, setShow] = useState("");
 
+    const { useGetFAQ } = useFAQ()
+
+    const { data } = useGetFAQ()
+
     return (
         <section className=" w-full bg-white flex flex-col items-center py-10 lg:py-20 ">
             <div className=" lg:max-w-[716px] w-full flex flex-col items-center gap-10 px-6 lg:gap-16 ">
@@ -64,7 +69,7 @@ export default function FAQ() {
                     viewport={{ once: true, amount: 0.1 }}
                     variants={stagger}
                 >
-                    {faq.map((item, index) => {
+                    {data?.data.map((item, index) => {
                         const isOpen = show === item?.title;
                         return (
                             <motion.div
@@ -107,7 +112,7 @@ export default function FAQ() {
                                         >
                                             <div className=" p-5 rounded-lg border ">
                                                 <CustomText type="body-md">
-                                                    {item?.body}
+                                                    {item?.description}
                                                 </CustomText>
                                             </div>
                                         </motion.div>
