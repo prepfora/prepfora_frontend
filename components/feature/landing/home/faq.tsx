@@ -18,32 +18,32 @@ const stagger = {
 };
 
 export default function FAQ() {
-    const faq = [
-        {
-            title: "Can I use Prepfora on my phone?",
-            body: "Complete practice sessions, maintain streaks, unlock badges, and earn PrepPoints that you can redeem for rewards.",
-        },
-        {
-            title: "How does Prepfora help me prepare?",
-            body: "Complete practice sessions, maintain streaks, unlock badges, and earn PrepPoints that you can redeem for rewards.",
-        },
-        {
-            title: "Does Prepfora teach lessons?",
-            body: "Complete practice sessions, maintain streaks, unlock badges, and earn PrepPoints that you can redeem for rewards.",
-        },
-        {
-            title: "Do I need to install an app?",
-            body: "Complete practice sessions, maintain streaks, unlock badges, and earn PrepPoints that you can redeem for rewards.",
-        },
-        {
-            title: "Is Prepfora suitable for first-time exam candidates?",
-            body: "Complete practice sessions, maintain streaks, unlock badges, and earn PrepPoints that you can redeem for rewards.",
-        },
-        {
-            title: "How does Prepfora know my weak topics?",
-            body: "Complete practice sessions, maintain streaks, unlock badges, and earn PrepPoints that you can redeem for rewards.",
-        },
-    ];
+    // const faq = [
+    //     {
+    //         title: "Can I use Prepfora on my phone?",
+    //         body: "Complete practice sessions, maintain streaks, unlock badges, and earn PrepPoints that you can redeem for rewards.",
+    //     },
+    //     {
+    //         title: "How does Prepfora help me prepare?",
+    //         body: "Complete practice sessions, maintain streaks, unlock badges, and earn PrepPoints that you can redeem for rewards.",
+    //     },
+    //     {
+    //         title: "Does Prepfora teach lessons?",
+    //         body: "Complete practice sessions, maintain streaks, unlock badges, and earn PrepPoints that you can redeem for rewards.",
+    //     },
+    //     {
+    //         title: "Do I need to install an app?",
+    //         body: "Complete practice sessions, maintain streaks, unlock badges, and earn PrepPoints that you can redeem for rewards.",
+    //     },
+    //     {
+    //         title: "Is Prepfora suitable for first-time exam candidates?",
+    //         body: "Complete practice sessions, maintain streaks, unlock badges, and earn PrepPoints that you can redeem for rewards.",
+    //     },
+    //     {
+    //         title: "How does Prepfora know my weak topics?",
+    //         body: "Complete practice sessions, maintain streaks, unlock badges, and earn PrepPoints that you can redeem for rewards.",
+    //     },
+    // ];
 
     const [show, setShow] = useState("");
 
