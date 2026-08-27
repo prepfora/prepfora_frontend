@@ -8,6 +8,7 @@ import { PiLinkedinLogoFill } from "react-icons/pi";
 import { FaInstagram } from "react-icons/fa";
 import { LiaFacebook } from "react-icons/lia";
 import { useRouter } from "next/navigation";
+import { FaTiktok, FaXTwitter, FaYoutube } from "react-icons/fa6";
 
 const fadeUp = {
     hidden: { opacity: 0, y: 20 },
@@ -52,6 +53,12 @@ export default function Footer() {
                             <motion.a href="https://www.facebook.com/profile.php?id=61592083746946" target="_blank" whileHover={{ scale: 1.15, y: -2 }} whileTap={{ scale: 0.9 }}>
                                 <LiaFacebook size={24} />
                             </motion.a>
+                            {/* <motion.a href="https://www.facebook.com/profile.php?id=61592083746946" target="_blank" whileHover={{ scale: 1.15, y: -2 }} whileTap={{ scale: 0.9 }}>
+                                <FaXTwitter size={24} />
+                            </motion.a>
+                            <motion.a href="https://www.facebook.com/profile.php?id=61592083746946" target="_blank" whileHover={{ scale: 1.15, y: -2 }} whileTap={{ scale: 0.9 }}>
+                                <FaYoutube size={24} />
+                            </motion.a>  */}
                         </div>
                     </motion.div>
                     <motion.div className=" flex items-center gap-4 " variants={fadeUp} transition={{ duration: 0.6, ease: "easeOut" }}>

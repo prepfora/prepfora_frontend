@@ -1,8 +1,9 @@
 "use client"
 import { motion } from "motion/react";
 import { LandingLayout } from "@/components/layouts";
-import { CustomButton, CustomImage, CustomText } from "@/components/ui"; 
+import { CustomButton, CustomImage, CustomText } from "@/components/ui";
 import { WaitlistBtn } from "@/components/common";
+import { useRouter } from "next/navigation";
 
 const fadeUp = {
     hidden: { opacity: 0, y: 24 },
@@ -17,7 +18,9 @@ const stagger = {
 };
 
 export default function HeroSection() {
-    
+
+    const router = useRouter()
+
     return (
         <section className=" w-full lg:h-[calc(100vh-100px)] flex flex-col pt-4 lg:pb-0 pb-4 relative bg-[#EAEFFA] ">
             <LandingLayout>
@@ -63,6 +66,7 @@ export default function HeroSection() {
                                 whileTap={{ scale: 0.97 }}
                             >
                                 <CustomButton
+                                    onClick={() => router.push("/about")}
                                     variant="primary-outline"
                                     className=" w-full! lg:w-[150px] "
                                 >
