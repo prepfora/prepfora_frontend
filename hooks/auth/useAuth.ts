@@ -60,9 +60,8 @@ const useAuth = () => {
             unsecureHttpService.post(URLS.REGISTER, data),
         onError: (error: AxiosError<ApiErrorResponse>) => handleApiError(error),
         onSuccess: (data) => {
-            console.log(data);
             showSuccess(data?.data?.message)
-            router.push("/auth/verify")
+            router.push(`/auth/verify?email=${formikRegister.values.email}`)
         },
     });
 

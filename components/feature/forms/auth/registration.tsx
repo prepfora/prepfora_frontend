@@ -6,6 +6,7 @@ import useAuth from "@/hooks/auth/useAuth";
 import { FormikProvider } from "formik";
 
 export default function RegistrationForm() {
+
     const { formikRegister: formik } = useAuth();
 
     return (
