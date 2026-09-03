@@ -1,88 +1,113 @@
-"use client"
+"use client";
 
 import { CustomButton, CustomText } from "@/components/ui";
-import useAuth from "@/hooks/auth/useAuth";
-import { FormikProvider } from "formik";
-import { useState } from "react";
+import { FormikProps, FormikProvider } from "formik";
 import { FaCheckCircle } from "react-icons/fa";
 import { useRouter } from "next/navigation";
+import { IAuthUser } from "@/types/auth";
 
-export default function ExamType() {
-    const { formik } = useAuth();
-    const [selected, setSelected] = useState<string[]>([]);
+interface CustomBoxProps {
+    name: string;
+    isActive: boolean;
+    onClick?: () => void;
+}
+
+const CustomBox = ({ name, isActive, onClick }: CustomBoxProps) => {
+    return (
+        <button
+            type="button"
+            onClick={onClick}
+            className={` ${isActive
+                ? " border-secondary-300 bg-secondary-50 "
+                : " border-neutral-100 "
+                } w-full h-[102px] text-neutral-500 flex justify-center items-center rounded-xl border relative `}
+        >
+            {isActive && (
+                <FaCheckCircle
+                    size={24}
+                    color="#4DC497"
+                    className="absolute top-3 right-3"
+                />
+            )}
+            <CustomText type={isActive ? "body-lg-bold" : "body-lg"}>
+                {name}
+            </CustomText>
+        </button>
+    );
+};
+
+const options = [
+    {
+        label: "WAEC",
+        value: "waec",
+    },
+    {
+        label: "NECO",
+        value: "neco",
+    },
+    {
+        label: "JAMB",
+        value: "jamb",
+    },
+    {
+        label: "POST-UTME",
+        value: "utme",
+    },
+];
+
+export default function ExamType({
+    formik,
+}: {
+    formik: FormikProps<IAuthUser>;
+}) {
     const router = useRouter();
 
-    const option = [
-        {
-            label: "WAEC",
-            value: "WAEC"
-        },
-        {
-            label: "NECO",
-            value: "NECO"
-        },
-        {
-            label: "JAMB",
-            value: "JAMB"
-        },
-        {
-            label: "POST-UTME",
-            value: "POST-UTME"
-        },
-    ];
+    const examinations = formik?.values?.examinations ?? [];
+    const hasSelection = examinations.length > 0;
 
     const toggleSelection = (value: string) => {
-        setSelected((prev) =>
-            prev.includes(value)
-                ? prev.filter((item) => item !== value)
-                : [...prev, value]
-        );
+        if (!formik) return;
+        const current = formik.values?.examinations ?? [];
+        const next = current.includes(value)
+            ? current.filter((item) => item !== value)
+            : [...current, value];
+        formik.setFieldValue("examinations", next);
     };
 
-    const CustomBox = (
-        {
-            name,
-            isActive,
-            onClick,
-        }: {
-            name: string,
-            isActive: boolean,
-            onClick?: () => void,
-        }
-    ) => {
-        return (
-            <button
-                type="button"
-                onClick={onClick}
-                className={` ${isActive ? " border-secondary-300 bg-secondary-50 " : " border-neutral-100 "} w-full h-[102px] text-neutral-500 flex justify-center items-center rounded-xl border relative `}
-            >
-                {isActive && (
-                    <FaCheckCircle size={24} color="#4DC497" className="absolute top-3 right-3" />
-                )}
-                <CustomText type={isActive ? "body-lg-bold" : "body-lg"} >{name}</CustomText>
-            </button>
-        )
-    };
-
-    return (
-        <FormikProvider value={formik}>
-            <form className=" w-full p-6 flex flex-col gap-6 rounded-2xl bg-white ">
-                <div className=" w-full grid grid-cols-2 gap-3 " >
-                    {option.map((item, index) => {
-                        return (
-                            <CustomBox
-                                key={index}
-                                name={item.label}
-                                isActive={selected.includes(item.value)}
-                                onClick={() => toggleSelection(item.value)}
-                            />
-                        );
-                    })}
-                </div>
-                <div className=" flex flex-col gap-4 w-full " >
-                    <CustomButton fullWidth onClick={() => router.push("/onboarding?type=exam-date")} variant={selected.length > 0 ? "primary" : "disabled"} >Continue</CustomButton>
-                </div>
-            </form>
-        </FormikProvider>
+    const formContent = (
+        <form className=" w-full p-6 flex flex-col gap-6 rounded-2xl bg-white ">
+            <div className=" w-full grid grid-cols-2 gap-3 ">
+                {options.map((item) => {
+                    return (
+                        <CustomBox
+                            key={item.value}
+                            name={item.label}
+                            isActive={examinations.includes(item.value)}
+                            onClick={() => toggleSelection(item.value)}
+                        />
+                    );
+                })}
+            </div>
+            <div className=" flex flex-col gap-4 w-full ">
+                <CustomButton
+                    fullWidth
+                    onClick={() => {
+                        if (hasSelection) {
+                            router.push("/onboarding?type=exam-date");
+                        }
+                    }}
+                    variant={hasSelection ? "primary" : "disabled"}
+                    disabled={!hasSelection}
+                >
+                    Continue
+                </CustomButton>
+            </div>
+        </form>
     );
+
+    if (!formik) {
+        return formContent;
+    }
+
+    return <FormikProvider value={formik}>{formContent}</FormikProvider>;
 }

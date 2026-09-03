@@ -1,14 +1,16 @@
 "use client"
 
 import { CustomButton, CustomText } from "@/components/ui";
-import useAuth from "@/hooks/auth/useAuth";
-import { FormikProvider } from "formik";
+import { FormikProps, FormikProvider } from "formik";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { FaCheckCircle } from "react-icons/fa";
+import { IAuthUser } from "@/types/auth";
 
-export default function YourGoal() {
-    const { formik } = useAuth();
+export default function YourGoal({ formik, isLoading }: {
+    formik: FormikProps<IAuthUser>,
+    isLoading: boolean
+}) {
     const [selected, setSelected] = useState<string[]>([]);
     const router = useRouter();
 
@@ -66,7 +68,7 @@ export default function YourGoal() {
 
     return (
         <FormikProvider value={formik}>
-            <form className=" w-full p-6 flex flex-col gap-6 rounded-2xl bg-white ">
+            <form onSubmit={formik.handleSubmit} className=" w-full p-6 flex flex-col gap-6 rounded-2xl bg-white ">
                 <div className=" w-full flex flex-col gap-3 " >
                     {option.map((item, index) => {
                         return (
@@ -80,7 +82,7 @@ export default function YourGoal() {
                     })}
                 </div>
                 <div className=" flex flex-col gap-4 w-full " >
-                    <CustomButton fullWidth onClick={() => router.push("/dashboard")} variant={selected.length > 0 ? "primary" : "disabled"} >Go to Dashboard</CustomButton>
+                    <CustomButton fullWidth loading={isLoading} disabled={selected.length === 0} type="submit" variant={selected.length > 0 ? "primary" : "disabled"} >Go to Dashboard</CustomButton>
                 </div>
             </form>
         </FormikProvider>

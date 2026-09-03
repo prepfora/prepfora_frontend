@@ -13,11 +13,18 @@ import {
 import { Logo } from "../icons";
 import { CustomText } from "../ui";
 import { usePathname, useRouter } from "next/navigation";
+import useUser from "@/hooks/useUser";
+import { textLimit } from "@/config/textlimit";
 
 export default function Sidebar() {
 
     const pathname = usePathname()
     const { push } = useRouter()
+
+    const { useGetProfile } = useUser()
+    const { data } = useGetProfile()
+    console.log(data, "data");
+
 
     const sidebar_link = [
         {
@@ -70,9 +77,11 @@ export default function Sidebar() {
                     })}
                 </div>
                 <div className=" p-4 w-full rounded-2xl bg-primary-350 flex items-center gap-4 mt-auto text-white ">
-                    <div className=" border border-white rounded-full w-10 h-10 bg-white "></div>
+                    <div className=" w-fit " >
+                        <div className=" border border-white rounded-full w-10 h-10 bg-white "></div>
+                    </div>
                     <div>
-                        <CustomText type="body-lg">Jane Doe</CustomText>
+                        <CustomText type="body-lg">{data?.data?.first_name ? textLimit(`${data?.data?.first_name} ${data?.data?.last_name}`, 12) : "Guest"}</CustomText>
                         <CustomText type="body-sm">Current Badge</CustomText>
                     </div>
                 </div>

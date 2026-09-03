@@ -62,6 +62,24 @@ export const useFetchDataNoCache = <T>({
   });
 };
 
+export const useUnsecureFetchDataNoCache = <T>({
+  endpoint,
+  name,
+  params,
+  id,
+  queryKey = [],
+  enable = true,
+}: UseFetchDataOptions): UseQueryResult<T> => {
+  return useQuery<T>({
+    queryKey: buildQueryKey(name, endpoint, id, queryKey, params),
+    queryFn: () => fetchUnsecureData<T>(endpoint, params), // FIXED
+    enabled: enable,
+    staleTime: 0,
+    gcTime: 0,
+    refetchOnMount: "always",
+  });
+};
+
 export const useUnsecureFetchData = <T>({
   endpoint,
   name,

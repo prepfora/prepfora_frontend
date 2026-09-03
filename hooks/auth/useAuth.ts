@@ -1,69 +1,136 @@
 "use client"
 import { ApiErrorResponse } from "@/config/getErrorMessage";
 import { handleApiError } from "@/config/handleApiError";
-import httpService from "@/config/httpService";
+import { tokenStorage, unsecureHttpService } from "@/config/httpService";
 import { showSuccess } from "@/config/toast";
 import { URLS } from "@/config/urls";
-import { IWaitlist } from "@/types/waitlist";
+import { IAuth, IAuthOtp } from "@/types/auth";
+// import { IWaitlist } from "@/types/waitlist";
 import { useMutation } from "@tanstack/react-query";
 import { AxiosError } from "axios";
 import { useFormik } from "formik";
+import { useRouter, useSearchParams } from "next/navigation";
 import { useState } from "react";
 import * as Yup from "yup";
 
 const useAuth = () => {
 
     const [isOpen, setOpen] = useState(false)
+    const router = useRouter()
+
+    const searchParams = useSearchParams()
+    const email = searchParams.get("email")
 
     const validationSchema = Yup.object({
         email: Yup.string()
             .email("Please enter a valid email")
             .required("Email is required"),
-
-        first_name: Yup.string()
-            .trim()
-            .min(2, "First name must be at least 2 characters")
-            .required("First name is required"),
-
-        last_name: Yup.string()
-            .trim()
-            .min(2, "Last name must be at least 2 characters")
-            .required("Last name is required"),
-        phone_number: Yup.string()
-                .trim() 
-                .required("Phone Number is required"),
     });
-    
-    const waitlist = useMutation({
-        mutationFn: (data: IWaitlist) =>
-            httpService.post(URLS.WAIT_LIST, data),
+
+    const validationSchemaRegister = Yup.object({
+        email: Yup.string()
+            .email("Please enter a valid email")
+            .required("Email is required"),
+        confirm_email: Yup.string()
+            .email("Please enter a valid email")
+            .required("Email is required")
+            .oneOf([Yup.ref("email")], "Email addresses do not match"),
+    });
+
+    const validationSchemaOtp = Yup.object({
+        email: Yup.string()
+            .email("Please enter a valid email")
+            .required("Email is required"),
+        otp: Yup.string()
+            .required("OTP is required"),
+    });
+
+    const login = useMutation({
+        mutationFn: (data: IAuth) =>
+            unsecureHttpService.post(URLS.LOGIN, data),
+        onError: (error: AxiosError<ApiErrorResponse>) => handleApiError(error),
+        onSuccess: (data) => {
+            showSuccess(data?.data?.message)
+            router.push(`/auth/verify?email=${formik.values.email}`)
+        },
+    });
+
+    const register = useMutation({
+        mutationFn: (data: IAuth) =>
+            unsecureHttpService.post(URLS.REGISTER, data),
+        onError: (error: AxiosError<ApiErrorResponse>) => handleApiError(error),
+        onSuccess: (data) => {
+            console.log(data);
+            showSuccess(data?.data?.message)
+            router.push("/auth/verify")
+        },
+    });
+
+    const otp = useMutation({
+        mutationFn: (data: IAuthOtp) =>
+            unsecureHttpService.post(URLS.OTP, data),
         onError: (error: AxiosError<ApiErrorResponse>) => handleApiError(error),
         onSuccess: (data) => {
 
-            setOpen(false)
-            showSuccess(data?.data?.message); 
-            formik.resetForm()
+            tokenStorage.setAccess(data?.data?.data?.tokens.access_token)
+            tokenStorage.setRefresh(data?.data?.data?.tokens.refresh_token)
+
+            showSuccess(data?.data?.message)
+
+            if (data?.data?.data?.user?.first_name) {
+                router.push("/dashboard/home")
+            } else {
+                router.push("/onboarding")
+            }
         },
-    }); 
+    });
 
     const formik = useFormik({
         initialValues: {
             email: "",
-            first_name: "",
-            last_name: "",
-            phone_number: ""
         },
         validationSchema: validationSchema,
         onSubmit: (data) => {
-            waitlist.mutate(data)
+            login.mutate(data)
         },
     });
 
+    const formikRegister = useFormik({
+        initialValues: {
+            email: "",
+            confirm_email: ""
+        },
+        validationSchema: validationSchemaRegister,
+        onSubmit: (data) => {
+            register.mutate({
+                email: data.email
+            })
+        },
+    });
+
+    const formikOtp = useFormik({
+        initialValues: {
+            email: email || "",
+            otp: ""
+        },
+        validationSchema: validationSchemaOtp,
+        onSubmit: (data) => {
+            otp.mutate({
+                ...data,
+                email: email as string,
+            })
+        },
+    });
+
+    const isLoading = login.isPending || register.isPending || otp.isPending
+
     return {
         formik,
+        formikRegister,
+        formikOtp,
         isOpen,
         setOpen,
-        isLoading: waitlist.isPending
+        isLoading,
     };
 };
 

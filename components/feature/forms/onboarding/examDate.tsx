@@ -1,14 +1,16 @@
 "use client"
 
 import { CustomButton, CustomText } from "@/components/ui";
-import useAuth from "@/hooks/auth/useAuth";
 import { FormikProvider } from "formik";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { FaCheckCircle } from "react-icons/fa";
+import { FormikProps } from "formik";
+import { IAuthUser } from "@/types/auth";
 
-export default function ExamDate() {
-    const { formik } = useAuth();
+export default function ExamDate({ formik, }: {
+    formik: FormikProps<IAuthUser>;
+}) {
     const [selected, setSelected] = useState<string[]>([]);
     const router = useRouter();
 
@@ -80,7 +82,7 @@ export default function ExamDate() {
                     })}
                 </div>
                 <div className=" flex flex-col gap-4 w-full " >
-                    <CustomButton fullWidth onClick={() => router.push("/onboarding?type=goals")} variant={selected.length > 0 ? "primary" : "disabled"} >Continue</CustomButton>
+                    <CustomButton fullWidth onClick={() => router.push("/onboarding?type=goals")} isDisabled={selected.length === 0} variant={selected.length > 0 ? "primary" : "disabled"} >Continue</CustomButton>
                 </div>
             </form>
         </FormikProvider>

@@ -3,7 +3,7 @@ import { URLS } from "@/config/urls";
 import { useState } from "react";
 import { PaginatedResponse } from "@/types/pagination";
 import { IFaqResponse } from "@/types/faq";
-import { useFetchDataNoCache } from "./useFetchData";
+import { useUnsecureFetchDataNoCache } from "./useFetchData";
 
 const useFAQ = () => {
 
@@ -11,7 +11,7 @@ const useFAQ = () => {
 
 
     const useGetFAQ = () => {
-        return useFetchDataNoCache<PaginatedResponse<IFaqResponse>>({
+        return useUnsecureFetchDataNoCache<PaginatedResponse<IFaqResponse>>({
             endpoint: URLS.FAQ,
             name: [URLS.FAQ],
             params: {

@@ -1,14 +1,15 @@
 "use client"
 
 import { CustomButton, CustomText } from "@/components/ui";
-import useAuth from "@/hooks/auth/useAuth";
-import { FormikProvider } from "formik";
+import { FormikProps, FormikProvider } from "formik";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { FaCheckCircle } from "react-icons/fa";
+import { IAuthUser } from "@/types/auth";
 
-export default function ExamGoal() {
-    const { formik } = useAuth();
+export default function ExamGoal({ formik, }: {
+    formik: FormikProps<IAuthUser>;
+}) {
     const [selected, setSelected] = useState<string[]>([]);
     const router = useRouter();
 
@@ -73,14 +74,14 @@ export default function ExamGoal() {
                             <CustomBox
                                 key={index}
                                 name={item.label}
-                                isActive={selected.includes(item.value)}
-                                onClick={() => toggleSelection(item.value)}
+                                isActive={formik.values?.current_expectation === item.value}
+                                onClick={() => formik.setFieldValue("current_expectation", item.value)}
                             />
                         );
                     })}
                 </div>
                 <div className=" flex flex-col gap-4 w-full " >
-                    <CustomButton fullWidth onClick={() => router.push("/onboarding?type=your-goals")} variant={selected.length > 0 ? "primary" : "disabled"} >Continue</CustomButton>
+                    <CustomButton fullWidth onClick={() => router.push("/onboarding?type=your-goals")} isDisabled={!formik.values?.current_expectation} variant={formik.values?.current_expectation ? "primary" : "disabled"} >Continue</CustomButton>
                 </div>
             </form>
         </FormikProvider>

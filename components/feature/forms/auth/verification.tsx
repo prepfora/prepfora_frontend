@@ -7,16 +7,16 @@ import { FormikProvider } from "formik";
 
 export default function VerificationForm() {
 
-    const { formik } = useAuth();
+    const { formikOtp: formik, isLoading } = useAuth();
 
     return (
         <FormikProvider value={formik}>
-            <form className=" w-full p-6 flex flex-col gap-6 rounded-2xl bg-white ">
+            <form onSubmit={formik.handleSubmit} className=" w-full p-6 flex flex-col gap-6 rounded-2xl bg-white ">
                 <div className=" flex flex-col gap-3 w-full justify-center items-center " >
                     <OTPInput name="otp" length={6} />
                 </div>
                 <div className=" flex flex-col gap-3 w-full " >
-                    <CustomButton fullWidth variant="disabled" >Continue</CustomButton> 
+                    <CustomButton type="submit" disabled={!formik.isValid} fullWidth loading={formik.isSubmitting} isDisabled={isLoading} variant={!formik.isValid ? "primary" : "disabled"} >Continue</CustomButton>
                 </div>
             </form>
         </FormikProvider>
