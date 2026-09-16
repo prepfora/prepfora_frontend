@@ -4,20 +4,28 @@ import { handleApiError } from "@/config/handleApiError";
 import httpService from "@/config/httpService";
 import { showSuccess } from "@/config/toast";
 import { URLS } from "@/config/urls";
-import { IAuthUser, IUpdateUserPayload, IUserProfile } from "@/types/auth";
+import { IAuthUser } from "@/types/auth";
 // import { IWaitlist } from "@/types/waitlist";
-import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { useMutation } from "@tanstack/react-query";
 import { AxiosError } from "axios";
 import { useFormik } from "formik";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import * as Yup from "yup";
-import { useFetchData, useUnsecureFetchDataNoCache } from "./useFetchData";
+import { useFetchData, useUnsecureFetchDataNoCache } from "../useFetchData";
+import { PaginatedResponse } from "@/types/pagination";
+import { 
+    IDataExam, 
+    IExam, 
+    ICreateExaminationPayload, 
+    IUpdateExaminationPayload, 
+    IExaminationReturn,
+    IQuestionMultipleResponse 
+} from "@/types/exam";
 
-const useUser = () => {
+const useExam = () => {
 
     const router = useRouter()
-    const queryClient = useQueryClient()
 
     const validationSchema = Yup.object({
         first_name: Yup.string()
@@ -44,41 +52,109 @@ const useUser = () => {
         onError: (error: AxiosError<ApiErrorResponse>) => handleApiError(error),
         onSuccess: (data) => {
             showSuccess(data?.data?.message)
-            queryClient.invalidateQueries({ queryKey: [URLS.USER_PROFILE] })
             router.push(`/dashboard/home`)
-        },
-    });
-
-    const updateProfile = useMutation({
-        mutationFn: (data: IUpdateUserPayload) =>
-            httpService.patch(URLS.USER_PROFILE, data),
-        onError: (error: AxiosError<ApiErrorResponse>) => handleApiError(error),
-        onSuccess: (data) => {
-            showSuccess(data?.data?.message || "Profile updated successfully")
-            queryClient.invalidateQueries({ queryKey: [URLS.USER_PROFILE] })
         },
     });
 
     const [page, setPage] = useState(1)
 
-    const useGetUniversity = () => {
-        return useUnsecureFetchDataNoCache<any>({
-            endpoint: URLS.UNIVERSITY,
-            name: [URLS.UNIVERSITY]
+    const useGetSubject = () => {
+        return useUnsecureFetchDataNoCache<PaginatedResponse<IDataExam>>({
+            endpoint: URLS.SUBJECT,
+            name: [URLS.SUBJECT]
         });
     };
 
-    const useGetProfile = () => {
-        return useFetchData<{
+    const useGetQuestion = (
+        subject?: string, 
+        limit?: string | number, 
+        year?: string, 
+        type?: string
+    ) => {
+        const cleanParams: Record<string, unknown> = {
+            subject: subject ? subject.toLowerCase() : "english",
+            limit: limit ? Number(limit) : 20,
+        };
+        if (type && type.trim()) {
+            cleanParams.type = type.toLowerCase();
+        }
+        if (year && year.trim()) {
+            cleanParams.year = year;
+        }
+
+        return useUnsecureFetchDataNoCache<{
             success: boolean;
             message: string;
-            data: IUserProfile;
-            pagination: any;
+            data: IQuestionMultipleResponse;
         }>({
-            endpoint: URLS.USER_PROFILE,
-            name: [URLS.USER_PROFILE]
+            endpoint: URLS.QUESTION,
+            name: [URLS.QUESTION],
+            params: cleanParams
         });
     };
+
+    const createExamination = useMutation({
+        mutationFn: async (data: ICreateExaminationPayload) => {
+            const response = await httpService.post<{
+                success: boolean;
+                message: string;
+                data: IExaminationReturn;
+            }>(URLS.EXAMINATION, data);
+            return response.data;
+        },
+        onError: (error: AxiosError<ApiErrorResponse>) => handleApiError(error),
+    });
+
+    const updateExamination = useMutation({
+        mutationFn: async ({
+            id,
+            data,
+        }: {
+            id: string;
+            data: IUpdateExaminationPayload;
+        }) => {
+            const response = await httpService.put<{
+                success: boolean;
+                message: string;
+                data: IExaminationReturn;
+            }>(`${URLS.EXAMINATION}/${id}`, data);
+            return response.data;
+        },
+        onError: (error: AxiosError<ApiErrorResponse>) => handleApiError(error),
+    });
+
+    const useGetUserExaminations = (params?: {
+        user_id?: string;
+        subject?: string;
+        exam_type?: string;
+        year?: string;
+        type?: string;
+        page?: number;
+        limit?: number;
+    }) => {
+        return useUnsecureFetchDataNoCache<{
+            success: boolean;
+            message: string;
+            data: IExaminationReturn[];
+        }>({
+            endpoint: URLS.EXAMINATION,
+            name: [URLS.EXAMINATION],
+            params: params as Record<string, unknown>,
+        });
+    };
+
+    const useGetExaminationById = (id?: string) => {
+        return useUnsecureFetchDataNoCache<{
+            success: boolean;
+            message: string;
+            data: IExaminationReturn;
+        }>({
+            endpoint: `${URLS.EXAMINATION}/${id}`,
+            name: id ? [URLS.EXAMINATION, id] : [URLS.EXAMINATION],
+            enable: Boolean(id),
+        });
+    };
+
 
     const formik = useFormik<IAuthUser>({
         initialValues: {
@@ -119,6 +195,7 @@ const useUser = () => {
                     return date.toISOString();
                 }
             };
+
             updateUser.mutate({
                 ...data,
                 current_examination_date: convertToDate()
@@ -131,13 +208,15 @@ const useUser = () => {
     return {
         formik,
         isLoading,
-        updateProfile,
-        updateUser,
-        useGetProfile,
-        useGetUniversity,
+        useGetQuestion,
+        useGetSubject,
+        useGetUserExaminations,
+        useGetExaminationById,
+        createExamination,
+        updateExamination,
         setPage,
         page
     };
 };
 
-export default useUser;
+export default useExam;
