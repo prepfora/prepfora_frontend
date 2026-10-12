@@ -85,10 +85,10 @@ export default function DashboardHome() {
                         key={index}
                         className="flex flex-col justify-between h-[145px] sm:h-[155px] bg-white p-3.5 sm:p-5 rounded-2xl shadow-sm border border-neutral-100/60 hover:shadow-md transition-shadow"
                     >
-                        <span className="text-xs sm:text-sm font-semibold text-neutral-800">
+                        <CustomText type="body-sm-bold" className="text-neutral-800 text-xs sm:text-sm">
                             <span className="inline md:hidden">{item.mobileName}</span>
                             <span className="hidden md:inline">{item.name}</span>
-                        </span>
+                        </CustomText>
 
                         <div className="flex items-center gap-2.5 sm:gap-3">
                             <div className="w-10 h-10 sm:w-11 sm:h-11 flex items-center justify-center shrink-0">
@@ -96,24 +96,24 @@ export default function DashboardHome() {
                             </div>
                             <div className="flex flex-col">
                                 <div className="flex items-baseline gap-1">
-                                    <span className="text-xl sm:text-2xl font-bold text-neutral-900 leading-none">
+                                    <CustomText type="headline-sm" className="font-bold text-neutral-900 text-xl sm:text-2xl leading-none">
                                         <span className="inline md:hidden">{item.mobileValue}</span>
                                         <span className="hidden md:inline">{item.value}</span>
-                                    </span>
+                                    </CustomText>
                                     {(item.mobileUnit || item.unit) && (
-                                        <span className="text-[10px] sm:text-xs text-neutral-400 font-normal">
+                                        <CustomText type="body-sm" className="text-[10px] sm:text-xs text-neutral-400 font-normal">
                                             <span className="inline md:hidden">{item.mobileUnit}</span>
                                             <span className="hidden md:inline">{item.unit}</span>
-                                        </span>
+                                        </CustomText>
                                     )}
                                 </div>
                             </div>
                         </div>
 
-                        <span className="text-[11px] sm:text-xs text-neutral-400 font-normal leading-tight">
+                        <CustomText type="body-sm" className="text-[11px] sm:text-xs text-neutral-400 font-normal leading-tight">
                             <span className="inline md:hidden">{item.mobileBody}</span>
                             <span className="hidden md:inline">{item.body}</span>
-                        </span>
+                        </CustomText>
                     </div>
                 ))}
             </div>

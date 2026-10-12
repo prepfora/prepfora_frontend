@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
+import { CustomButton, CustomText } from "@/components/ui";
 
 interface ExamHeaderProps {
     subjectTitle: string;
@@ -33,9 +34,9 @@ export default function ExamHeader({
     return (
         <header className="w-full bg-white border-b border-[#E2EAF4] px-4 sm:px-8 py-3 sm:py-4 flex items-center justify-between shadow-xs sticky top-0 z-30">
             {/* Subject Title (truncated on small screens) */}
-            <h1 className="text-sm sm:text-lg font-bold text-neutral-900 tracking-tight truncate max-w-[100px] xs:max-w-[140px] sm:max-w-none">
+            <CustomText type="headline-sm" className="!text-sm sm:!text-lg font-bold text-neutral-900 tracking-tight truncate max-w-[100px] xs:max-w-[140px] sm:max-w-none">
                 {subjectTitle}
-            </h1>
+            </CustomText>
 
             {/* Right: Timer & End Session & Mobile Hamburger */}
             <div className="flex items-center gap-2 sm:gap-4 flex-shrink-0">
@@ -63,13 +64,14 @@ export default function ExamHeader({
                 </div>
 
                 {/* End Session Button */}
-                <button
-                    type="button"
+                <CustomButton
+                    variant="primary"
+                    size="sm"
                     onClick={onEndSession}
-                    className="bg-[#059669] hover:bg-[#047857] active:scale-[0.98] text-white font-semibold text-xs sm:text-sm px-3 sm:px-5 py-1.5 sm:py-2 rounded-xl transition-all shadow-xs cursor-pointer flex items-center justify-center"
+                    className="!bg-[#059669] hover:!bg-[#047857] !rounded-xl !px-3 sm:!px-5 !py-1.5 sm:!py-2"
                 >
                     End Session
-                </button>
+                </CustomButton>
 
                 {/* Hamburger Menu Icon (Mobile Only) to open Question Navigator */}
                 {onOpenNavigator && (

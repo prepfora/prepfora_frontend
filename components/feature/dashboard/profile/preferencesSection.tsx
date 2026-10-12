@@ -2,6 +2,7 @@
 
 import React from "react";
 import { UserProfileData } from "./profileTypes";
+import { CustomButton, CustomText } from "@/components/ui";
 
 interface PreferencesSectionProps {
     profile: UserProfileData;
@@ -16,32 +17,36 @@ export default function PreferencesSection({
 }: PreferencesSectionProps) {
     return (
         <section className="w-full flex flex-col gap-3">
-            <h3 className="text-lg font-bold text-neutral-900">Preferences</h3>
+            <CustomText type="title-md" className="font-bold text-neutral-900 text-lg">
+                Preferences
+            </CustomText>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
                 {/* Exam Type Card */}
                 <div className="bg-white border border-[#E2EAF4] rounded-2xl p-5 shadow-xs flex flex-col gap-3">
                     <div className="flex items-center justify-between">
-                        <span className="text-sm font-bold text-neutral-900">
+                        <CustomText type="body-sm-bold" className="text-sm font-bold text-neutral-900">
                             Exam Type
-                        </span>
-                        <button
-                            type="button"
+                        </CustomText>
+                        <CustomButton
+                            variant="primary-outline"
+                            size="sm"
                             onClick={onEditExamType}
-                            className="border border-[#2563EB] text-[#2563EB] text-xs font-semibold px-3 py-0.5 rounded-full hover:bg-blue-50 transition-colors cursor-pointer relative z-20 select-none shrink-0"
+                            className="h-7 px-3 py-0.5 text-xs rounded-full relative z-20 shrink-0 font-semibold"
                         >
                             Edit
-                        </button>
+                        </CustomButton>
                     </div>
 
                     <div className="flex flex-col gap-2">
                         {profile.examTypes.map((exam) => (
-                            <span
+                            <CustomText
                                 key={exam}
+                                type="body-md"
                                 className="text-sm text-neutral-600 font-medium"
                             >
                                 {exam}
-                            </span>
+                            </CustomText>
                         ))}
                     </div>
                 </div>
@@ -49,27 +54,28 @@ export default function PreferencesSection({
                 {/* Goals Card */}
                 <div className="bg-white border border-[#E2EAF4] rounded-2xl p-5 shadow-xs flex flex-col gap-3">
                     <div className="flex items-center justify-between">
-                        <span className="text-sm font-bold text-neutral-900">
+                        <CustomText type="body-sm-bold" className="text-sm font-bold text-neutral-900">
                             Goals
-                        </span>
-                        <button
-                            type="button"
+                        </CustomText>
+                        <CustomButton
+                            variant="primary-outline"
+                            size="sm"
                             onClick={onEditGoals}
-                            className="border border-[#2563EB] text-[#2563EB] text-xs font-semibold px-3 py-0.5 rounded-full hover:bg-blue-50 transition-colors cursor-pointer relative z-20 select-none shrink-0"
+                            className="h-7 px-3 py-0.5 text-xs rounded-full relative z-20 shrink-0 font-semibold"
                         >
                             Edit
-                        </button>
+                        </CustomButton>
                     </div>
 
                     <div className="flex flex-col gap-2.5">
                         {profile.goals.map((g) => (
                             <div key={g.exam} className="flex flex-col">
-                                <span className="text-sm font-bold text-neutral-900">
+                                <CustomText type="body-sm-bold" className="text-sm font-bold text-neutral-900">
                                     {g.exam}
-                                </span>
-                                <span className="text-sm text-neutral-600 font-medium">
+                                </CustomText>
+                                <CustomText type="body-md" className="text-sm text-neutral-600 font-medium">
                                     {g.goal}
-                                </span>
+                                </CustomText>
                             </div>
                         ))}
                     </div>

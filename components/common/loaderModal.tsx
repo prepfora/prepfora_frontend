@@ -2,6 +2,7 @@
 
 import React from "react";
 import { AnimatePresence, motion } from "framer-motion";
+import { CustomText } from "@/components/ui";
 
 export interface LoaderModalProps {
     isOpen: boolean;
@@ -52,20 +53,22 @@ export default function LoaderModal({
                         </div>
 
                         {/* Title with animated bouncing dots */}
-                        <h3 id="loader-modal-title" className="flex items-center gap-1 text-lg sm:text-xl font-semibold text-neutral-900 mb-1.5">
-                            <span>{title}</span>
-                            <span className="flex">
+                        <div id="loader-modal-title" className="flex items-center gap-1 mb-1.5">
+                            <CustomText type="title-lg" className="font-semibold text-neutral-900">
+                                {title}
+                            </CustomText>
+                            <span className="flex text-lg font-bold text-neutral-900">
                                 <span className="animate-bounce" style={{ animationDelay: "0ms" }}>.</span>
                                 <span className="animate-bounce" style={{ animationDelay: "150ms" }}>.</span>
                                 <span className="animate-bounce" style={{ animationDelay: "300ms" }}>.</span>
                             </span>
-                        </h3>
+                        </div>
 
                         {/* Subtitle / Description */}
                         {description && (
-                            <p className="text-sm text-neutral-500 mb-5 leading-relaxed">
+                            <CustomText type="body-sm" className="text-neutral-500 mb-5 leading-relaxed">
                                 {description}
-                            </p>
+                            </CustomText>
                         )}
 
                         {/* Animated infinite loading progress bar */}
@@ -86,9 +89,9 @@ export default function LoaderModal({
 
                         {/* Reassurance text */}
                         {subtext && (
-                            <span className="text-xs text-neutral-400 font-medium">
+                            <CustomText type="label-sm" className="text-neutral-400 font-medium">
                                 {subtext}
-                            </span>
+                            </CustomText>
                         )}
                     </motion.div>
                 </motion.div>

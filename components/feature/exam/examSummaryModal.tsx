@@ -2,6 +2,7 @@
 
 import React from "react";
 import { useRouter } from "next/navigation";
+import { CustomButton, CustomText } from "@/components/ui";
 
 export interface QuestionResult {
     number: number;
@@ -72,12 +73,12 @@ export default function ExamSummaryModal({
                 {/* Header with Title and Close Button */}
                 <div className="flex items-start justify-between">
                     <div>
-                        <h2 className="text-xl sm:text-2xl font-bold text-neutral-900">
+                        <CustomText type="headline-sm" className="!text-xl sm:!text-2xl font-bold text-neutral-900">
                             Practice Summary
-                        </h2>
-                        <p className="text-xs sm:text-sm text-neutral-500 mt-1">
+                        </CustomText>
+                        <CustomText type="body-sm" className="!text-xs sm:!text-sm text-neutral-500 mt-1">
                             You can always view this summary in the performance tab
-                        </p>
+                        </CustomText>
                     </div>
 
                     <button
@@ -105,23 +106,23 @@ export default function ExamSummaryModal({
 
                 {/* Section 1: Question Review */}
                 <div className="flex flex-col gap-3">
-                    <h3 className="text-sm sm:text-base font-bold text-neutral-900">
+                    <CustomText type="body-md-bold" className="!text-sm sm:!text-base font-bold text-neutral-900">
                         Question Review
-                    </h3>
+                    </CustomText>
 
                     {/* Review Legend */}
                     <div className="flex items-center gap-4 text-xs font-medium text-neutral-600">
                         <div className="flex items-center gap-1.5">
                             <span className="w-2.5 h-2.5 rounded-full bg-[#10B981]" />
-                            <span>Correct</span>
+                            <CustomText type="label-sm" className="!text-xs text-neutral-600">Correct</CustomText>
                         </div>
                         <div className="flex items-center gap-1.5">
                             <span className="w-2.5 h-2.5 rounded-full bg-[#EF4444]" />
-                            <span>Incorrect</span>
+                            <CustomText type="label-sm" className="!text-xs text-neutral-600">Incorrect</CustomText>
                         </div>
                         <div className="flex items-center gap-1.5">
                             <span className="w-2.5 h-2.5 rounded-full bg-[#F59E0B]" />
-                            <span>Skipped</span>
+                            <CustomText type="label-sm" className="!text-xs text-neutral-600">Skipped</CustomText>
                         </div>
                     </div>
 
@@ -146,25 +147,25 @@ export default function ExamSummaryModal({
 
                 {/* Section 2: Practice Summary Banner */}
                 <div className="flex flex-col gap-3">
-                    <h3 className="text-sm sm:text-base font-bold text-neutral-900">
+                    <CustomText type="body-md-bold" className="!text-sm sm:!text-base font-bold text-neutral-900">
                         Practice Summary
-                    </h3>
+                    </CustomText>
 
                     {/* Emerald Banner matching Image 1 */}
                     <div className="w-full bg-[#52C498] rounded-3xl p-5 sm:p-7 flex flex-col md:flex-row items-stretch md:items-center gap-5 sm:gap-6 shadow-sm">
                         {/* Left Inner Score Card */}
                         <div className="w-full md:w-[220px] flex-shrink-0 bg-[#DCF3E8] rounded-2xl p-4 sm:p-5 flex flex-col justify-between shadow-xs">
-                            <span className="font-bold text-sm sm:text-base text-neutral-900">
+                            <CustomText type="body-sm-bold" className="font-bold text-sm sm:text-base text-neutral-900">
                                 {subjectTitle}
-                            </span>
+                            </CustomText>
 
                             <div className="my-2 sm:my-3 flex items-baseline gap-1">
                                 <span className="text-3xl sm:text-[34px] font-extrabold text-neutral-900 leading-none">
                                     {score}
                                 </span>
-                                <span className="text-xs font-semibold text-neutral-500">
+                                <CustomText type="label-sm" className="!text-xs font-semibold text-neutral-500">
                                     /{totalScore}
-                                </span>
+                                </CustomText>
                             </div>
 
                             <div className="flex items-center gap-2 pt-1">
@@ -185,21 +186,21 @@ export default function ExamSummaryModal({
                                     <ellipse cx="12" cy="8" rx="8" ry="3.5" fill="#C98A0C" />
                                     <ellipse cx="12" cy="7" rx="8" ry="3.5" fill="#FDE047" />
                                 </svg>
-                                <span className="text-xs font-semibold text-neutral-800">
+                                <CustomText type="body-sm" className="!text-xs font-semibold text-neutral-800">
                                     {prepPoints} PrepPoints earned
-                                </span>
+                                </CustomText>
                             </div>
                         </div>
 
                         {/* Right Content: Focus Areas & Action */}
                         <div className="flex-1 flex flex-col justify-between gap-4">
                             <div>
-                                <h4 className="font-bold text-sm sm:text-base text-neutral-900 mb-1.5">
+                                <CustomText type="body-md-bold" className="font-bold text-sm sm:text-base text-neutral-900 mb-1.5">
                                     Focus Areas
-                                </h4>
-                                <p className="text-xs sm:text-sm text-neutral-800 leading-relaxed max-w-md mb-3 font-normal">
+                                </CustomText>
+                                <CustomText type="body-sm" className="!text-xs sm:!text-sm text-neutral-800 leading-relaxed max-w-md mb-3 font-normal">
                                     Based on your latest practice, we recommend focusing on these topics to improve your score.
-                                </p>
+                                </CustomText>
 
                                 <div className="flex flex-wrap items-center gap-x-5 gap-y-2">
                                     {focusAreas.map((topic, i) => (
@@ -216,13 +217,14 @@ export default function ExamSummaryModal({
 
                             {/* Action Button */}
                             <div className="flex justify-end pt-1">
-                                <button
-                                    type="button"
+                                <CustomButton
+                                    variant="primary"
+                                    size="sm"
                                     onClick={handlePracticeMore}
-                                    className="w-full sm:w-auto bg-[#2563EB] hover:bg-primary-250 active:scale-[0.98] text-white font-semibold text-xs sm:text-sm px-5 py-2.5 rounded-xl transition-all shadow-xs cursor-pointer flex items-center justify-center"
+                                    className="w-full sm:w-auto !rounded-xl"
                                 >
                                     Practice More Questions
-                                </button>
+                                </CustomButton>
                             </div>
                         </div>
                     </div>

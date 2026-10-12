@@ -19,7 +19,7 @@ import useUser from "@/hooks/useUser";
 import { IUniversity } from "@/types/auth";
 
 export default function ProfilePage() {
-    const { useGetProfile, useGetUniversity, updateProfile } = useUser();
+    const { useGetProfile, useGetUniversity, updateProfile, updateProfilePicture } = useUser();
     const { data: profileResponse } = useGetProfile();
     const { data: universityResponse } = useGetUniversity();
 
@@ -99,7 +99,7 @@ export default function ProfilePage() {
             universityOfInterest: user?.university || "Obafemi Awolowo University",
             walletBalance: user?.prep_points ?? 4000,
             currentBadge: user?.best_score ? `${user.best_score}% Top Score` : "Current Badge",
-            avatarUrl: "/images/landing/hero1.png",
+            avatarUrl: user?.profile_picture || "/images/landing/hero1.png",
             examTypes: exams,
             goals: [
                 {
@@ -134,6 +134,8 @@ export default function ProfilePage() {
             <ProfileHeaderCard
                 profile={profile}
                 onEditProfile={() => setIsEditProfileOpen(true)}
+                onUploadImage={(file) => updateProfilePicture.mutate(file)}
+                isUploadingImage={updateProfilePicture.isPending}
             />
 
             {/* My Wallet Section */}
@@ -213,6 +215,8 @@ export default function ProfilePage() {
                 universityOptions={universityOptions}
                 avatarUrl={profile.avatarUrl}
                 isLoading={updateProfile.isPending}
+                isUploadingImage={updateProfilePicture.isPending}
+                onUploadImage={(file) => updateProfilePicture.mutate(file)}
                 onUpdate={(data) => {
                     updateProfile.mutate({
                         first_name: data.first_name,

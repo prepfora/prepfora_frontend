@@ -1,6 +1,7 @@
 "use client";
 
 import React from "react";
+import { CustomText } from "@/components/ui";
 
 export type QuestionStatus = "answered" | "skipped" | "unanswered";
 
@@ -28,12 +29,12 @@ export default function QuestionNavigator({
             {/* Header */}
             <div className="flex items-start justify-between">
                 <div>
-                    <h3 className="text-base font-bold text-neutral-900">
+                    <CustomText type="body-md-bold" className="!text-base font-bold text-neutral-900">
                         Question Navigator
-                    </h3>
-                    <p className="text-xs text-neutral-500 mt-0.5">
+                    </CustomText>
+                    <CustomText type="body-sm" className="!text-xs text-neutral-500 mt-0.5">
                         Jump to any question quickly
-                    </p>
+                    </CustomText>
                 </div>
                 {onCloseMobile && (
                     <button
@@ -65,17 +66,17 @@ export default function QuestionNavigator({
                 <div className="flex items-center gap-4">
                     <div className="flex items-center gap-1.5">
                         <span className="w-2.5 h-2.5 rounded-full bg-[#2563EB] inline-block" />
-                        <span>Answered</span>
+                        <CustomText type="label-sm" className="!text-xs text-neutral-600">Answered</CustomText>
                     </div>
                     <div className="flex items-center gap-1.5">
                         <span className="w-2.5 h-2.5 rounded-full border-2 border-[#93C5FD] bg-white inline-block" />
-                        <span>Not Answered</span>
+                        <CustomText type="label-sm" className="!text-xs text-neutral-600">Not Answered</CustomText>
                     </div>
                 </div>
 
                 <div className="flex items-center gap-1.5">
                     <span className="w-2.5 h-2.5 rounded-full bg-[#F59E0B] inline-block" />
-                    <span>Skipped</span>
+                    <CustomText type="label-sm" className="!text-xs text-neutral-600">Skipped</CustomText>
                 </div>
             </div>
 

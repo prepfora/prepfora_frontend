@@ -98,9 +98,9 @@ export default function SubjectPerformance({
                                 <CustomText type="body-sm-bold" className="text-neutral-800 font-semibold">
                                     {item.name}
                                 </CustomText>
-                                <span className={`text-sm font-bold ${item.textColor}`}>
+                                <CustomText type="body-sm-bold" className={`text-sm font-bold ${item.textColor}`}>
                                     {item.percent}%
-                                </span>
+                                </CustomText>
                             </div>
 
                             {/* Thin Progress bar */}

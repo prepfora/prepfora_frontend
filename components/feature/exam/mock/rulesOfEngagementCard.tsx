@@ -1,6 +1,7 @@
 "use client";
 
 import React from "react";
+import { CustomButton, CustomText } from "@/components/ui";
 
 interface RulesOfEngagementCardProps {
     exam: "JAMB" | "WAEC" | "POST UTME" | "NECO";
@@ -34,29 +35,30 @@ export default function RulesOfEngagementCard({
             </div>
 
             {/* Title & Subtitle */}
-            <h2 className="text-base sm:text-lg font-bold text-neutral-900 text-center mt-2">
+            <CustomText type="headline-sm" className="!text-base sm:!text-lg font-bold text-neutral-900 text-center mt-2">
                 {exam} Simulation: Rules of Engagement
-            </h2>
-            <p className="text-xs sm:text-sm text-neutral-500 text-center max-w-lg mx-auto leading-relaxed mt-1 mb-5">
+            </CustomText>
+            <CustomText type="body-sm" className="!text-xs sm:!text-sm text-neutral-500 text-center max-w-lg mx-auto leading-relaxed mt-1 mb-5">
                 Please review the following instructions carefully before initiating the secure examination portal. Once started, you cannot pause the session.
-            </p>
+            </CustomText>
 
             {/* Central Start Exam Button */}
-            <button
-                type="button"
+            <CustomButton
+                variant="primary"
+                size="md"
                 onClick={onStartExam}
-                className="bg-[#059669] hover:bg-[#047857] active:scale-[0.98] text-white font-semibold text-sm px-10 py-2.5 rounded-xl shadow-xs mx-auto block mb-8 cursor-pointer transition-all"
+                className="!bg-[#059669] hover:!bg-[#047857] shadow-xs mx-auto block mb-8 !px-10"
             >
                 Start Exam
-            </button>
+            </CustomButton>
 
             {/* Two-Column Breakdown & Time/System checks */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6 items-start">
                 {/* Left Column: Exam Breakdown */}
                 <div className="flex flex-col gap-2">
-                    <span className="text-xs font-semibold text-neutral-500 uppercase tracking-wider">
+                    <CustomText type="label-sm" className="!text-xs font-semibold text-neutral-500 uppercase tracking-wider">
                         EXAM BREAKDOWN
-                    </span>
+                    </CustomText>
 
                     {/* JAMB: 4 subjects */}
                     {!isWAEC ? (
@@ -113,9 +115,9 @@ export default function RulesOfEngagementCard({
                 <div className="flex flex-col gap-4">
                     {/* Time Limit Crimson Card */}
                     <div className="flex flex-col gap-2">
-                        <span className="text-xs font-semibold text-neutral-500 uppercase tracking-wider">
+                        <CustomText type="label-sm" className="!text-xs font-semibold text-neutral-500 uppercase tracking-wider">
                             TIME LIMIT
-                        </span>
+                        </CustomText>
 
                         <div className="bg-[#991B1B] rounded-2xl p-5 text-white shadow-xs">
                             <div className="flex items-baseline gap-1">
@@ -134,9 +136,9 @@ export default function RulesOfEngagementCard({
 
                     {/* System Check */}
                     <div className="flex flex-col gap-2">
-                        <span className="text-xs font-semibold text-neutral-500 uppercase tracking-wider">
+                        <CustomText type="label-sm" className="!text-xs font-semibold text-neutral-500 uppercase tracking-wider">
                             SYSTEM CHECK
-                        </span>
+                        </CustomText>
 
                         <div className="flex flex-col gap-2.5">
                             <div className="bg-[#E8FAF3] border border-[#52C498]/40 rounded-2xl p-3 sm:p-3.5 flex items-center gap-3 text-xs sm:text-sm font-semibold text-neutral-800 shadow-xs">
@@ -167,9 +169,9 @@ export default function RulesOfEngagementCard({
 
             {/* Bottom Dashed Prohibited Actions Box */}
             <div className="border border-dashed border-red-300 rounded-2xl p-5 mt-6 bg-transparent">
-                <span className="text-xs font-bold text-red-500 uppercase tracking-wider block mb-2">
+                <CustomText type="label-sm" className="!text-xs font-bold !text-red-500 uppercase tracking-wider block mb-2">
                     PROHIBITED ACTIONS
-                </span>
+                </CustomText>
 
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 text-xs text-neutral-800 leading-relaxed">
                     <p>

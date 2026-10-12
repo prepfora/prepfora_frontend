@@ -76,9 +76,9 @@ export default function RecentActivities({
                                 <CustomText type="body-sm-bold" className="text-neutral-900 font-bold text-sm">
                                     {item.name}
                                 </CustomText>
-                                <span className="text-xs text-neutral-400 font-normal">
+                                <CustomText type="body-sm" className="text-xs text-neutral-400 font-normal">
                                     {item.time}
-                                </span>
+                                </CustomText>
                             </div>
                             <CustomText type="body-sm" className="text-neutral-500 text-xs leading-relaxed">
                                 {item.body}

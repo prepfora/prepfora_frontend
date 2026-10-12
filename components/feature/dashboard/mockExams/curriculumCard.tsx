@@ -2,7 +2,7 @@
 
 import React from "react";
 import { ExamCurriculum } from "./mockExamTypes";
-import { CustomImage } from "@/components/ui";
+import { CustomImage, CustomButton, CustomText } from "@/components/ui";
 
 interface CurriculumCardProps {
     curriculum: ExamCurriculum;
@@ -100,43 +100,45 @@ export default function CurriculumCard({
                 </div>
 
                 {/* Title & Description */}
-                <h3 className="text-xl font-bold text-neutral-900 mb-1.5">
+                <CustomText type="headline-sm" className="!text-xl font-bold text-neutral-900 mb-1.5">
                     {title}
-                </h3>
-                <p className="text-xs text-neutral-500 leading-relaxed mb-6">
+                </CustomText>
+                <CustomText type="body-sm" className="!text-xs text-neutral-500 leading-relaxed mb-6">
                     {description}
-                </p>
+                </CustomText>
 
                 {/* Info Row: Available Mocks & Last Attempt */}
                 <div className="flex items-center justify-between pt-2 border-t border-neutral-100">
                     <div className="flex flex-col">
-                        <span className="text-[11px] text-neutral-400 font-medium">
+                        <CustomText type="label-sm" className="!text-[11px] text-neutral-400 font-medium">
                             Available mocks
-                        </span>
-                        <span className="text-xs font-bold text-neutral-800 mt-0.5">
+                        </CustomText>
+                        <CustomText type="body-sm-bold" className="!text-xs font-bold text-neutral-800 mt-0.5">
                             {availableMocks}
-                        </span>
+                        </CustomText>
                     </div>
 
                     <div className="flex flex-col text-right">
-                        <span className="text-[11px] text-neutral-400 font-medium">
+                        <CustomText type="label-sm" className="!text-[11px] text-neutral-400 font-medium">
                             Last Attempt
-                        </span>
-                        <span className="text-xs font-bold text-neutral-800 mt-0.5">
+                        </CustomText>
+                        <CustomText type="body-sm-bold" className="!text-xs font-bold text-neutral-800 mt-0.5">
                             {lastAttempt}
-                        </span>
+                        </CustomText>
                     </div>
                 </div>
             </div>
 
             {/* Start Exam Button */}
-            <button
-                type="button"
+            <CustomButton
+                variant="primary-outline"
+                size="sm"
+                fullWidth
                 onClick={() => onStartExam(curriculum)}
-                className="w-full mt-6 py-2.5 px-4 rounded-xl border border-primary-300 text-primary-300 font-semibold text-xs sm:text-sm hover:bg-primary-50 active:scale-[0.98] transition-all flex items-center justify-center cursor-pointer"
+                className="mt-6 !rounded-xl"
             >
                 Start Exam
-            </button>
+            </CustomButton>
         </div>
     );
 }

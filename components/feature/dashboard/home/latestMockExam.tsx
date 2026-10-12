@@ -57,16 +57,16 @@ export default function LatestMockExam({
                 <div className="flex-1 min-h-[160px] bg-white rounded-2xl p-6 flex flex-col justify-between shadow-sm border border-neutral-100/60">
                     <div className="flex flex-col gap-1">
                         <div className="flex justify-between items-center">
-                            <span className="text-base font-bold text-neutral-900">
+                            <CustomText type="body-lg-bold" className="text-base font-bold text-neutral-900">
                                 {mockExam.title}
-                            </span>
-                            <span className="text-base font-bold text-[#10B981]">
+                            </CustomText>
+                            <CustomText type="body-lg-bold" className="text-base font-bold text-[#10B981]">
                                 {mockExam.score}
-                            </span>
+                            </CustomText>
                         </div>
-                        <span className="text-xs text-neutral-400 font-normal">
+                        <CustomText type="body-sm" className="text-xs text-neutral-400 font-normal">
                             {mockExam.date}
-                        </span>
+                        </CustomText>
                     </div>
 
                     <div className="flex justify-end pt-2">

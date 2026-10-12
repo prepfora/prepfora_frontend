@@ -1,17 +1,12 @@
 "use client"
 import {
-    Book,
     ChartSquare,
     Element4,
-    Like,
     Monitor,
-    Profile2User,
-    ShieldSecurity,
-    Sms,
     TrendUp,
 } from "iconsax-reactjs";
 import { Logo } from "../icons";
-import { CustomText } from "../ui";
+import { CustomImage, CustomText } from "../ui";
 import { usePathname, useRouter } from "next/navigation";
 import useUser from "@/hooks/useUser";
 import { textLimit } from "@/config/textlimit";
@@ -79,17 +74,16 @@ export default function Sidebar() {
                 <button
                     type="button"
                     onClick={() => push("/dashboard/profile")}
-                    className={`p-4 w-full rounded-2xl bg-primary-350 flex items-center gap-4 mt-auto text-white cursor-pointer hover:bg-primary-550 transition-colors text-left ${
-                        pathname === "/dashboard/profile" ? "ring-2 ring-white/50" : ""
-                    }`}
+                    className={`p-4 w-full rounded-2xl bg-primary-350 flex items-center gap-4 mt-auto text-white cursor-pointer hover:bg-primary-550 transition-colors text-left ${pathname === "/dashboard/profile" ? "ring-2 ring-white/50" : ""
+                        }`}
                 >
                     <div className="w-fit">
-                        <div className="border border-white rounded-full w-10 h-10 bg-white overflow-hidden">
-                            {/* eslint-disable-next-line @next/next/no-img-element */}
-                            <img
-                                src="/images/landing/hero1.png"
+                        <div className="border border-white rounded-full w-10 h-10 bg-white overflow-hidden relative">
+                            <CustomImage
+                                src={data?.data?.profile_picture || "/images/landing/hero1.png"}
                                 alt="Avatar"
-                                className="w-full h-full object-cover object-top"
+                                layout="fill"
+                                objectFit="cover"
                             />
                         </div>
                     </div>

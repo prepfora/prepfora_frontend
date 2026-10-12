@@ -2,6 +2,7 @@
 
 import React from "react";
 import { UserProfileData } from "./profileTypes";
+import { CustomButton, CustomText } from "@/components/ui";
 
 interface PersonalInfoSectionProps {
     profile: UserProfileData;
@@ -15,56 +16,59 @@ export default function PersonalInfoSection({
     return (
         <section className="w-full flex flex-col gap-3">
             <div className="flex items-center justify-between">
-                <h3 className="text-lg font-bold text-neutral-900">Personal Info</h3>
-                <button
-                    type="button"
+                <CustomText type="title-md" className="font-bold text-neutral-900 text-lg">
+                    Personal Info
+                </CustomText>
+                <CustomButton
+                    variant="primary-outline"
+                    size="sm"
                     onClick={onEdit}
-                    className="border border-[#2563EB] text-[#2563EB] text-xs font-semibold px-4 py-1 rounded-full hover:bg-blue-50 transition-colors cursor-pointer relative z-20 select-none shrink-0"
+                    className="h-8 px-4 py-1 text-xs rounded-full relative z-20 shrink-0 font-semibold"
                 >
                     Edit
-                </button>
+                </CustomButton>
             </div>
 
             <div className="w-full bg-white border border-[#E2EAF4] rounded-2xl p-6 shadow-xs">
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-y-6 gap-x-12">
                     {/* Email Address - Not editable */}
                     <div className="flex flex-col">
-                        <span className="text-sm font-bold text-neutral-900">
+                        <CustomText type="body-sm-bold" className="text-sm font-bold text-neutral-900">
                             Email Address
-                        </span>
-                        <span className="text-sm text-neutral-600 font-medium mt-1">
+                        </CustomText>
+                        <CustomText type="body-md" className="text-sm text-neutral-600 font-medium mt-1">
                             {profile.email}
-                        </span>
+                        </CustomText>
                     </div>
 
                     {/* Phone Number */}
                     <div className="flex flex-col">
-                        <span className="text-sm font-bold text-neutral-900">
+                        <CustomText type="body-sm-bold" className="text-sm font-bold text-neutral-900">
                             Phone Number
-                        </span>
-                        <span className="text-sm text-neutral-600 font-medium mt-1">
+                        </CustomText>
+                        <CustomText type="body-md" className="text-sm text-neutral-600 font-medium mt-1">
                             {profile.phone}
-                        </span>
+                        </CustomText>
                     </div>
 
                     {/* State of Residence */}
                     <div className="flex flex-col">
-                        <span className="text-sm font-bold text-neutral-900">
+                        <CustomText type="body-sm-bold" className="text-sm font-bold text-neutral-900">
                             State of Residence
-                        </span>
-                        <span className="text-sm text-neutral-600 font-medium mt-1">
+                        </CustomText>
+                        <CustomText type="body-md" className="text-sm text-neutral-600 font-medium mt-1">
                             {profile.stateOfResidence}
-                        </span>
+                        </CustomText>
                     </div>
 
                     {/* University of Interest */}
                     <div className="flex flex-col">
-                        <span className="text-sm font-bold text-neutral-900">
+                        <CustomText type="body-sm-bold" className="text-sm font-bold text-neutral-900">
                             University of Interest
-                        </span>
-                        <span className="text-sm text-neutral-600 font-medium mt-1">
+                        </CustomText>
+                        <CustomText type="body-md" className="text-sm text-neutral-600 font-medium mt-1">
                             {profile.universityOfInterest}
-                        </span>
+                        </CustomText>
                     </div>
                 </div>
             </div>

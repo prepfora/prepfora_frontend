@@ -4,7 +4,7 @@ import { handleApiError } from "@/config/handleApiError";
 import httpService from "@/config/httpService";
 import { showSuccess } from "@/config/toast";
 import { URLS } from "@/config/urls";
-import { IAuthUser, IUpdateUserPayload, IUserProfile } from "@/types/auth";
+import { IAuthUser, IFileUploadResponse, IUpdateUserPayload, IUserProfile } from "@/types/auth";
 // import { IWaitlist } from "@/types/waitlist";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { AxiosError } from "axios";
@@ -56,6 +56,60 @@ const useUser = () => {
         onSuccess: (data) => {
             showSuccess(data?.data?.message || "Profile updated successfully")
             queryClient.invalidateQueries({ queryKey: [URLS.USER_PROFILE] })
+        },
+    });
+
+    const uploadFile = useMutation({
+        mutationFn: async (file: File) => {
+            const formData = new FormData();
+            formData.append("file", file);
+            formData.append("folder", "profiles");
+            const response = await httpService.post<{
+                success: boolean;
+                message: string;
+                data: IFileUploadResponse;
+            }>(URLS.UPLOAD_FILE, formData, {
+                headers: {
+                    "Content-Type": "multipart/form-data",
+                },
+            });
+            return response.data;
+        },
+        onError: (error: AxiosError<ApiErrorResponse>) => handleApiError(error),
+    });
+
+    const updateProfilePicture = useMutation({
+        mutationFn: async (file: File) => {
+            const formData = new FormData();
+            formData.append("file", file);
+            formData.append("folder", "profiles");
+            const uploadRes = await httpService.post<{
+                success: boolean;
+                message: string;
+                data: IFileUploadResponse;
+            }>(URLS.UPLOAD_FILE, formData, {
+                headers: {
+                    "Content-Type": "multipart/form-data",
+                },
+            });
+
+            const fileUrl = uploadRes?.data?.data?.url;
+            if (!fileUrl) {
+                throw new Error("Failed to retrieve uploaded image URL");
+            }
+
+            const patchRes = await httpService.patch(URLS.USER_PROFILE, {
+                profile_picture: fileUrl,
+            });
+            return {
+                url: fileUrl,
+                data: patchRes.data,
+            };
+        },
+        onError: (error: AxiosError<ApiErrorResponse>) => handleApiError(error),
+        onSuccess: () => {
+            showSuccess("Profile picture updated successfully");
+            queryClient.invalidateQueries({ queryKey: [URLS.USER_PROFILE] });
         },
     });
 
@@ -133,6 +187,8 @@ const useUser = () => {
         isLoading,
         updateProfile,
         updateUser,
+        uploadFile,
+        updateProfilePicture,
         useGetProfile,
         useGetUniversity,
         setPage,

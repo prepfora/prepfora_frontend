@@ -1,6 +1,6 @@
 "use client";
 
-import { CustomButton } from "@/components/ui";
+import { CustomButton, CustomImage, CustomText } from "@/components/ui";
 import { ArrowDown2, NotificationBing } from "iconsax-reactjs";
 import { useEffect, useMemo, useState } from "react";
 import { StartPracticeModal, SubjectCardData } from "./practice";
@@ -101,7 +101,7 @@ export default function DashboardNavbar() {
                         onClick={() => setShowMobileMenu(!showMobileMenu)}
                         className="bg-white border border-neutral-300 rounded-full px-3.5 py-1 text-xs font-bold text-neutral-800 flex items-center gap-1.5 shadow-2xs hover:border-neutral-400 transition-colors"
                     >
-                        <span>{currentExamName}</span>
+                        <CustomText type="label-sm">{currentExamName}</CustomText>
                         <ArrowDown2
                             size={12}
                             variant="Bold"
@@ -125,7 +125,7 @@ export default function DashboardNavbar() {
                                             : "text-neutral-700"
                                     }`}
                                 >
-                                    {item.name}
+                                    <CustomText type="body-sm">{item.name}</CustomText>
                                 </button>
                             ))}
                         </div>
@@ -144,13 +144,13 @@ export default function DashboardNavbar() {
 
                     <Link
                         href="/dashboard/profile"
-                        className="w-8 h-8 rounded-full overflow-hidden border border-neutral-200 block shrink-0"
+                        className="w-8 h-8 rounded-full overflow-hidden border border-neutral-200 block shrink-0 relative"
                     >
-                        {/* eslint-disable-next-line @next/next/no-img-element */}
-                        <img
-                            src="/images/landing/hero1.png"
+                        <CustomImage
+                            src={profileResponse?.data?.profile_picture || "/images/landing/hero1.png"}
                             alt="Avatar"
-                            className="w-full h-full object-cover object-top"
+                            layout="fill"
+                            objectFit="cover"
                         />
                     </Link>
                 </div>
@@ -169,9 +169,9 @@ export default function DashboardNavbar() {
                                     selectedExam === item.id
                                         ? "bg-secondary-50 border-secondary-300 text-secondary-300 font-semibold"
                                         : "text-neutral-500 border-transparent hover:text-neutral-700"
-                                } border text-sm rounded-xl w-[112px] h-10 transition-colors cursor-pointer`}
+                                } border text-sm rounded-xl w-[112px] h-10 transition-colors cursor-pointer flex items-center justify-center`}
                             >
-                                {item.name}
+                                <CustomText type="body-sm">{item.name}</CustomText>
                             </button>
                         ))}
                     </div>

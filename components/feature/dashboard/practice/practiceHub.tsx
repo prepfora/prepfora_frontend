@@ -2,7 +2,7 @@
 
 import React, { useState, useRef, useEffect, useMemo } from "react";
 import { useRouter } from "next/navigation";
-import { CustomText } from "@/components/ui";
+import { CustomButton, CustomField, CustomText } from "@/components/ui";
 import { EmptyState } from "@/components/common";
 import PracticeSubjectCard, { SubjectCardData } from "./practiceSubjectCard";
 import { useDashboardExam } from "../dashboardContext";
@@ -326,16 +326,16 @@ export default function PracticeHub({ onStartPractice }: PracticeHubProps = {}) 
                     <div className="flex items-center justify-between flex-wrap gap-2">
                         <div className="flex items-center gap-2.5">
                             <span className="w-2.5 h-2.5 rounded-full bg-primary-400 animate-pulse" />
-                            <h3 className="font-bold text-base sm:text-lg text-neutral-900">
+                            <CustomText type="title-md" className="font-bold text-neutral-900">
                                 {navbarExamName} Exams Done &amp; In Progress
-                            </h3>
+                            </CustomText>
                             <span className="px-2.5 py-0.5 rounded-full bg-primary-100 text-primary-400 text-xs font-bold">
                                 {currentExamSessions.length} {currentExamSessions.length === 1 ? "Exam" : "Exams"}
                             </span>
                         </div>
-                        <span className="text-xs text-neutral-500 hidden sm:inline-block">
+                        <CustomText type="body-sm" className="text-xs text-neutral-500 hidden sm:inline-block">
                             Your answered questions and scores are saved in real-time.
-                        </span>
+                        </CustomText>
                     </div>
 
                     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
@@ -352,13 +352,13 @@ export default function PracticeHub({ onStartPractice }: PracticeHubProps = {}) 
                                             </span>
                                         </div>
                                         <div className="flex flex-col">
-                                            <span className="font-bold text-sm text-neutral-900 line-clamp-1">
+                                            <CustomText type="body-sm-bold" className="font-bold text-sm text-neutral-900 line-clamp-1">
                                                 {session.subjectTitle}
-                                            </span>
-                                            <span className="text-xs text-neutral-500 font-medium">
+                                            </CustomText>
+                                            <CustomText type="body-sm" className="text-xs text-neutral-500 font-medium">
                                                 {session.exam_type.toUpperCase()}{" "}
                                                 {session.exam_year ? `• ${session.exam_year}` : ""}
-                                            </span>
+                                            </CustomText>
                                         </div>
                                     </div>
 
@@ -370,9 +370,9 @@ export default function PracticeHub({ onStartPractice }: PracticeHubProps = {}) 
                                 {/* Progress Bar & Answered Stats */}
                                 <div className="w-full flex flex-col gap-1.5">
                                     <div className="flex justify-between text-xs text-neutral-500">
-                                        <span>
+                                        <CustomText type="body-sm" className="text-xs text-neutral-500">
                                             {session.total_questions_answered} of {session.total_question} questions answered
-                                        </span>
+                                        </CustomText>
                                         {session.percent === 100 && (
                                             <span className="text-emerald-600 font-medium text-xs">Completed</span>
                                         )}
@@ -386,25 +386,28 @@ export default function PracticeHub({ onStartPractice }: PracticeHubProps = {}) 
                                 </div>
 
                                 {/* Continue / Retake Button */}
-                                <button
-                                    type="button"
+                                <CustomButton
+                                    size="sm"
+                                    fullWidth
                                     onClick={() => handleResumeDirect(session)}
-                                    className="w-full h-9 rounded-xl bg-primary-300 hover:bg-primary-400 text-white font-semibold text-xs transition-colors flex items-center justify-center gap-2 cursor-pointer shadow-xs active:scale-[0.98]"
+                                    className="h-9 rounded-xl font-semibold text-xs"
+                                    endContent={
+                                        <svg
+                                            width="14"
+                                            height="14"
+                                            viewBox="0 0 24 24"
+                                            fill="none"
+                                            stroke="currentColor"
+                                            strokeWidth="2.5"
+                                            strokeLinecap="round"
+                                            strokeLinejoin="round"
+                                        >
+                                            <polyline points="9 18 15 12 9 6" />
+                                        </svg>
+                                    }
                                 >
-                                    <span>{session.percent === 100 ? "Retake Practice" : "Resume Practice"}</span>
-                                    <svg
-                                        width="14"
-                                        height="14"
-                                        viewBox="0 0 24 24"
-                                        fill="none"
-                                        stroke="currentColor"
-                                        strokeWidth="2.5"
-                                        strokeLinecap="round"
-                                        strokeLinejoin="round"
-                                    >
-                                        <polyline points="9 18 15 12 9 6" />
-                                    </svg>
-                                </button>
+                                    {session.percent === 100 ? "Retake Practice" : "Resume Practice"}
+                                </CustomButton>
                             </div>
                         ))}
                     </div>
@@ -431,44 +434,47 @@ export default function PracticeHub({ onStartPractice }: PracticeHubProps = {}) 
             <div className="w-full flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-4">
                 {/* Search Input */}
                 <div className="relative w-full sm:w-[320px]">
-                    <div className="absolute left-3.5 top-1/2 -translate-y-1/2 text-neutral-400 pointer-events-none flex items-center">
-                        <svg
-                            width="18"
-                            height="18"
-                            viewBox="0 0 24 24"
-                            fill="none"
-                            stroke="currentColor"
-                            strokeWidth="2"
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                        >
-                            <circle cx="11" cy="11" r="8" />
-                            <line x1="21" y1="21" x2="16.65" y2="16.65" />
-                        </svg>
-                    </div>
-                    <input
-                        type="text"
-                        value={searchQuery}
-                        onChange={(e) => setSearchQuery(e.target.value)}
+                    <CustomField
                         placeholder="Search Subjects"
-                        className="w-full h-10 pl-10 pr-4 text-sm bg-white border border-[#DCE4F0] rounded-xl placeholder:text-neutral-400 text-neutral-800 focus:outline-none focus:ring-2 focus:ring-primary-300 focus:border-transparent transition-all shadow-xs"
+                        value={searchQuery}
+                        onChange={(val) => setSearchQuery(String(val || ""))}
+                        prefix={
+                            <svg
+                                width="18"
+                                height="18"
+                                viewBox="0 0 24 24"
+                                fill="none"
+                                stroke="currentColor"
+                                strokeWidth="2"
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
+                                className="text-neutral-400"
+                            >
+                                <circle cx="11" cy="11" r="8" />
+                                <line x1="21" y1="21" x2="16.65" y2="16.65" />
+                            </svg>
+                        }
+                        suffix={
+                            searchQuery ? (
+                                <button
+                                    type="button"
+                                    onClick={() => setSearchQuery("")}
+                                    className="text-neutral-400 hover:text-neutral-600 text-xs font-bold cursor-pointer"
+                                >
+                                    ✕
+                                </button>
+                            ) : undefined
+                        }
+                        className="w-full"
+                        inputGroupClassName="h-10 bg-white border border-[#DCE4F0] rounded-xl shadow-xs"
                     />
-                    {searchQuery && (
-                        <button
-                            type="button"
-                            onClick={() => setSearchQuery("")}
-                            className="absolute right-3 top-1/2 -translate-y-1/2 text-neutral-400 hover:text-neutral-600 text-xs font-bold cursor-pointer"
-                        >
-                            ✕
-                        </button>
-                    )}
                 </div>
 
                 {/* Right Controls: Filter by + Dropdown + Clear Filters */}
                 <div className="flex items-center gap-4 flex-wrap sm:flex-nowrap">
-                    <span className="text-sm font-medium text-neutral-600 whitespace-nowrap">
+                    <CustomText type="body-sm" className="font-medium text-neutral-600 whitespace-nowrap">
                         Filter by:
-                    </span>
+                    </CustomText>
 
                     {/* Dropdown */}
                     <div className="relative" ref={dropdownRef}>
@@ -477,7 +483,7 @@ export default function PracticeHub({ onStartPractice }: PracticeHubProps = {}) 
                             onClick={() => setIsDropdownOpen((prev) => !prev)}
                             className="h-10 px-4 bg-white border border-neutral-300 rounded-xl text-sm font-medium text-neutral-800 hover:border-neutral-400 transition-colors flex items-center gap-3 cursor-pointer shadow-xs min-w-[130px] justify-between"
                         >
-                            <span>{selectedExam}</span>
+                            <CustomText type="body-sm">{selectedExam}</CustomText>
                             <svg
                                 width="16"
                                 height="16"
@@ -510,7 +516,7 @@ export default function PracticeHub({ onStartPractice }: PracticeHubProps = {}) 
                                                 : "text-neutral-700 hover:bg-neutral-50"
                                             }`}
                                     >
-                                        {exam}
+                                        <CustomText type="body-sm">{exam}</CustomText>
                                     </button>
                                 ))}
                             </div>
