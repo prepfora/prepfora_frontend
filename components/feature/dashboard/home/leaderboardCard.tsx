@@ -31,12 +31,12 @@ export default function LeaderboardCard({
                 </div>
 
                 <div className="flex flex-col gap-0.5">
-                    <span className="text-base font-bold text-neutral-900 leading-snug">
+                    <CustomText type="body-lg-bold" className="text-base font-bold text-neutral-900 leading-snug">
                         Nationwide Rank
-                    </span>
-                    <span className="text-xs text-neutral-800 font-medium">
+                    </CustomText>
+                    <CustomText type="body-sm" className="text-xs text-neutral-800 font-medium">
                         {percentile}
-                    </span>
+                    </CustomText>
                 </div>
             </Link>
         </section>

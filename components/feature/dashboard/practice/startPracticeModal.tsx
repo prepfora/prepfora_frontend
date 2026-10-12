@@ -4,6 +4,7 @@ import React, { useState, useEffect, useRef, useMemo } from "react";
 import { useRouter } from "next/navigation";
 import { SubjectCardData } from "./practiceSubjectCard";
 import useExam from "@/hooks/exam/useExam";
+import { CustomButton, CustomText } from "@/components/ui";
 
 export interface PracticeConfig {
     subject: SubjectCardData | null;
@@ -434,12 +435,12 @@ export default function StartPracticeModal({
                 {step === "subject" && (
                     <div className="flex flex-col gap-5">
                         <div>
-                            <h2 className="text-xl font-bold text-neutral-900">
+                            <CustomText type="headline-sm" className="!text-xl font-bold text-neutral-900">
                                 Practice Details
-                            </h2>
-                            <p className="text-xs text-neutral-500 mt-1">
+                            </CustomText>
+                            <CustomText type="body-sm" className="!text-xs text-neutral-500 mt-1">
                                 Choose your subject, exam category, and examination year
-                            </p>
+                            </CustomText>
                         </div>
 
                         {/* Subject Select Dropdown */}
@@ -614,13 +615,14 @@ export default function StartPracticeModal({
                         </div>
 
                         {/* Continue Button */}
-                        <button
-                            type="button"
+                        <CustomButton
+                            variant="primary"
                             onClick={handleContinue}
-                            className="w-full h-12 mt-2 bg-primary-300 hover:bg-primary-250 text-white rounded-xl font-semibold text-sm transition-colors cursor-pointer active:scale-[0.99] flex items-center justify-center shadow-xs"
+                            fullWidth
+                            className="!h-12 !mt-2 !rounded-xl"
                         >
                             Continue
-                        </button>
+                        </CustomButton>
                     </div>
                 )}
 
@@ -628,12 +630,12 @@ export default function StartPracticeModal({
                 {step === "school" && (
                     <div className="flex flex-col gap-6">
                         <div>
-                            <h2 className="text-xl font-bold text-neutral-900">
+                            <CustomText type="headline-sm" className="!text-xl font-bold text-neutral-900">
                                 Choose your school
-                            </h2>
-                            <p className="text-xs text-neutral-500 mt-1">
+                            </CustomText>
+                            <CustomText type="body-sm" className="!text-xs text-neutral-500 mt-1">
                                 Select your target university or tertiary institution
-                            </p>
+                            </CustomText>
                         </div>
 
                         <div className="flex flex-col gap-2 relative" ref={schoolDropdownRef}>
@@ -689,13 +691,14 @@ export default function StartPracticeModal({
                         </div>
 
                         {/* Continue Button */}
-                        <button
-                            type="button"
+                        <CustomButton
+                            variant="primary"
                             onClick={handleContinue}
-                            className="w-full h-12 mt-2 bg-primary-300 hover:bg-primary-250 text-white rounded-xl font-semibold text-sm transition-colors cursor-pointer active:scale-[0.99] flex items-center justify-center shadow-xs"
+                            fullWidth
+                            className="!h-12 !mt-2 !rounded-xl"
                         >
                             Continue
-                        </button>
+                        </CustomButton>
                     </div>
                 )}
 
@@ -703,12 +706,12 @@ export default function StartPracticeModal({
                 {step === "questions" && (
                     <div className="flex flex-col gap-6">
                         <div>
-                            <h2 className="text-xl font-bold text-neutral-900">
+                            <CustomText type="headline-sm" className="!text-xl font-bold text-neutral-900">
                                 Preferred Number of Questions
-                            </h2>
-                            <p className="text-xs text-neutral-500 mt-1">
+                            </CustomText>
+                            <CustomText type="body-sm" className="!text-xs text-neutral-500 mt-1">
                                 Choose how many questions you want to practice
-                            </p>
+                            </CustomText>
                         </div>
 
                         <div className="flex flex-col gap-3">
@@ -751,25 +754,26 @@ export default function StartPracticeModal({
                         </div>
 
                         {/* Continue Button */}
-                        <button
-                            type="button"
+                        <CustomButton
+                            variant="primary"
                             onClick={handleContinue}
-                            className="w-full h-12 mt-2 bg-primary-300 hover:bg-primary-250 text-white rounded-xl font-semibold text-sm transition-colors cursor-pointer active:scale-[0.99] flex items-center justify-center shadow-xs"
+                            fullWidth
+                            className="!h-12 !mt-2 !rounded-xl"
                         >
                             Continue
-                        </button>
+                        </CustomButton>
                     </div>
                 )}
 
                 {/* Step 4: Set Time */}
                 {step === "time" && (
                     <div className="flex flex-col">
-                        <h2 className="text-2xl font-bold text-neutral-900 tracking-tight">
+                        <CustomText type="headline-sm" className="!text-2xl font-bold text-neutral-900 tracking-tight">
                             Set Time
-                        </h2>
-                        <p className="text-xs sm:text-sm text-neutral-600 leading-relaxed max-w-sm mt-1">
+                        </CustomText>
+                        <CustomText type="body-sm" className="!text-xs sm:!text-sm text-neutral-600 leading-relaxed max-w-sm mt-1">
                             Since this is a practice session, you can either go with the recommended time or manually set how long you would like to practice for.
-                        </p>
+                        </CustomText>
 
                         {/* Tabs: Recommended Time vs Set Time */}
                         <div className="flex items-center justify-center border-b border-neutral-100 mt-6 mb-6">
@@ -865,9 +869,9 @@ export default function StartPracticeModal({
                                             onFocus={(e) => e.target.select()}
                                             className="w-13 sm:w-15 text-center text-3xl sm:text-4xl font-bold tracking-tight text-neutral-900 bg-neutral-50/80 hover:bg-neutral-100 focus:bg-white border border-transparent focus:border-primary-300 focus:ring-2 focus:ring-primary-100 rounded-xl py-0.5 transition-all outline-none"
                                         />
-                                        <span className="text-xs sm:text-sm font-medium text-neutral-700 ml-1">
+                                        <CustomText type="label-sm" className="font-medium text-neutral-700 ml-1">
                                             hrs
-                                        </span>
+                                        </CustomText>
                                     </div>
                                     <button
                                         type="button"
@@ -909,9 +913,9 @@ export default function StartPracticeModal({
                                             onFocus={(e) => e.target.select()}
                                             className="w-13 sm:w-15 text-center text-3xl sm:text-4xl font-bold tracking-tight text-neutral-900 bg-neutral-50/80 hover:bg-neutral-100 focus:bg-white border border-transparent focus:border-primary-300 focus:ring-2 focus:ring-primary-100 rounded-xl py-0.5 transition-all outline-none"
                                         />
-                                        <span className="text-xs sm:text-sm font-medium text-neutral-700 ml-1">
+                                        <CustomText type="label-sm" className="font-medium text-neutral-700 ml-1">
                                             mins
-                                        </span>
+                                        </CustomText>
                                     </div>
                                     <button
                                         type="button"
@@ -953,9 +957,9 @@ export default function StartPracticeModal({
                                             onFocus={(e) => e.target.select()}
                                             className="w-13 sm:w-15 text-center text-3xl sm:text-4xl font-bold tracking-tight text-neutral-900 bg-neutral-50/80 hover:bg-neutral-100 focus:bg-white border border-transparent focus:border-primary-300 focus:ring-2 focus:ring-primary-100 rounded-xl py-0.5 transition-all outline-none"
                                         />
-                                        <span className="text-xs sm:text-sm font-medium text-neutral-700 ml-1">
+                                        <CustomText type="label-sm" className="font-medium text-neutral-700 ml-1">
                                             secs
-                                        </span>
+                                        </CustomText>
                                     </div>
                                     <button
                                         type="button"
@@ -972,22 +976,23 @@ export default function StartPracticeModal({
                         )}
 
                         {/* Continue Button */}
-                        <button
-                            type="button"
+                        <CustomButton
+                            variant="primary"
                             onClick={handleContinue}
-                            className="w-full h-13 mt-6 bg-primary-300 hover:bg-primary-250 text-white rounded-2xl font-semibold text-base transition-colors cursor-pointer active:scale-[0.99] flex items-center justify-center shadow-xs"
+                            fullWidth
+                            className="!h-13 !mt-6 !rounded-2xl !text-base"
                         >
                             Continue
-                        </button>
+                        </CustomButton>
                     </div>
                 )}
 
                 {/* Step 5: Summary */}
                 {step === "summary" && (
                     <div className="flex flex-col gap-5">
-                        <h2 className="text-xl font-bold text-neutral-900">
+                        <CustomText type="headline-sm" className="!text-xl font-bold text-neutral-900">
                             Summary
-                        </h2>
+                        </CustomText>
 
                         <div className="flex flex-col gap-3.5 bg-neutral-50 p-4 rounded-2xl border border-neutral-150">
                             <div className="flex justify-between items-center text-sm">
@@ -1017,14 +1022,16 @@ export default function StartPracticeModal({
                         </div>
 
                         {/* Start Practicing Button */}
-                        <button
-                            type="button"
+                        <CustomButton
+                            variant="primary"
                             onClick={handleContinue}
                             disabled={started}
-                            className="w-full h-12 mt-2 bg-primary-300 hover:bg-primary-250 text-white rounded-xl font-semibold text-sm transition-colors cursor-pointer active:scale-[0.99] flex items-center justify-center shadow-xs disabled:opacity-75"
+                            loading={started}
+                            fullWidth
+                            className="!h-12 !mt-2 !rounded-xl"
                         >
                             {started ? "Starting Practice Session..." : "Start Practicing"}
-                        </button>
+                        </CustomButton>
                     </div>
                 )}
             </div>

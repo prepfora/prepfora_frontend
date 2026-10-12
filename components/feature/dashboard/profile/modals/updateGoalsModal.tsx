@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
+import { CustomButton, CustomText } from "@/components/ui";
 
 interface UpdateGoalsModalProps {
     isOpen: boolean;
@@ -53,9 +54,9 @@ export default function UpdateGoalsModal({
             >
                 {/* Header */}
                 <div className="flex items-center justify-between">
-                    <h3 className="text-lg font-bold text-[#064E3B]">
+                    <CustomText type="headline-sm" className="!text-lg font-bold !text-[#064E3B]">
                         Update Goals
-                    </h3>
+                    </CustomText>
                     <button
                         type="button"
                         onClick={onClose}
@@ -116,7 +117,7 @@ export default function UpdateGoalsModal({
                                         : "border border-neutral-300 bg-white text-neutral-800 font-medium hover:border-neutral-400"
                                 }`}
                             >
-                                <span className="text-sm">{option}</span>
+                                <CustomText type="body-sm" className="font-medium">{option}</CustomText>
 
                                 {isSelected && (
                                     <div className="w-5 h-5 rounded-full bg-[#10B981] flex items-center justify-center flex-shrink-0 text-white">
@@ -131,13 +132,14 @@ export default function UpdateGoalsModal({
                 </div>
 
                 {/* Update Button */}
-                <button
-                    type="button"
+                <CustomButton
+                    variant="primary"
                     onClick={handleUpdate}
-                    className="w-full h-12 bg-[#2563EB] hover:bg-blue-700 text-white font-semibold text-sm rounded-2xl transition-colors cursor-pointer shadow-xs mt-1"
+                    fullWidth
+                    className="!h-12 !rounded-2xl mt-1"
                 >
                     Update
-                </button>
+                </CustomButton>
             </div>
         </div>
     );

@@ -12,6 +12,7 @@ import {
     QuestionResult,
 } from "@/components/feature";
 import { ExamQuestion, Option } from "@/components/feature/exam/mockExamData";
+import { CustomButton, CustomText } from "@/components/ui";
 import useExam from "@/hooks/exam/useExam";
 import useUser from "@/hooks/useUser";
 import { ICreateExaminationPayload, IUpdateExaminationPayload } from "@/types/exam";
@@ -490,12 +491,12 @@ function ExamContent() {
         return (
             <div className="min-h-screen bg-[#EEF3FA] flex flex-col items-center justify-center p-6 text-center">
                 <div className="w-12 h-12 rounded-full border-3 border-primary-100 border-t-primary-300 animate-spin mb-4" />
-                <h2 className="text-lg font-bold text-neutral-800">
+                <CustomText type="title-lg" className="font-bold text-neutral-800">
                     Loading {subjectTitleParam} Questions...
-                </h2>
-                <p className="text-sm text-neutral-500 max-w-sm mt-1">
+                </CustomText>
+                <CustomText type="body-sm" className="text-neutral-500 max-w-sm mt-1">
                     Fetching practice questions from {typeParam.toUpperCase()} database.
-                </p>
+                </CustomText>
             </div>
         );
     }
@@ -507,19 +508,17 @@ function ExamContent() {
                 <div className="w-12 h-12 rounded-full bg-red-100 text-red-600 flex items-center justify-center text-xl font-bold mb-4">
                     !
                 </div>
-                <h2 className="text-lg font-bold text-neutral-800">
+                <CustomText type="title-lg" className="font-bold text-neutral-800">
                     Unable to Load Questions
-                </h2>
-                <p className="text-sm text-neutral-500 max-w-sm mt-1 mb-4">
+                </CustomText>
+                <CustomText type="body-sm" className="text-neutral-500 max-w-sm mt-1 mb-4">
                     There was an issue retrieving questions for this subject. Please retry.
-                </p>
-                <button
-                    type="button"
+                </CustomText>
+                <CustomButton
                     onClick={() => refetchQuestions()}
-                    className="px-6 py-2.5 bg-primary-300 hover:bg-primary-250 text-white rounded-xl text-sm font-semibold shadow-xs cursor-pointer transition-colors"
                 >
                     Retry Loading
-                </button>
+                </CustomButton>
             </div>
         );
     }
@@ -613,7 +612,9 @@ export default function ExamPage() {
         <Suspense
             fallback={
                 <div className="min-h-screen bg-[#EEF3FA] flex items-center justify-center">
-                    <p className="text-neutral-500 font-medium">Loading practice session...</p>
+                    <CustomText type="body-md" className="text-neutral-500 font-medium">
+                        Loading practice session...
+                    </CustomText>
                 </div>
             }
         >

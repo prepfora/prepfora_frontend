@@ -2,6 +2,7 @@
 
 import React, { useState, useRef, useEffect } from "react";
 import { IntensityLevel } from "./performanceTypes";
+import { CustomText } from "@/components/ui";
 
 const TIMELINE_BLOCKS: IntensityLevel[][] = [
     // Row 1 (7 days)
@@ -40,9 +41,9 @@ export default function PerformanceInsight() {
         <div className="w-full bg-white border border-[#E2EAF4] rounded-3xl p-6 shadow-xs flex flex-col justify-between gap-5">
             {/* Header */}
             <div className="flex items-center justify-between">
-                <h3 className="text-lg sm:text-xl font-bold text-neutral-900">
+                <CustomText type="headline-sm" className="!text-lg sm:!text-xl font-bold text-neutral-900">
                     Performance Insight
-                </h3>
+                </CustomText>
 
                 {/* Time Range Dropdown */}
                 <div className="relative" ref={dropdownRef}>
@@ -96,30 +97,30 @@ export default function PerformanceInsight() {
                 {/* Current Pace Pill */}
                 <div className="bg-[#EDF3FD] rounded-2xl p-4 flex flex-col justify-between">
                     <div>
-                        <span className="text-xs font-semibold text-primary-300">
+                        <CustomText type="label-sm" className="!text-xs font-semibold !text-primary-300">
                             Current Pace
-                        </span>
-                        <h4 className="text-sm font-bold text-neutral-900 mt-1">
+                        </CustomText>
+                        <CustomText type="body-md-bold" className="!text-sm font-bold text-neutral-900 mt-1">
                             Gaining Momentum
-                        </h4>
-                        <p className="text-xs text-neutral-600 leading-relaxed mt-1">
+                        </CustomText>
+                        <CustomText type="body-sm" className="!text-xs text-neutral-600 leading-relaxed mt-1">
                             You are studying 12% more than last week. Keep this pace to reach your 85% goal faster.
-                        </p>
+                        </CustomText>
                     </div>
                 </div>
 
                 {/* Daily Habit Pill */}
                 <div className="bg-[#E8FAF3] rounded-2xl p-4 flex flex-col justify-between">
                     <div>
-                        <span className="text-xs font-semibold text-[#059669]">
+                        <CustomText type="label-sm" className="!text-xs font-semibold !text-[#059669]">
                             Daily Habit
-                        </span>
-                        <h4 className="text-sm font-bold text-neutral-900 mt-1">
+                        </CustomText>
+                        <CustomText type="body-md-bold" className="!text-sm font-bold text-neutral-900 mt-1">
                             Consistent
-                        </h4>
-                        <p className="text-xs text-neutral-600 leading-relaxed mt-1">
+                        </CustomText>
+                        <CustomText type="body-sm" className="!text-xs text-neutral-600 leading-relaxed mt-1">
                             8-day practice streak
-                        </p>
+                        </CustomText>
                     </div>
                 </div>
             </div>
@@ -127,23 +128,23 @@ export default function PerformanceInsight() {
             {/* Practice Intensity Timeline */}
             <div className="flex flex-col gap-2.5 pt-2">
                 <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
-                    <span className="text-xs font-bold text-neutral-900">
+                    <CustomText type="body-sm-bold" className="!text-xs font-bold text-neutral-900">
                         Practice Intensity timeline
-                    </span>
+                    </CustomText>
 
                     {/* Legend */}
                     <div className="flex items-center gap-3 text-[11px] text-neutral-500 font-medium">
                         <div className="flex items-center gap-1.5">
                             <span className="w-2.5 h-2.5 rounded bg-[#C7D9FA] inline-block" />
-                            <span>Low Intensity</span>
+                            <CustomText type="label-sm" className="!text-[11px] text-neutral-500 font-medium">Low Intensity</CustomText>
                         </div>
                         <div className="flex items-center gap-1.5">
                             <span className="w-2.5 h-2.5 rounded bg-[#4F82F1] inline-block" />
-                            <span>Mid Intensity</span>
+                            <CustomText type="label-sm" className="!text-[11px] text-neutral-500 font-medium">Mid Intensity</CustomText>
                         </div>
                         <div className="flex items-center gap-1.5">
                             <span className="w-2.5 h-2.5 rounded bg-[#0B2564] inline-block" />
-                            <span>High Intensity</span>
+                            <CustomText type="label-sm" className="!text-[11px] text-neutral-500 font-medium">High Intensity</CustomText>
                         </div>
                     </div>
                 </div>
@@ -166,8 +167,8 @@ export default function PerformanceInsight() {
 
                 {/* Footer Labels */}
                 <div className="flex items-center justify-between text-[11px] text-neutral-400 pt-1">
-                    <span>Darker blocks represent higher practice volume.</span>
-                    <span>Each block represents each day</span>
+                    <CustomText type="label-sm" className="!text-[11px] text-neutral-400">Darker blocks represent higher practice volume.</CustomText>
+                    <CustomText type="label-sm" className="!text-[11px] text-neutral-400">Each block represents each day</CustomText>
                 </div>
             </div>
         </div>

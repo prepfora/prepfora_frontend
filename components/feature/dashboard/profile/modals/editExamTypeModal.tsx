@@ -6,6 +6,8 @@ import { useFormik } from "formik";
 import * as Yup from "yup";
 import { IAuthUser } from "@/types/auth";
 
+import { CustomText } from "@/components/ui";
+
 interface EditExamTypeModalProps {
     isOpen: boolean;
     onClose: () => void;
@@ -70,12 +72,12 @@ export default function EditExamTypeModal({
                 {/* Header */}
                 <div className="flex items-center justify-between">
                     <div>
-                        <h3 className="text-lg font-bold text-neutral-900">
+                        <CustomText type="headline-sm" className="!text-lg font-bold text-neutral-900">
                             Edit Exam Types
-                        </h3>
-                        <p className="text-xs text-neutral-500 mt-0.5">
+                        </CustomText>
+                        <CustomText type="body-sm" className="!text-xs text-neutral-500 mt-0.5">
                             Select the examinations you are currently preparing for.
-                        </p>
+                        </CustomText>
                     </div>
                     <button
                         type="button"

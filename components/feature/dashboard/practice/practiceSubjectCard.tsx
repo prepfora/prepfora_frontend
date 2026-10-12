@@ -1,6 +1,7 @@
 "use client";
 
 import React from "react";
+import { CustomButton, CustomText } from "@/components/ui";
 
 export interface SubjectCardData {
     id: string | number;
@@ -80,18 +81,24 @@ export default function PracticeSubjectCard({
             {/* Middle: Subject Name & Percentage */}
             <div className="w-full mb-4">
                 <div className="flex justify-between items-center mb-1">
-                    <span className="text-sm font-semibold text-neutral-800 group-hover:text-neutral-900 transition-colors">
+                    <CustomText type="body-sm-bold" className="text-neutral-800 group-hover:text-neutral-900 transition-colors">
                         {name}
-                    </span>
-                    <span className={`text-sm font-bold ${colorTheme.text}`}>
+                    </CustomText>
+                    <CustomText type="body-sm-bold" className={colorTheme.text}>
                         {percent}%
-                    </span>
+                    </CustomText>
                 </div>
 
                 {subject.totalQuestion !== undefined && subject.totalAnswered !== undefined && subject.totalQuestion > 0 && (
                     <div className="flex justify-between text-xs text-neutral-400 mb-1.5 font-medium">
-                        <span>{subject.totalAnswered} of {subject.totalQuestion} answered</span>
-                        {subject.year && <span>({subject.year})</span>}
+                        <CustomText type="body-sm" className="text-neutral-400 text-xs">
+                            {subject.totalAnswered} of {subject.totalQuestion} answered
+                        </CustomText>
+                        {subject.year && (
+                            <CustomText type="body-sm" className="text-neutral-400 text-xs">
+                                ({subject.year})
+                            </CustomText>
+                        )}
                     </div>
                 )}
 
@@ -105,13 +112,15 @@ export default function PracticeSubjectCard({
             </div>
 
             {/* Bottom Button */}
-            <button
-                type="button"
+            <CustomButton
+                variant="primary-outline"
+                size="sm"
+                fullWidth
                 onClick={() => onContinue?.(subject)}
-                className="w-full h-10 rounded-xl border border-primary-300 text-primary-300 font-semibold text-xs sm:text-sm hover:bg-primary-50 active:scale-[0.98] transition-all flex items-center justify-center cursor-pointer"
+                className="h-10 rounded-xl text-xs sm:text-sm font-semibold"
             >
                 {subject.examinationId ? "Resume Practice" : "Continue Practicing"}
-            </button>
+            </CustomButton>
         </div>
     );
 }

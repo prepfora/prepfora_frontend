@@ -1,6 +1,7 @@
 "use client";
 
 import { useRouter } from "next/navigation";
+import { CustomButton, CustomText } from "@/components/ui";
 
 export interface MockExamResultData {
     status: "positive" | "negative";
@@ -123,34 +124,35 @@ export default function MockExamResultModal({
                 </div>
 
                 {/* Title & Subtitle */}
-                <h3 className="text-2xl font-bold text-neutral-900 mt-2">
+                <CustomText type="headline-sm" className="!text-2xl font-bold text-neutral-900 mt-2">
                     {isPositive ? "Congratulations!!!" : "Your Result is in!"}
-                </h3>
-                <p className="text-sm text-neutral-600 mt-1">
+                </CustomText>
+                <CustomText type="body-sm" className="!text-sm text-neutral-600 mt-1">
                     {isPositive
                         ? `You passed your ${result.examTitle || "JAMB Exam"}`
                         : "You tried your best"}
-                </p>
+                </CustomText>
 
                 {/* Score Line */}
                 <div className="flex items-baseline justify-center gap-1 mt-5 mb-2">
-                    <span className="text-sm font-medium text-neutral-600">
+                    <CustomText type="body-sm" className="!text-sm font-medium text-neutral-600">
                         Your Result:
-                    </span>
-                    <span
-                        className={`text-2xl sm:text-3xl font-extrabold ml-1 leading-none ${isPositive ? "text-[#10B981]" : "text-[#EF4444]"
+                    </CustomText>
+                    <CustomText
+                        type="headline-sm"
+                        className={`!text-2xl sm:!text-3xl font-extrabold ml-1 leading-none ${isPositive ? "!text-[#10B981]" : "!text-[#EF4444]"
                             }`}
                     >
                         {result.score}
-                    </span>
-                    <span className="text-xs font-semibold text-neutral-500">
+                    </CustomText>
+                    <CustomText type="label-sm" className="!text-xs font-semibold text-neutral-500">
                         /{result.totalScore}
-                    </span>
+                    </CustomText>
                 </div>
 
                 {/* PrepPoints Earned Line */}
                 <div className="flex items-center justify-center gap-1.5 text-xs font-semibold text-neutral-700 mb-6">
-                    <span>PrepPoint Earned:</span>
+                    <CustomText type="label-sm" className="!text-xs font-semibold text-neutral-700">PrepPoint Earned:</CustomText>
                     {/* Coin stack icon */}
                     <svg
                         width="18"
@@ -166,19 +168,20 @@ export default function MockExamResultModal({
                         <ellipse cx="12" cy="8" rx="7" ry="3" fill="#C98A0C" />
                         <ellipse cx="12" cy="7" rx="7" ry="3" fill="#FDE047" />
                     </svg>
-                    <span className="font-bold text-neutral-900">
+                    <CustomText type="label-sm" className="!text-xs font-bold text-neutral-900">
                         {result.prepPoints}
-                    </span>
+                    </CustomText>
                 </div>
 
                 {/* View Analysis Button */}
-                <button
-                    type="button"
+                <CustomButton
+                    variant="primary"
                     onClick={handleViewAnalysis}
-                    className="w-full h-12 bg-[#2563EB] hover:bg-primary-250 text-white rounded-xl font-semibold text-sm transition-colors cursor-pointer active:scale-[0.99] flex items-center justify-center shadow-xs"
+                    fullWidth
+                    className="!h-12 !rounded-xl"
                 >
                     View Analysis
-                </button>
+                </CustomButton>
             </div>
         </div>
     );

@@ -92,7 +92,7 @@ export default function CommonQuestion() {
                                     }
                                     className=" w-full flex text-left items-center justify-between h-16 "
                                 >
-                                    {item?.title}
+                                    <CustomText type="title-md">{item?.title}</CustomText>
                                     <motion.div
                                         animate={{ rotate: isOpen ? 180 : 0 }}
                                         transition={{ duration: 0.3, ease: "easeOut" }}

@@ -1,7 +1,7 @@
 "use client"
 
 import { IoIosArrowDropleft } from "react-icons/io";
-import { CustomText } from "../ui";
+import { CustomButton, CustomText } from "../ui";
 import { useRouter } from "next/navigation";
 
 interface Props {
@@ -18,14 +18,14 @@ export default function AuthLayout({ children, title, body, btn, btnlink }: Prop
     return (
         <section className="w-full flex-1 h-full flex py-4 sm:py-6 flex-col lg:justify-center lg:items-center my-auto">
             <div className="max-w-[440px] sm:max-w-[460px] w-full flex flex-col gap-10 sm:gap-8">
-                <button
-                    type="button"
+                <CustomButton
+                    variant="ghost"
                     onClick={() => back()}
-                    className="flex items-center gap-2 text-neutral-800 hover:text-neutral-900 transition-colors w-fit group cursor-pointer"
+                    className="flex items-center gap-2 text-neutral-800 hover:text-neutral-900 transition-colors w-fit p-0 h-auto group cursor-pointer"
                 >
                     <IoIosArrowDropleft size={26} className="text-neutral-800 group-hover:scale-105 transition-transform" />
                     <CustomText type="body-md" className="font-medium text-neutral-800">Back</CustomText>
-                </button>
+                </CustomButton>
                 <div className="flex lg:pt-0 pt-8 flex-col gap-1.5 sm:gap-2">
                     <CustomText type="headline-lg" className="font-semibold text-2xl sm:text-3xl text-neutral-900">
                         {title ?? "Create Account"}
@@ -35,13 +35,15 @@ export default function AuthLayout({ children, title, body, btn, btnlink }: Prop
                             {body ?? "Already have an account?"}
                         </CustomText>
                         {btn && (
-                            <button
-                                type="button"
+                            <CustomButton
+                                variant="ghost"
                                 onClick={() => push(btnlink ?? "/")}
-                                className="text-secondary-450 font-bold hover:underline cursor-pointer transition-colors"
+                                className="text-secondary-450 font-bold hover:underline cursor-pointer transition-colors p-0 h-auto"
                             >
-                                {btn ?? "Login"}
-                            </button>
+                                <CustomText type="body-md" className="text-secondary-450 font-bold">
+                                    {btn ?? "Login"}
+                                </CustomText>
+                            </CustomButton>
                         )}
                     </div>
                 </div>

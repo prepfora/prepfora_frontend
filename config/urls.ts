@@ -15,5 +15,6 @@ export const URLS = {
     QUESTION: "/questions",
     SUBJECT: "/subjects",
     EXAMINATION: "/examination",
+    UPLOAD_FILE: "/upload/file",
 };
 

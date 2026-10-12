@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useEffect } from "react";
-import { FormikField } from "@/components/ui";
+import { FormikField, CustomButton, CustomText } from "@/components/ui";
 import { FormikProvider, useFormik } from "formik";
 import * as Yup from "yup";
 
@@ -64,7 +64,7 @@ export default function GenericEditModal({
             >
                 {/* Header */}
                 <div className="flex items-center justify-between">
-                    <h3 className="text-lg font-bold text-[#064E3B]">{title}</h3>
+                    <CustomText type="headline-sm" className="!text-lg font-bold !text-[#064E3B]">{title}</CustomText>
                     <button
                         type="button"
                         onClick={onClose}
@@ -89,13 +89,16 @@ export default function GenericEditModal({
                             multiple={multiple}
                         />
 
-                        <button
+                        <CustomButton
                             type="submit"
+                            variant="primary"
                             disabled={isLoading || formik.isSubmitting}
-                            className="w-full h-12 mt-2 bg-[#2563EB] hover:bg-blue-700 disabled:bg-blue-300 text-white font-semibold text-sm rounded-2xl transition-colors cursor-pointer shadow-xs flex items-center justify-center"
+                            loading={isLoading || formik.isSubmitting}
+                            fullWidth
+                            className="!h-12 !mt-2 !rounded-2xl"
                         >
-                            {isLoading || formik.isSubmitting ? "Updating..." : "Update"}
-                        </button>
+                            Update
+                        </CustomButton>
                     </form>
                 </FormikProvider>
             </div>

@@ -2,6 +2,7 @@
 
 import React, { useState } from "react";
 import { ExamQuestion } from "./mockExamData";
+import { CustomButton, CustomText } from "@/components/ui";
 
 interface QuestionRendererProps {
     question: ExamQuestion;
@@ -42,9 +43,9 @@ export default function QuestionRenderer({
             {question.type === "comprehension" && question.passageContent && (
                 <div className="w-full lg:w-[380px] flex-shrink-0 bg-white border border-[#E2EAF4] rounded-2xl p-4 sm:p-6 shadow-xs flex flex-col gap-2.5 sm:gap-3">
                     <div className="flex items-center justify-between gap-2">
-                        <h2 className="text-sm sm:text-base font-bold text-neutral-900 leading-snug">
+                        <CustomText type="body-md-bold" className="!text-sm sm:!text-base font-bold text-neutral-900 leading-snug">
                             {question.passageTitle}
-                        </h2>
+                        </CustomText>
                         <button
                             type="button"
                             onClick={() => setIsPassageCollapsed((prev) => !prev)}
@@ -87,9 +88,9 @@ export default function QuestionRenderer({
             {question.type === "essay" && (
                 <div className="w-full lg:w-[340px] flex-shrink-0 bg-white border border-[#E2EAF4] rounded-2xl p-6 shadow-xs flex flex-col gap-4">
                     <div className="flex items-center justify-between">
-                        <h2 className="text-sm font-bold text-neutral-900">
+                        <CustomText type="body-md-bold" className="!text-sm font-bold text-neutral-900">
                             {question.essayInstructionTitle || "Essay Instructions"}
-                        </h2>
+                        </CustomText>
                         <button
                             type="button"
                             onClick={() => setIsInstructionCollapsed((prev) => !prev)}
@@ -141,14 +142,16 @@ export default function QuestionRenderer({
                 <div className="flex flex-col gap-2 mb-6">
                     <div className="flex items-start justify-between gap-4">
                         {/<[a-z][\s\S]*>/i.test(question.prompt) ? (
-                            <h2
-                                className="text-lg sm:text-xl font-bold text-neutral-900 leading-snug max-w-3xl"
-                                dangerouslySetInnerHTML={{ __html: question.prompt }}
-                            />
+                            <CustomText
+                                type="headline-sm"
+                                className="!text-lg sm:!text-xl font-bold text-neutral-900 leading-snug max-w-3xl"
+                            >
+                                <span dangerouslySetInnerHTML={{ __html: question.prompt }} />
+                            </CustomText>
                         ) : (
-                            <h2 className="text-lg sm:text-xl font-bold text-neutral-900 leading-snug max-w-3xl">
+                            <CustomText type="headline-sm" className="!text-lg sm:!text-xl font-bold text-neutral-900 leading-snug max-w-3xl">
                                 {question.prompt}
-                            </h2>
+                            </CustomText>
                         )}
 
                         {question.year && (
@@ -320,25 +323,25 @@ export default function QuestionRenderer({
                 {/* Bottom Action Buttons: Mobile Sticky Dock & Desktop Row */}
                 <div className="fixed sm:static bottom-0 left-0 right-0 z-20 bg-white/95 sm:bg-transparent backdrop-blur-md sm:backdrop-blur-none border-t sm:border-t-0 border-[#E2EAF4] px-4 py-3 sm:p-0 sm:pt-4 flex items-center justify-between sm:justify-start gap-3 sm:gap-4 shadow-lg sm:shadow-none">
                     {/* Previous Button */}
-                    <button
-                        type="button"
+                    <CustomButton
+                        variant="outline"
+                        size="sm"
                         onClick={onPrevious}
                         disabled={isFirst}
-                        className="px-4 sm:px-6 py-2.5 rounded-xl border border-primary-300 text-primary-300 font-semibold text-xs sm:text-sm bg-white hover:bg-primary-50 transition-colors cursor-pointer disabled:opacity-40 disabled:cursor-not-allowed flex items-center gap-1.5"
+                        className="!px-4 sm:!px-6 !py-2.5 !rounded-xl !bg-white hover:!bg-primary-50 !cursor-pointer disabled:!opacity-40 disabled:!cursor-not-allowed flex items-center gap-1.5"
                     >
                         <span>←</span>
                         <span>Previous</span>
-                    </button>
+                    </CustomButton>
 
-                    {/* Skip for Now Button (Icon on mobile matching Image 2, Text on desktop) */}
-                    <button
-                        type="button"
+                    {/* Skip for Now Button */}
+                    <CustomButton
+                        variant="outline"
+                        size="sm"
                         onClick={onSkip}
-                        className="w-11 h-11 sm:w-auto sm:px-6 sm:py-2.5 rounded-xl border border-[#10B981] text-[#059669] font-semibold text-xs sm:text-sm bg-white hover:bg-[#E8FAF3] transition-colors cursor-pointer flex items-center justify-center flex-shrink-0"
-                        title="Skip for Now"
-                        aria-label="Skip question"
+                        className="!w-11 !h-11 sm:!w-auto sm:!px-6 sm:!py-2.5 !rounded-xl !border-[#10B981] !text-[#059669] !bg-white hover:!bg-[#E8FAF3] flex items-center justify-center flex-shrink-0"
                     >
-                        {/* Mobile Icon (up arrow matching Image 2) */}
+                        {/* Mobile Icon */}
                         <svg
                             width="18"
                             height="18"
@@ -355,18 +358,19 @@ export default function QuestionRenderer({
                         </svg>
                         {/* Desktop Text */}
                         <span className="hidden sm:inline">Skip for Now</span>
-                    </button>
+                    </CustomButton>
 
                     {/* Save and Next Button */}
-                    <button
-                        type="button"
+                    <CustomButton
+                        variant="primary"
+                        size="sm"
                         onClick={onSaveAndNext}
-                        className="px-5 sm:px-6 py-2.5 rounded-xl bg-primary-300 text-white font-semibold text-xs sm:text-sm hover:bg-primary-250 active:scale-[0.98] transition-colors cursor-pointer flex items-center justify-center gap-1.5 shadow-xs flex-1 sm:flex-initial"
+                        className="!px-5 sm:!px-6 !py-2.5 !rounded-xl flex items-center justify-center gap-1.5 shadow-xs flex-1 sm:flex-initial"
                     >
                         <span className="sm:hidden">{isLast ? "Submit" : "Next"}</span>
                         <span className="hidden sm:inline">{isLast ? "Submit Exam" : "Save and Next"}</span>
                         <span>→</span>
-                    </button>
+                    </CustomButton>
                 </div>
             </div>
         </div>

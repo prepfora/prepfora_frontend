@@ -4,6 +4,7 @@ import React, { useState, useEffect, useRef } from "react";
 import { useRouter } from "next/navigation";
 import { ExamCurriculum } from "./mockExamTypes";
 import useExam from "@/hooks/exam/useExam";
+import { CustomButton, CustomText } from "@/components/ui";
 
 interface StartMockExamModalProps {
     isOpen: boolean;
@@ -144,9 +145,9 @@ export default function StartMockExamModal({
 
                 {/* Modal Body */}
                 <div className="flex flex-col gap-5">
-                    <h2 className="text-xl font-bold text-neutral-900">
+                    <CustomText type="headline-sm" className="!text-xl font-bold text-neutral-900">
                         Exam Details
-                    </h2>
+                    </CustomText>
 
                     {/* Choose Exam Year */}
                     <div className="flex flex-col gap-2 relative" ref={yearRef}>
@@ -259,13 +260,14 @@ export default function StartMockExamModal({
                     )}
 
                     {/* Continue Button */}
-                    <button
-                        type="button"
+                    <CustomButton
+                        variant="primary"
                         onClick={handleContinue}
-                        className="w-full h-12 mt-2 bg-[#8daef5] hover:bg-primary-300 text-white rounded-xl font-semibold text-sm transition-colors cursor-pointer active:scale-[0.99] flex items-center justify-center shadow-xs"
+                        fullWidth
+                        className="!h-12 !mt-2 !rounded-xl"
                     >
                         Continue
-                    </button>
+                    </CustomButton>
                 </div>
             </div>
         </div>
