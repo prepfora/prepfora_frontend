@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useEffect } from "react";
-import { FormikField } from "@/components/ui";
+import { CustomButton, CustomText, FormikField } from "@/components/ui";
 import { FormikProvider, useFormik } from "formik";
 import * as Yup from "yup";
 
@@ -81,12 +81,12 @@ export default function EditPersonalInfoModal({
                 {/* Header */}
                 <div className="flex items-center justify-between">
                     <div>
-                        <h3 className="text-lg font-bold text-neutral-900">
+                        <CustomText type="title-md" className="font-bold text-neutral-900 text-lg">
                             Edit Personal Info
-                        </h3>
-                        <p className="text-xs text-neutral-500 mt-0.5">
+                        </CustomText>
+                        <CustomText type="body-sm" className="text-xs text-neutral-500 mt-0.5">
                             Update your personal and educational information.
-                        </p>
+                        </CustomText>
                     </div>
                     <button
                         type="button"
@@ -106,9 +106,9 @@ export default function EditPersonalInfoModal({
                     <form onSubmit={formik.handleSubmit} className="flex flex-col gap-4">
                         {/* Email Address - Non-editable */}
                         <div className="flex flex-col gap-1.5">
-                            <label className="text-xs font-semibold text-neutral-700">
+                            <CustomText type="label-sm" className="text-xs font-semibold text-neutral-700">
                                 Email Address
-                            </label>
+                            </CustomText>
                             <div className="w-full h-12 px-4 rounded-xl border border-neutral-200 bg-neutral-100/90 text-neutral-600 flex items-center justify-between text-sm select-none cursor-not-allowed">
                                 <span className="truncate font-medium">{initialEmail}</span>
                                 <span className="text-[11px] font-semibold text-neutral-400 bg-neutral-200/80 px-2 py-0.5 rounded-md flex-shrink-0">
@@ -147,13 +147,15 @@ export default function EditPersonalInfoModal({
                         )}
 
                         {/* Submit Button */}
-                        <button
+                        <CustomButton
                             type="submit"
+                            fullWidth
+                            loading={isLoading || formik.isSubmitting}
                             disabled={isLoading || formik.isSubmitting}
-                            className="w-full h-12 mt-2 bg-[#2563EB] hover:bg-blue-700 disabled:bg-blue-300 text-white font-semibold text-sm rounded-2xl transition-colors cursor-pointer shadow-xs flex items-center justify-center gap-2"
+                            className="w-full mt-2"
                         >
-                            {isLoading || formik.isSubmitting ? "Updating..." : "Save Changes"}
-                        </button>
+                            Save Changes
+                        </CustomButton>
                     </form>
                 </FormikProvider>
             </div>

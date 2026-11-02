@@ -2,6 +2,7 @@
 
 import React from "react";
 import { useRouter } from "next/navigation";
+import { CustomButton, CustomText } from "@/components/ui";
 
 interface MockExamHeaderProps {
     title: string;
@@ -41,9 +42,9 @@ export default function MockExamHeader({
                     <span>Back</span>
                 </button>
 
-                <h1 className="text-base sm:text-lg font-bold text-neutral-900">
+                <CustomText type="headline-sm" className="!text-base sm:!text-lg font-bold text-neutral-900">
                     {title}
-                </h1>
+                </CustomText>
             </div>
 
             {/* Right: Timer & Start Exam */}
@@ -70,13 +71,14 @@ export default function MockExamHeader({
                     <span>02:00:00</span>
                 </div>
 
-                <button
-                    type="button"
+                <CustomButton
+                    variant="primary"
+                    size="sm"
                     onClick={onStartExam}
-                    className="bg-[#059669] hover:bg-[#047857] active:scale-[0.98] text-white font-semibold text-sm px-5 py-2.5 rounded-xl transition-all shadow-xs cursor-pointer flex items-center justify-center"
+                    className="!bg-[#059669] hover:!bg-[#047857] !rounded-xl"
                 >
                     Start Exam
-                </button>
+                </CustomButton>
             </div>
         </header>
     );

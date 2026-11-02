@@ -12,6 +12,7 @@ import {
     QuestionResult,
 } from "@/components/feature";
 import { ExamQuestion, Option } from "@/components/feature/exam/mockExamData";
+import { CustomButton, CustomText } from "@/components/ui";
 import useExam from "@/hooks/exam/useExam";
 import useUser from "@/hooks/useUser";
 import { ICreateExaminationPayload, IUpdateExaminationPayload } from "@/types/exam";
@@ -158,6 +159,7 @@ function ExamContent() {
     const [answers, setAnswers] = useState<Record<number, string>>({});
     const [statuses, setStatuses] = useState<Record<number, QuestionStatus>>({});
     const [isSummaryOpen, setIsSummaryOpen] = useState<boolean>(false);
+    const [isNavigatorOpen, setIsNavigatorOpen] = useState<boolean>(false);
 
     // Restore existing examination progress & answers from backend (GET /examination/{id}) and local storage
     useEffect(() => {
@@ -489,12 +491,12 @@ function ExamContent() {
         return (
             <div className="min-h-screen bg-[#EEF3FA] flex flex-col items-center justify-center p-6 text-center">
                 <div className="w-12 h-12 rounded-full border-3 border-primary-100 border-t-primary-300 animate-spin mb-4" />
-                <h2 className="text-lg font-bold text-neutral-800">
+                <CustomText type="title-lg" className="font-bold text-neutral-800">
                     Loading {subjectTitleParam} Questions...
-                </h2>
-                <p className="text-sm text-neutral-500 max-w-sm mt-1">
+                </CustomText>
+                <CustomText type="body-sm" className="text-neutral-500 max-w-sm mt-1">
                     Fetching practice questions from {typeParam.toUpperCase()} database.
-                </p>
+                </CustomText>
             </div>
         );
     }
@@ -506,19 +508,17 @@ function ExamContent() {
                 <div className="w-12 h-12 rounded-full bg-red-100 text-red-600 flex items-center justify-center text-xl font-bold mb-4">
                     !
                 </div>
-                <h2 className="text-lg font-bold text-neutral-800">
+                <CustomText type="title-lg" className="font-bold text-neutral-800">
                     Unable to Load Questions
-                </h2>
-                <p className="text-sm text-neutral-500 max-w-sm mt-1 mb-4">
+                </CustomText>
+                <CustomText type="body-sm" className="text-neutral-500 max-w-sm mt-1 mb-4">
                     There was an issue retrieving questions for this subject. Please retry.
-                </p>
-                <button
-                    type="button"
+                </CustomText>
+                <CustomButton
                     onClick={() => refetchQuestions()}
-                    className="px-6 py-2.5 bg-primary-300 hover:bg-primary-250 text-white rounded-xl text-sm font-semibold shadow-xs cursor-pointer transition-colors"
                 >
                     Retry Loading
-                </button>
+                </CustomButton>
             </div>
         );
     }
@@ -534,11 +534,12 @@ function ExamContent() {
                         persistAnswerToBackend(answers);
                         setIsSummaryOpen(true);
                     }}
+                    onOpenNavigator={() => setIsNavigatorOpen(true)}
                 />
 
                 {/* Save status badge */}
                 {saveStatus !== "idle" && (
-                    <div className="absolute right-6 sm:right-48 top-1/2 -translate-y-1/2 flex items-center gap-1.5 px-3 py-1 bg-white/90 backdrop-blur-xs border border-neutral-200 rounded-full text-xs font-semibold text-neutral-700 shadow-xs transition-all animate-fadeIn">
+                    <div className="absolute right-12 sm:right-48 top-1/2 -translate-y-1/2 flex items-center gap-1.5 px-3 py-1 bg-white/90 backdrop-blur-xs border border-neutral-200 rounded-full text-xs font-semibold text-neutral-700 shadow-xs transition-all animate-fadeIn z-30">
                         {saveStatus === "saving" ? (
                             <>
                                 <div className="w-2 h-2 rounded-full bg-amber-400 animate-ping" />
@@ -566,7 +567,7 @@ function ExamContent() {
             </div>
 
             {/* Main Exam Body */}
-            <main className="flex-1 w-full max-w-[1440px] mx-auto p-4 sm:p-6 lg:p-8 flex flex-col lg:flex-row gap-6 items-start">
+            <main className="flex-1 w-full max-w-[1440px] mx-auto p-4 sm:p-6 lg:p-8 pb-24 sm:pb-8 flex flex-col lg:flex-row gap-6 items-start">
                 {/* Question Area (Left / Center) */}
                 <QuestionRenderer
                     question={currentQuestion}
@@ -581,12 +582,14 @@ function ExamContent() {
                     isLast={currentIndex === effectiveQuestions.length - 1}
                 />
 
-                {/* Question Navigator Sidebar (Right) */}
+                {/* Question Navigator Sidebar (Right) & Mobile Drawer */}
                 <QuestionNavigator
                     totalQuestions={effectiveQuestions.length}
                     currentIndex={currentIndex}
                     statuses={statuses}
                     onSelectQuestion={(idx) => setCurrentIndex(idx)}
+                    isOpenMobile={isNavigatorOpen}
+                    onCloseMobile={() => setIsNavigatorOpen(false)}
                 />
             </main>
 
@@ -609,7 +612,9 @@ export default function ExamPage() {
         <Suspense
             fallback={
                 <div className="min-h-screen bg-[#EEF3FA] flex items-center justify-center">
-                    <p className="text-neutral-500 font-medium">Loading practice session...</p>
+                    <CustomText type="body-md" className="text-neutral-500 font-medium">
+                        Loading practice session...
+                    </CustomText>
                 </div>
             }
         >

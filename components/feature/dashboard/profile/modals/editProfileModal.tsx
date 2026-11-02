@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useEffect } from "react";
-import { FormikField } from "@/components/ui";
+import { CustomButton, CustomImage, CustomText, FormikField } from "@/components/ui";
 import { FormikProvider, useFormik } from "formik";
 import * as Yup from "yup";
 
@@ -17,6 +17,8 @@ interface EditProfileModalProps {
     universityOptions?: { label: string; value: string }[];
     avatarUrl?: string;
     isLoading?: boolean;
+    isUploadingImage?: boolean;
+    onUploadImage?: (file: File) => void;
     onUpdate: (data: {
         first_name: string;
         last_name: string;
@@ -38,8 +40,22 @@ export default function EditProfileModal({
     universityOptions = [],
     avatarUrl = "/images/landing/hero1.png",
     isLoading = false,
+    isUploadingImage = false,
+    onUploadImage,
     onUpdate,
 }: EditProfileModalProps) {
+    const fileInputRef = React.useRef<HTMLInputElement>(null);
+    const [previewUrl, setPreviewUrl] = React.useState<string | null>(null);
+
+    const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        const file = e.target.files?.[0];
+        if (!file) return;
+        const objectUrl = URL.createObjectURL(file);
+        setPreviewUrl(objectUrl);
+        onUploadImage?.(file);
+        // Clear input value so same file can be selected again if needed
+        e.target.value = "";
+    };
     const formik = useFormik({
         initialValues: {
             first_name: initialFirstName || "",
@@ -64,6 +80,7 @@ export default function EditProfileModal({
 
     useEffect(() => {
         if (isOpen) {
+            setPreviewUrl(null);
             formik.resetForm({
                 values: {
                     first_name: initialFirstName || "",
@@ -74,7 +91,7 @@ export default function EditProfileModal({
                 },
             });
         }
-    }, [isOpen, initialFirstName, initialLastName, initialPhone, initialState, initialUniversity]);
+    }, [isOpen, initialFirstName, initialLastName, initialPhone, initialState, initialUniversity, avatarUrl]);
 
     if (!isOpen) return null;
 
@@ -86,9 +103,9 @@ export default function EditProfileModal({
             >
                 {/* Header */}
                 <div className="flex items-center justify-between">
-                    <h3 className="text-lg font-bold text-[#064E3B]">
+                    <CustomText type="title-md" className="font-bold text-[#064E3B] text-lg">
                         Edit Profile
-                    </h3>
+                    </CustomText>
                     <button
                         type="button"
                         onClick={onClose}
@@ -104,25 +121,52 @@ export default function EditProfileModal({
 
                 {/* Avatar with Teal Border and Camera Icon */}
                 <div className="relative mx-auto w-24 h-24 sm:w-28 sm:h-28">
-                    <div className="w-full h-full rounded-full overflow-hidden border-4 border-[#10B981] bg-neutral-100">
-                        {/* eslint-disable-next-line @next/next/no-img-element */}
-                        <img
-                            src={avatarUrl}
+                    <input
+                        ref={fileInputRef}
+                        type="file"
+                        accept="image/*"
+                        className="hidden"
+                        onChange={handleFileChange}
+                    />
+
+                    <div
+                        onClick={() => !isUploadingImage && fileInputRef.current?.click()}
+                        className="w-full h-full rounded-full overflow-hidden border-4 border-[#10B981] bg-neutral-100 relative cursor-pointer group"
+                    >
+                        <CustomImage
+                            src={previewUrl || avatarUrl}
                             alt="Profile"
-                            className="w-full h-full object-cover object-top"
+                            layout="fill"
+                            objectFit="cover"
                         />
+                        {isUploadingImage ? (
+                            <div className="absolute inset-0 bg-black/50 flex flex-col items-center justify-center z-10 gap-1 text-white">
+                                <div className="w-6 h-6 border-2 border-white border-t-transparent rounded-full animate-spin" />
+                                <span className="text-[10px] font-semibold">Uploading...</span>
+                            </div>
+                        ) : (
+                            <div className="absolute inset-0 bg-black/30 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center z-10 text-white">
+                                <span className="text-[11px] font-bold bg-black/40 px-2 py-0.5 rounded-full">Change</span>
+                            </div>
+                        )}
                     </div>
 
                     {/* Camera Badge */}
                     <button
                         type="button"
-                        className="absolute bottom-0 right-0 w-8 h-8 rounded-full bg-white border border-neutral-900 shadow-sm flex items-center justify-center cursor-pointer hover:bg-neutral-50 transition-colors"
+                        onClick={() => fileInputRef.current?.click()}
+                        disabled={isUploadingImage}
+                        className="absolute bottom-0 right-0 w-8 h-8 rounded-full bg-white border border-neutral-900 shadow-sm flex items-center justify-center cursor-pointer hover:bg-neutral-50 transition-colors z-20"
                         title="Change photo"
                     >
-                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#1E293B" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                            <path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z" />
-                            <circle cx="12" cy="13" r="4" />
-                        </svg>
+                        {isUploadingImage ? (
+                            <div className="w-3.5 h-3.5 border-2 border-primary-500 border-t-transparent rounded-full animate-spin" />
+                        ) : (
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#1E293B" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                                <path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z" />
+                                <circle cx="12" cy="13" r="4" />
+                            </svg>
+                        )}
                     </button>
                 </div>
 
@@ -169,13 +213,15 @@ export default function EditProfileModal({
                         )}
 
                         {/* Update Button */}
-                        <button
+                        <CustomButton
                             type="submit"
+                            fullWidth
+                            loading={isLoading || formik.isSubmitting}
                             disabled={isLoading || formik.isSubmitting}
-                            className="w-full h-12 mt-2 bg-[#2563EB] hover:bg-blue-700 disabled:bg-blue-300 text-white font-semibold text-sm rounded-2xl transition-colors cursor-pointer shadow-xs flex items-center justify-center gap-2"
+                            className="w-full mt-2"
                         >
-                            {isLoading || formik.isSubmitting ? "Updating..." : "Update Profile"}
-                        </button>
+                            Update Profile
+                        </CustomButton>
                     </form>
                 </FormikProvider>
             </div>

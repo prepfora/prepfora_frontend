@@ -1,6 +1,7 @@
 "use client";
 
 import React from "react";
+import { CustomButton, CustomText } from "@/components/ui";
 
 interface WalletSectionProps {
     balance: number;
@@ -13,14 +14,16 @@ export default function WalletSection({
 }: WalletSectionProps) {
     return (
         <section className="w-full flex flex-col gap-3">
-            <h3 className="text-lg font-bold text-neutral-900">My Wallet</h3>
+            <CustomText type="title-md" className="font-bold text-neutral-900 text-lg">
+                My Wallet
+            </CustomText>
 
             <div className="w-full bg-white border border-[#E2EAF4] rounded-2xl p-5 shadow-xs flex items-center justify-between">
                 {/* Left: Balance Info */}
                 <div className="flex flex-col gap-1.5">
-                    <span className="text-sm font-semibold text-neutral-800">
+                    <CustomText type="body-sm-bold" className="text-sm font-semibold text-neutral-800">
                         Wallet Balance
-                    </span>
+                    </CustomText>
 
                     <div className="bg-[#F8FAFC] border border-neutral-200/80 rounded-lg px-3 py-1.5 flex items-center gap-2 w-fit">
                         {/* Gold Coin Icon */}
@@ -32,20 +35,21 @@ export default function WalletSection({
                             <ellipse cx="18" cy="10" rx="11" ry="5" fill="#C98A0C" />
                             <ellipse cx="18" cy="8.5" rx="11" ry="5" fill="#FDE047" />
                         </svg>
-                        <span className="text-sm font-bold text-neutral-900">
+                        <CustomText type="body-sm-bold" className="text-sm font-bold text-neutral-900">
                             {balance} PP
-                        </span>
+                        </CustomText>
                     </div>
                 </div>
 
                 {/* Right: Add Money Button */}
-                <button
-                    type="button"
+                <CustomButton
+                    variant="primary"
+                    size="sm"
                     onClick={onAddMoney}
-                    className="bg-[#2563EB] hover:bg-blue-700 text-white font-medium text-xs sm:text-sm px-5 py-2.5 rounded-xl transition-colors cursor-pointer shadow-xs"
+                    className="h-10 px-5 text-xs sm:text-sm rounded-xl font-medium"
                 >
                     Add Money
-                </button>
+                </CustomButton>
             </div>
         </section>
     );
