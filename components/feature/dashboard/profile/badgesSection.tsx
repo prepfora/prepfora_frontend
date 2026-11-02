@@ -1,6 +1,7 @@
 "use client";
 
 import React from "react";
+import { CustomText } from "@/components/ui";
 import { UserProfileData } from "./profileTypes";
 
 interface BadgesSectionProps {
@@ -63,7 +64,9 @@ export default function BadgesSection({ badges }: BadgesSectionProps) {
 
     return (
         <section className="w-full flex flex-col gap-3">
-            <h3 className="text-lg font-bold text-neutral-900">Badges</h3>
+            <CustomText type="title-md" className="font-bold text-neutral-900 text-lg">
+                Badges
+            </CustomText>
 
             <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
                 {badges.map((badge) => (
@@ -72,9 +75,9 @@ export default function BadgesSection({ badges }: BadgesSectionProps) {
                         className="bg-white border border-[#E2EAF4] rounded-2xl p-5 flex flex-col items-center justify-center text-center shadow-2xs hover:shadow-xs transition-shadow"
                     >
                         {renderBadgeIcon(badge.type)}
-                        <span className="text-xs font-bold text-neutral-800 mt-3">
+                        <CustomText type="body-sm-bold" className="text-xs font-bold text-neutral-800 mt-3">
                             {badge.name}
-                        </span>
+                        </CustomText>
                     </div>
                 ))}
             </div>

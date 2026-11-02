@@ -3,6 +3,7 @@
 import React, { useState } from "react";
 import { useRouter } from "next/navigation";
 import { ExamAnalysisData } from "./mockExamTypes";
+import { CustomButton, CustomText } from "@/components/ui";
 
 interface MockExamAnalysisViewProps {
     analysis: ExamAnalysisData;
@@ -68,18 +69,19 @@ export default function MockExamAnalysisView({
                         <span>Back</span>
                     </button>
 
-                    <h2 className="text-lg sm:text-xl font-bold text-neutral-900">
+                    <CustomText type="headline-sm" className="!text-lg sm:!text-xl font-bold text-neutral-900">
                         {examTitle}
-                    </h2>
+                    </CustomText>
                 </div>
 
-                <button
-                    type="button"
+                <CustomButton
+                    variant="primary"
+                    size="sm"
                     onClick={handleShare}
-                    className="bg-[#2563EB] hover:bg-primary-250 text-white font-semibold text-xs sm:text-sm px-5 py-2.5 rounded-xl transition-all shadow-xs cursor-pointer active:scale-[0.98] self-start sm:self-auto"
+                    className="!rounded-xl shadow-xs self-start sm:self-auto"
                 >
                     {copied ? "Copied Link!" : "Share Result with Friends"}
-                </button>
+                </CustomButton>
             </div>
 
             {/* Analysis Layout */}
@@ -89,9 +91,9 @@ export default function MockExamAnalysisView({
                     {/* Total Score Card (Deep Green) */}
                     <div className="w-full bg-[#067A52] rounded-2xl p-6 text-white shadow-xs flex flex-col justify-between min-h-[160px]">
                         <div>
-                            <span className="text-xs font-semibold text-emerald-100 uppercase tracking-wider">
+                            <CustomText type="label-sm" className="!text-xs font-semibold !text-emerald-100 uppercase tracking-wider">
                                 Total Score
-                            </span>
+                            </CustomText>
                             <div className="my-3 flex items-baseline gap-1">
                                 <span className="text-4xl font-extrabold tracking-tight">
                                     {totalScore}
@@ -102,19 +104,19 @@ export default function MockExamAnalysisView({
                             </div>
                         </div>
 
-                        <p className="text-xs text-emerald-100 leading-relaxed font-normal">
+                        <CustomText type="body-sm" className="!text-xs !text-emerald-100 leading-relaxed font-normal">
                             {percentileMessage}
-                        </p>
+                        </CustomText>
                     </div>
 
                     {/* AI Strategy Advice Card (Warm Amber) */}
                     <div className="w-full bg-[#F6BA6F] rounded-2xl p-6 text-neutral-900 shadow-xs flex flex-col gap-2">
-                        <h4 className="text-sm font-bold text-neutral-900">
+                        <CustomText type="body-md-bold" className="!text-sm font-bold text-neutral-900">
                             AI Strategy Advice
-                        </h4>
-                        <p className="text-xs text-neutral-900 leading-relaxed font-normal">
+                        </CustomText>
+                        <CustomText type="body-sm" className="!text-xs text-neutral-900 leading-relaxed font-normal">
                             {aiAdvice}
-                        </p>
+                        </CustomText>
                     </div>
                 </div>
 
@@ -134,9 +136,9 @@ export default function MockExamAnalysisView({
                                 className="bg-white border border-[#3B82F6] rounded-2xl p-5 shadow-xs flex flex-col justify-between gap-3"
                             >
                                 <div className="flex items-center justify-between">
-                                    <span className="text-sm font-bold text-neutral-900">
+                                    <CustomText type="body-sm-bold" className="!text-sm font-bold text-neutral-900">
                                         {sec.title}
-                                    </span>
+                                    </CustomText>
                                     <div className="flex items-baseline gap-0.5">
                                         <span className="text-lg font-extrabold text-neutral-900">
                                             {sec.score}
@@ -147,9 +149,9 @@ export default function MockExamAnalysisView({
                                     </div>
                                 </div>
 
-                                <p className="text-xs text-neutral-500">
+                                <CustomText type="body-sm" className="!text-xs text-neutral-500">
                                     {sec.percentile}
-                                </p>
+                                </CustomText>
 
                                 <div className="flex items-center gap-1.5 text-xs text-neutral-700 font-medium pt-1">
                                     <svg
@@ -174,9 +176,9 @@ export default function MockExamAnalysisView({
 
                     {/* Topic Gaps Section */}
                     <div className="flex flex-col gap-3 mt-2">
-                        <h3 className="text-lg font-bold text-neutral-900">
+                        <CustomText type="headline-sm" className="!text-lg font-bold text-neutral-900">
                             Topic Gaps
-                        </h3>
+                        </CustomText>
 
                         <div className="w-full bg-white rounded-2xl border border-[#E2EAF4] p-6 shadow-xs flex flex-col divide-y divide-neutral-100">
                             {topicGaps.map((gap) => (
@@ -187,30 +189,31 @@ export default function MockExamAnalysisView({
                                     <div className="flex flex-col gap-1">
                                         <div className="flex items-center gap-2">
                                             {gap.subject && (
-                                                <span className="text-sm font-bold text-neutral-900">
+                                                <CustomText type="body-sm-bold" className="!text-sm font-bold text-neutral-900">
                                                     {gap.subject}
-                                                </span>
+                                                </CustomText>
                                             )}
-                                            <span className="text-sm font-bold text-neutral-900">
+                                            <CustomText type="body-sm-bold" className="!text-sm font-bold text-neutral-900">
                                                 {gap.topic}
-                                            </span>
+                                            </CustomText>
                                         </div>
 
-                                        <p className="text-xs text-neutral-600">
+                                        <CustomText type="body-sm" className="!text-xs text-neutral-600">
                                             {gap.missedQuestions}
-                                        </p>
-                                        <p className="text-xs text-neutral-500">
+                                        </CustomText>
+                                        <CustomText type="body-sm" className="!text-xs text-neutral-500">
                                             {gap.errorReason}
-                                        </p>
+                                        </CustomText>
                                     </div>
 
-                                    <button
-                                        type="button"
+                                    <CustomButton
+                                        variant="outline"
+                                        size="sm"
                                         onClick={handleStartPracticing}
-                                        className="border border-[#10B981] text-[#059669] hover:bg-[#E8FAF3] active:scale-[0.98] font-semibold text-xs px-4 py-2 rounded-xl transition-colors cursor-pointer self-start sm:self-auto"
+                                        className="!border-[#10B981] !text-[#059669] hover:!bg-[#E8FAF3] !rounded-xl self-start sm:self-auto"
                                     >
                                         Start Practicing
-                                    </button>
+                                    </CustomButton>
                                 </div>
                             ))}
                         </div>

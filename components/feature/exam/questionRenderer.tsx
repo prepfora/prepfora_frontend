@@ -2,6 +2,7 @@
 
 import React, { useState } from "react";
 import { ExamQuestion } from "./mockExamData";
+import { CustomButton, CustomText } from "@/components/ui";
 
 interface QuestionRendererProps {
     question: ExamQuestion;
@@ -40,30 +41,31 @@ export default function QuestionRenderer({
         <div className="flex-1 flex flex-col lg:flex-row gap-6 items-start w-full">
             {/* Left Panel for Comprehension Passage */}
             {question.type === "comprehension" && question.passageContent && (
-                <div className="w-full lg:w-[380px] flex-shrink-0 bg-white border border-[#E2EAF4] rounded-2xl p-6 shadow-xs flex flex-col gap-3">
-                    <div className="flex items-center justify-between">
-                        <h2 className="text-sm font-bold text-neutral-900 leading-snug">
+                <div className="w-full lg:w-[380px] flex-shrink-0 bg-white border border-[#E2EAF4] rounded-2xl p-4 sm:p-6 shadow-xs flex flex-col gap-2.5 sm:gap-3">
+                    <div className="flex items-center justify-between gap-2">
+                        <CustomText type="body-md-bold" className="!text-sm sm:!text-base font-bold text-neutral-900 leading-snug">
                             {question.passageTitle}
-                        </h2>
+                        </CustomText>
                         <button
                             type="button"
                             onClick={() => setIsPassageCollapsed((prev) => !prev)}
-                            className="text-neutral-500 hover:text-neutral-800 transition-colors p-1"
+                            className="w-7 h-7 rounded-full border border-neutral-300 hover:border-neutral-400 flex items-center justify-center text-neutral-600 hover:text-neutral-900 hover:bg-neutral-50 transition-colors p-1 flex-shrink-0 cursor-pointer"
+                            aria-label="Toggle passage"
                         >
                             <svg
-                                width="18"
-                                height="18"
+                                width="14"
+                                height="14"
                                 viewBox="0 0 24 24"
                                 fill="none"
                                 stroke="currentColor"
-                                strokeWidth="2"
+                                strokeWidth="2.5"
                                 strokeLinecap="round"
                                 strokeLinejoin="round"
                                 className={`transition-transform duration-200 ${
                                     isPassageCollapsed ? "rotate-180" : ""
                                 }`}
                             >
-                                <polyline points="18 15 12 9 6 15" />
+                                <polyline points="6 9 12 15 18 9" />
                             </svg>
                         </button>
                     </div>
@@ -73,7 +75,7 @@ export default function QuestionRenderer({
                     </span>
 
                     {!isPassageCollapsed && (
-                        <div className="text-sm text-neutral-700 leading-relaxed max-h-[500px] overflow-y-auto pr-2 space-y-4 font-normal">
+                        <div className="text-sm text-neutral-700 leading-relaxed max-h-[350px] sm:max-h-[500px] overflow-y-auto pr-2 space-y-3 font-normal">
                             {question.passageContent.split("\n\n").map((para, i) => (
                                 <p key={i}>{para}</p>
                             ))}
@@ -86,9 +88,9 @@ export default function QuestionRenderer({
             {question.type === "essay" && (
                 <div className="w-full lg:w-[340px] flex-shrink-0 bg-white border border-[#E2EAF4] rounded-2xl p-6 shadow-xs flex flex-col gap-4">
                     <div className="flex items-center justify-between">
-                        <h2 className="text-sm font-bold text-neutral-900">
+                        <CustomText type="body-md-bold" className="!text-sm font-bold text-neutral-900">
                             {question.essayInstructionTitle || "Essay Instructions"}
-                        </h2>
+                        </CustomText>
                         <button
                             type="button"
                             onClick={() => setIsInstructionCollapsed((prev) => !prev)}
@@ -135,19 +137,21 @@ export default function QuestionRenderer({
             )}
 
             {/* Main Center Area: Question Prompt & Options/Editor */}
-            <div className="flex-1 flex flex-col w-full">
+            <div className="flex-1 flex flex-col w-full pb-20 sm:pb-0">
                 {/* Prompt Header */}
                 <div className="flex flex-col gap-2 mb-6">
                     <div className="flex items-start justify-between gap-4">
                         {/<[a-z][\s\S]*>/i.test(question.prompt) ? (
-                            <h2
-                                className="text-lg sm:text-xl font-bold text-neutral-900 leading-snug max-w-3xl"
-                                dangerouslySetInnerHTML={{ __html: question.prompt }}
-                            />
+                            <CustomText
+                                type="headline-sm"
+                                className="!text-lg sm:!text-xl font-bold text-neutral-900 leading-snug max-w-3xl"
+                            >
+                                <span dangerouslySetInnerHTML={{ __html: question.prompt }} />
+                            </CustomText>
                         ) : (
-                            <h2 className="text-lg sm:text-xl font-bold text-neutral-900 leading-snug max-w-3xl">
+                            <CustomText type="headline-sm" className="!text-lg sm:!text-xl font-bold text-neutral-900 leading-snug max-w-3xl">
                                 {question.prompt}
-                            </h2>
+                            </CustomText>
                         )}
 
                         {question.year && (
@@ -316,37 +320,57 @@ export default function QuestionRenderer({
                     </div>
                 )}
 
-                {/* Bottom Action Buttons: Previous, Skip for Now, Save and Next */}
-                <div className="flex items-center gap-4 flex-wrap pt-2">
+                {/* Bottom Action Buttons: Mobile Sticky Dock & Desktop Row */}
+                <div className="fixed sm:static bottom-0 left-0 right-0 z-20 bg-white/95 sm:bg-transparent backdrop-blur-md sm:backdrop-blur-none border-t sm:border-t-0 border-[#E2EAF4] px-4 py-3 sm:p-0 sm:pt-4 flex items-center justify-between sm:justify-start gap-3 sm:gap-4 shadow-lg sm:shadow-none">
                     {/* Previous Button */}
-                    <button
-                        type="button"
+                    <CustomButton
+                        variant="outline"
+                        size="sm"
                         onClick={onPrevious}
                         disabled={isFirst}
-                        className="px-5 sm:px-6 py-2.5 rounded-xl border border-primary-300 text-primary-300 font-semibold text-sm bg-white hover:bg-primary-50 transition-colors cursor-pointer disabled:opacity-40 disabled:cursor-not-allowed flex items-center gap-2"
+                        className="!px-4 sm:!px-6 !py-2.5 !rounded-xl !bg-white hover:!bg-primary-50 !cursor-pointer disabled:!opacity-40 disabled:!cursor-not-allowed flex items-center gap-1.5"
                     >
                         <span>←</span>
                         <span>Previous</span>
-                    </button>
+                    </CustomButton>
 
                     {/* Skip for Now Button */}
-                    <button
-                        type="button"
+                    <CustomButton
+                        variant="outline"
+                        size="sm"
                         onClick={onSkip}
-                        className="px-5 sm:px-6 py-2.5 rounded-xl border border-[#10B981] text-[#059669] font-semibold text-sm bg-white hover:bg-[#E8FAF3] transition-colors cursor-pointer flex items-center justify-center"
+                        className="!w-11 !h-11 sm:!w-auto sm:!px-6 sm:!py-2.5 !rounded-xl !border-[#10B981] !text-[#059669] !bg-white hover:!bg-[#E8FAF3] flex items-center justify-center flex-shrink-0"
                     >
-                        Skip for Now
-                    </button>
+                        {/* Mobile Icon */}
+                        <svg
+                            width="18"
+                            height="18"
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            stroke="currentColor"
+                            strokeWidth="2.5"
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            className="sm:hidden"
+                        >
+                            <line x1="12" y1="19" x2="12" y2="5" />
+                            <polyline points="5 12 12 5 19 12" />
+                        </svg>
+                        {/* Desktop Text */}
+                        <span className="hidden sm:inline">Skip for Now</span>
+                    </CustomButton>
 
                     {/* Save and Next Button */}
-                    <button
-                        type="button"
+                    <CustomButton
+                        variant="primary"
+                        size="sm"
                         onClick={onSaveAndNext}
-                        className="px-5 sm:px-6 py-2.5 rounded-xl bg-primary-300 text-white font-semibold text-sm hover:bg-primary-250 active:scale-[0.98] transition-colors cursor-pointer flex items-center gap-2 shadow-xs"
+                        className="!px-5 sm:!px-6 !py-2.5 !rounded-xl flex items-center justify-center gap-1.5 shadow-xs flex-1 sm:flex-initial"
                     >
-                        <span>{isLast ? "Submit Exam" : "Save and Next"}</span>
+                        <span className="sm:hidden">{isLast ? "Submit" : "Next"}</span>
+                        <span className="hidden sm:inline">{isLast ? "Submit Exam" : "Save and Next"}</span>
                         <span>→</span>
-                    </button>
+                    </CustomButton>
                 </div>
             </div>
         </div>

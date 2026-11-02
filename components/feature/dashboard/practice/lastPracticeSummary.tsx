@@ -28,17 +28,17 @@ export default function LastPracticeSummary({
             <div className="w-full bg-[#52C498] rounded-3xl p-6 sm:p-7 flex flex-col md:flex-row items-stretch md:items-center gap-6 lg:gap-8 shadow-sm">
                 {/* Left Inner Score Card */}
                 <div className="w-full md:w-[260px] flex-shrink-0 bg-[#DCF3E8] rounded-2xl p-5 sm:p-6 flex flex-col justify-between shadow-xs">
-                    <span className="font-bold text-base text-neutral-900">
+                    <CustomText type="body-lg-bold" className="font-bold text-base text-neutral-900">
                         {subject}
-                    </span>
+                    </CustomText>
 
                     <div className="my-3 flex items-baseline gap-1">
-                        <span className="text-3xl sm:text-[34px] font-extrabold text-neutral-900 leading-none">
+                        <CustomText type="headline-lg" className="text-3xl sm:text-[34px] font-extrabold text-neutral-900 leading-none">
                             {score}
-                        </span>
-                        <span className="text-xs font-semibold text-neutral-500">
+                        </CustomText>
+                        <CustomText type="body-sm" className="text-xs font-semibold text-neutral-500">
                             /{totalScore}
-                        </span>
+                        </CustomText>
                     </div>
 
                     <div className="flex items-center gap-2 pt-1">
@@ -59,26 +59,26 @@ export default function LastPracticeSummary({
                             <ellipse cx="12" cy="8" rx="8" ry="3.5" fill="#C98A0C" />
                             <ellipse cx="12" cy="7" rx="8" ry="3.5" fill="#FDE047" />
                         </svg>
-                        <span className="text-xs font-semibold text-neutral-800">
+                        <CustomText type="body-sm" className="text-xs font-semibold text-neutral-800">
                             {prepPoints} PrepPoints earned
-                        </span>
+                        </CustomText>
                     </div>
                 </div>
 
                 {/* Right Focus Areas Content */}
                 <div className="flex-1 flex flex-col justify-center">
-                    <h3 className="font-bold text-base sm:text-lg text-neutral-900 mb-2">
+                    <CustomText type="title-md" className="font-bold text-base sm:text-lg text-neutral-900 mb-2">
                         Focus Areas
-                    </h3>
-                    <p className="text-sm text-neutral-800 leading-relaxed max-w-xl mb-4 font-normal">
+                    </CustomText>
+                    <CustomText type="body-md" className="text-sm text-neutral-800 leading-relaxed max-w-xl mb-4 font-normal">
                         Based on your latest practice, we recommend focusing on these topics to improve your score.
-                    </p>
+                    </CustomText>
 
                     <div className="flex flex-wrap items-center gap-x-6 gap-y-2">
                         {focusAreas.map((topic, index) => (
                             <div key={index} className="flex items-center gap-2 text-neutral-900 font-bold text-sm">
                                 <span className="w-1.5 h-1.5 rounded-full bg-neutral-900 inline-block" />
-                                <span>{topic}</span>
+                                <CustomText type="body-sm-bold">{topic}</CustomText>
                             </div>
                         ))}
                     </div>

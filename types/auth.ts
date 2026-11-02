@@ -8,6 +8,13 @@ export interface IAuthOtp {
     otp: string;
 }
 
+export interface IGoogleAuthPayload {
+    id_token?: string | null;
+    email?: string | null;
+    first_name?: string | null;
+    last_name?: string | null;
+}
+
 export interface IAuthUser {
     first_name: string,
     last_name: string,
@@ -28,6 +35,14 @@ export interface IUniversity {
     website: string
 }
 
+export interface IFileUploadResponse {
+    url: string;
+    key: string;
+    file_name: string;
+    content_type: string;
+    size: number;
+}
+
 export interface IUserProfile {
     id: string;
     first_name: string | null;
@@ -41,6 +56,7 @@ export interface IUserProfile {
     current_expectation: string | null;
     prep_points: number | null;
     best_score: number | null;
+    profile_picture?: string | null;
 }
 
 export interface IUpdateUserPayload {
@@ -52,4 +68,5 @@ export interface IUpdateUserPayload {
     current_expectation?: string | null;
     phone?: string | null;
     current_examination_date?: string | null;
+    profile_picture?: string | null;
 }

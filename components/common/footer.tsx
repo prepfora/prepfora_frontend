@@ -3,7 +3,7 @@ import { motion } from "motion/react";
 import { Logo } from "@/components/icons";
 import { LandingLayout } from "@/components/layouts";
 import NextLink from "next/link";
-import { CustomText } from "@/components/ui";
+import { CustomButton, CustomText } from "@/components/ui";
 import { PiLinkedinLogoFill } from "react-icons/pi";
 import { FaInstagram } from "react-icons/fa";
 import { LiaFacebook } from "react-icons/lia";
@@ -62,12 +62,14 @@ export default function Footer() {
                         </div>
                     </motion.div>
                     <motion.div className=" flex items-center gap-4 " variants={fadeUp} transition={{ duration: 0.6, ease: "easeOut" }}>
-                        <button className=" cursor-pointer " onClick={() => router.push("/policy")} ><CustomText type="body-lg">Privacy Policy</CustomText></button>
-                        <button className=" cursor-pointer " onClick={() => router.push("/terms")} >
+                        <CustomButton variant="ghost" className=" cursor-pointer text-white hover:text-white/80 p-0 h-auto" onClick={() => router.push("/policy")} >
+                            <CustomText type="body-lg">Privacy Policy</CustomText>
+                        </CustomButton>
+                        <CustomButton variant="ghost" className=" cursor-pointer text-white hover:text-white/80 p-0 h-auto" onClick={() => router.push("/terms")} >
                             <CustomText type="body-lg">
                                 Terms and Conditions
                             </CustomText>
-                        </button>
+                        </CustomButton>
                     </motion.div>
 
                     <motion.div variants={fadeUp} transition={{ duration: 0.6, ease: "easeOut" }}>
