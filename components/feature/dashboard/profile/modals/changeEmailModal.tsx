@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState, useRef, useEffect } from "react";
+import { CustomButton, CustomText, CustomField } from "@/components/ui";
 
 interface ChangeEmailModalProps {
     isOpen: boolean;
@@ -76,9 +77,9 @@ export default function ChangeEmailModal({
             >
                 {/* Header */}
                 <div className="flex items-center justify-between">
-                    <h3 className="text-lg font-bold text-[#064E3B]">
+                    <CustomText type="headline-sm" className="!text-lg font-bold !text-[#064E3B]">
                         Change Email
-                    </h3>
+                    </CustomText>
                     <button
                         type="button"
                         onClick={onClose}
@@ -95,58 +96,42 @@ export default function ChangeEmailModal({
                 {/* Step 1: Input Current and New Email */}
                 {step === 1 && (
                     <form onSubmit={handleStep1Submit} className="flex flex-col gap-4">
-                        {/* Current Email */}
-                        <div className="flex flex-col gap-1.5">
-                            <label className="text-xs font-semibold text-neutral-800">
-                                Current Email *
-                            </label>
-                            <input
-                                type="email"
-                                placeholder="enter email"
-                                value={curEmailInput}
-                                onChange={(e) => setCurEmailInput(e.target.value)}
-                                required
-                                className="w-full h-12 px-4 border border-neutral-300 rounded-2xl text-sm font-medium text-neutral-900 placeholder:text-neutral-400 focus:outline-none focus:ring-2 focus:ring-blue-400 transition-all"
-                            />
-                        </div>
+                        <CustomField<string>
+                            label="Current Email *"
+                            type="email"
+                            placeholder="enter email"
+                            value={curEmailInput}
+                            onChange={(val) => setCurEmailInput(val)}
+                        />
 
-                        {/* New Email */}
-                        <div className="flex flex-col gap-1.5">
-                            <label className="text-xs font-semibold text-neutral-800">
-                                New Email *
-                            </label>
-                            <input
-                                type="email"
-                                placeholder="enter email"
-                                value={newEmailInput}
-                                onChange={(e) => setNewEmailInput(e.target.value)}
-                                required
-                                className="w-full h-12 px-4 border border-neutral-300 rounded-2xl text-sm font-medium text-neutral-900 placeholder:text-neutral-400 focus:outline-none focus:ring-2 focus:ring-blue-400 transition-all"
-                            />
-                        </div>
+                        <CustomField<string>
+                            label="New Email *"
+                            type="email"
+                            placeholder="enter email"
+                            value={newEmailInput}
+                            onChange={(val) => setNewEmailInput(val)}
+                        />
 
                         {/* Update Button */}
-                        <button
+                        <CustomButton
                             type="submit"
+                            variant="primary"
                             disabled={!isStep1Valid}
-                            className={`w-full h-12 mt-2 font-semibold text-sm rounded-2xl transition-colors cursor-pointer shadow-xs ${
-                                isStep1Valid
-                                    ? "bg-[#2563EB] hover:bg-blue-700 text-white"
-                                    : "bg-[#8BB2F8] text-white cursor-not-allowed opacity-90"
-                            }`}
+                            fullWidth
+                            className="!h-12 !mt-2 !rounded-2xl"
                         >
                             Update
-                        </button>
+                        </CustomButton>
                     </form>
                 )}
 
                 {/* Step 2: 6-Digit OTP Verification */}
                 {step === 2 && (
                     <form onSubmit={handleStep2Submit} className="flex flex-col gap-6">
-                        <p className="text-sm text-neutral-800 leading-relaxed font-normal">
+                        <CustomText type="body-sm" className="text-neutral-800 leading-relaxed font-normal">
                             An email with a 6–digit code has been sent to your new email,{" "}
                             <span className="font-semibold text-neutral-900">{newEmailInput || "johndod@gmail.com"}</span>. Enter the code below to change your email.
-                        </p>
+                        </CustomText>
 
                         {/* 6 OTP Boxes */}
                         <div className="grid grid-cols-6 gap-2 sm:gap-2.5">
@@ -169,16 +154,15 @@ export default function ChangeEmailModal({
                         </div>
 
                         {/* Update Button */}
-                        <button
+                        <CustomButton
                             type="submit"
-                            className={`w-full h-12 font-semibold text-sm rounded-2xl transition-colors cursor-pointer shadow-xs ${
-                                isStep2Valid
-                                    ? "bg-[#2563EB] hover:bg-blue-700 text-white"
-                                    : "bg-[#8BB2F8] text-white"
-                            }`}
+                            variant="primary"
+                            disabled={!isStep2Valid}
+                            fullWidth
+                            className="!h-12 !rounded-2xl"
                         >
                             Update
-                        </button>
+                        </CustomButton>
                     </form>
                 )}
             </div>

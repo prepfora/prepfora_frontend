@@ -2,6 +2,7 @@
 
 import React from "react";
 import { MOCK_PERFORMANCE_STATS, PerformanceStat } from "./performanceTypes";
+import { CustomText } from "@/components/ui";
 
 interface PerformanceStatsProps {
     stats?: PerformanceStat[];
@@ -89,30 +90,30 @@ export default function PerformanceStats({
                     key={index}
                     className="bg-white border border-[#E2EAF4] rounded-2xl p-5 flex flex-col justify-between shadow-xs min-h-[145px]"
                 >
-                    <span className="font-bold text-sm text-neutral-800">
+                    <CustomText type="body-sm-bold" className="font-bold text-neutral-800">
                         {stat.title}
-                    </span>
+                    </CustomText>
 
                     <div className="flex items-center gap-3 my-2">
                         {renderIcon(stat.iconType)}
 
                         {stat.value && (
                             <div className="flex items-baseline gap-1">
-                                <span className="text-2xl sm:text-3xl font-extrabold text-neutral-900 tracking-tight leading-none">
+                                <CustomText type="headline-sm" className="!text-2xl sm:!text-3xl font-extrabold text-neutral-900 tracking-tight leading-none">
                                     {stat.value}
-                                </span>
+                                </CustomText>
                                 {stat.subUnit && (
-                                    <span className="text-xs font-semibold text-neutral-400">
+                                    <CustomText type="label-sm" className="!text-xs font-semibold text-neutral-400">
                                         {stat.subUnit}
-                                    </span>
+                                    </CustomText>
                                 )}
                             </div>
                         )}
                     </div>
 
-                    <span className="text-xs text-neutral-500 font-medium">
+                    <CustomText type="body-sm" className="!text-xs text-neutral-500 font-medium">
                         {stat.footerText}
-                    </span>
+                    </CustomText>
                 </div>
             ))}
         </section>

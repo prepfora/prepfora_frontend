@@ -2,6 +2,7 @@
 
 import React, { useState, useRef, useEffect } from "react";
 import { MOCK_SUBJECT_PERFORMANCES, SubjectPerformanceItem } from "./performanceTypes";
+import { CustomText } from "@/components/ui";
 
 const EXAMS = ["WAEC", "JAMB", "NECO", "Post-UTME"];
 
@@ -43,9 +44,9 @@ export default function SubjectPerformanceCard() {
             <div className="w-full bg-white border border-[#E2EAF4] rounded-3xl p-6 shadow-xs flex flex-col justify-between gap-5">
                 {/* Header */}
                 <div className="flex items-center justify-between">
-                    <h3 className="text-lg sm:text-xl font-bold text-neutral-900">
+                    <CustomText type="headline-sm" className="!text-lg sm:!text-xl font-bold text-neutral-900">
                         Subject Performance
-                    </h3>
+                    </CustomText>
 
                     {/* Exam Selector Dropdown */}
                     <div className="relative" ref={dropdownRef}>
@@ -98,15 +99,15 @@ export default function SubjectPerformanceCard() {
                 <div className="flex items-center justify-end gap-3 text-[11px] text-neutral-600 font-medium">
                     <div className="flex items-center gap-1.5">
                         <span className="w-2.5 h-2.5 rounded-sm bg-[#EF4444] inline-block" />
-                        <span>Needs Attention</span>
+                        <CustomText type="label-sm" className="!text-[11px] text-neutral-600 font-medium">Needs Attention</CustomText>
                     </div>
                     <div className="flex items-center gap-1.5">
                         <span className="w-2.5 h-2.5 rounded-sm bg-[#10B981] inline-block" />
-                        <span>Strong Performance</span>
+                        <CustomText type="label-sm" className="!text-[11px] text-neutral-600 font-medium">Strong Performance</CustomText>
                     </div>
                     <div className="flex items-center gap-1.5">
                         <span className="w-2.5 h-2.5 rounded-sm bg-[#2563EB] inline-block" />
-                        <span>Stable</span>
+                        <CustomText type="label-sm" className="!text-[11px] text-neutral-600 font-medium">Stable</CustomText>
                     </div>
                 </div>
 
@@ -118,12 +119,12 @@ export default function SubjectPerformanceCard() {
                             className="bg-white border border-[#E2EAF4] rounded-2xl p-3.5 flex flex-col gap-2 shadow-2xs hover:border-neutral-300 transition-colors"
                         >
                             <div className="flex items-center justify-between text-xs">
-                                <span className="font-semibold text-neutral-900 truncate">
+                                <CustomText type="body-sm-bold" className="font-semibold text-neutral-900 truncate">
                                     {subject.name}
-                                </span>
-                                <span className={`font-bold ${getStatusColor(subject)}`}>
+                                </CustomText>
+                                <CustomText type="body-sm-bold" className={`font-bold ${getStatusColor(subject)}`}>
                                     {subject.percent}%
-                                </span>
+                                </CustomText>
                             </div>
 
                             {/* Progress bar */}
@@ -136,9 +137,9 @@ export default function SubjectPerformanceCard() {
                                 />
                             </div>
 
-                            <div className="text-[10px] sm:text-[11px] text-neutral-400 font-medium truncate">
+                            <CustomText type="label-sm" className="!text-[10px] sm:!text-[11px] text-neutral-400 font-medium truncate">
                                 {subject.focus}
-                            </div>
+                            </CustomText>
                         </div>
                     ))}
                 </div>
@@ -147,9 +148,9 @@ export default function SubjectPerformanceCard() {
             {/* Next Badge Card */}
             <div className="w-full bg-[#DCF3E8] border border-[#BDEBD0] rounded-3xl p-5 flex flex-col gap-2.5 shadow-2xs">
                 <div className="flex items-center justify-between">
-                    <span className="text-sm font-bold text-[#0B4632]">
+                    <CustomText type="body-sm-bold" className="!text-sm font-bold text-[#0B4632]">
                         Next Badge
-                    </span>
+                    </CustomText>
 
                     {/* Medal Icon */}
                     <div className="w-6 h-6 flex items-center justify-center">
@@ -199,9 +200,9 @@ export default function SubjectPerformanceCard() {
                     />
                 </div>
 
-                <p className="text-xs text-[#065F46] font-medium">
+                <CustomText type="body-sm" className="!text-xs text-[#065F46] font-medium">
                     What the user has to do to get to the next rank
-                </p>
+                </CustomText>
             </div>
         </div>
     );

@@ -15,6 +15,7 @@ import {
     ExamHistoryItem,
     ExamAnalysisData,
 } from "@/components/feature";
+import { CustomText } from "@/components/ui";
 
 export default function MockExamsPage() {
     const [selectedCurriculum, setSelectedCurriculum] =
@@ -47,9 +48,9 @@ export default function MockExamsPage() {
         <div className="w-full flex flex-col gap-6 max-w-[1400px] mx-auto pb-12 animate-fadeIn">
             {/* Active Exam Curriculums Section */}
             <section className="w-full flex flex-col gap-4">
-                <h2 className="text-xl font-bold text-neutral-900">
+                <CustomText type="headline-sm" className="!text-xl font-bold text-neutral-900">
                     Active Exam Curriculums
-                </h2>
+                </CustomText>
 
                 {/* Grid: 3 columns on large screens */}
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
